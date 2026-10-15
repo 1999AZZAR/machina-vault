@@ -1,4 +1,4 @@
-const CACHE_NAME = 'machina-vault-v1.0.0';
+const CACHE_NAME = 'machina-vault-v2.0.4';
 const ASSETS = [
   '/',
   '/index.html',

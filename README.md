@@ -5,12 +5,14 @@
 
 ## Features
 
-- **Procedural Horology Archetypes**:
-  - **Swiss Lever Escapement**: 15-tooth club escape wheel, ruby pallet stones, roller table, Breguet overcoil hairspring, and Gyromax balance wheel.
-  - **Flying Tourbillon**: One-minute rotating carriage, 3-arm filigreed cage, co-axial balance, and 60-second graduation ring.
-  - **Epicyclic Planetary Train**: Sun gear, planet gears, planet carrier spider plate, and internal ring gear (annulus).
-- **Drafting Precision**:
-  - Involute gear tooth profiles with calculated pitch radii and tooth thickness.
+- **Haute Horlogerie Kinematic Archetypes**:
+  - **Swiss Lever Escapement & Breguet Overcoil**: 15-tooth club escape wheel, synthetic ruby pallet stones with shellac clamps, T-shaped fork, eccentric banking pins, 16 gold timing screws, 4 Gyromax slotted collets, Breguet overcoil hairspring with mobile stud, swan-neck micrometer regulator, and Incabloc shock setting.
+  - **Flying Tourbillon Carriage**: 60-second chapter ring with 300 1/5th second micro-ticks, fixed 64-tooth fourth wheel, 3-arm aerodynamic titanium cage with circular perlage graining and mirror anglage, off-center planetary escape wheel, co-axial Glucydur balance, and central ruby chaton with blued screws.
+  - **Multi-Stage Epicyclic Planetary Train**: Involute gear tooth geometry (20° pressure angle line of action), 56-tooth outer annulus chassis with blued screws, 24-tooth central sun gear, tri-lobe spider carrier plate with perlage, and 3 16-tooth planetary gears with ruby pivots.
+  - **Astronomical Equation of Time & Moonphase Complication**: Asymmetrical kidney cam (*camme en rein*) modeling real solar variance ($\pm 16\text{ min}$ over 365.2422 days), 12 zodiac month sectors, ruby-roller feeler lever with differential transmission, and 59-tooth synodic lunar star wheel with twin crater-stippled gold moons and steel jumper spring.
+- **Drafting Precision & Archival Layout**:
+  - Radiant SVG gradient defs for synthetic corundum rubies, 18K yellow gold, heat-blued steel, and circular perlage graining.
+  - Lossless 6-character accession ID encoding and deterministic recovery: `MCV-ESC-XXXXXX`, `MCV-TOR-XXXXXX`, `MCV-EPI-XXXXXX`, `MCV-AST-XXXXXX`.
   - Millimeter coordinate neatlines, sub-millimeter tick marks, and corner alignment crosses.
   - Vermilion imperial seal chop: `璇玑典藏` (*Xuán Jī Diǎn Cáng*).
   - Metric chronometer pitch module scale bar (0 1.0 2.0mm MODULE 0.8 / 10:1 Scale).
