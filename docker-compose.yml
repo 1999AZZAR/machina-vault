@@ -1,0 +1,7 @@
+services:
+  machina-vault:
+    build: .
+    container_name: machina-vault
+    ports:
+      - "8092:80"
+    restart: unless-stopped

@@ -1,0 +1,51 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 192 192" width="192" height="192">
+  <rect width="192" height="192" rx="28" fill="#EFE9DC"/>
+  <!-- Archival Framing -->
+  <rect x="14" y="14" width="164" height="164" rx="8" fill="none" stroke="#1A1A1A" stroke-width="2"/>
+  <rect x="20" y="20" width="152" height="152" rx="4" fill="none" stroke="#CDC4B4" stroke-width="1"/>
+  
+  <!-- Caliper Module Ticks Bottom -->
+  <line x1="32" y1="156" x2="80" y2="156" stroke="#1A1A1A" stroke-width="1.2"/>
+  <line x1="32" y1="151" x2="32" y2="156" stroke="#1A1A1A" stroke-width="1.2"/>
+  <line x1="56" y1="153" x2="56" y2="156" stroke="#1A1A1A" stroke-width="1"/>
+  <line x1="80" y1="151" x2="80" y2="156" stroke="#1A1A1A" stroke-width="1.2"/>
+
+  <!-- Horological Involute Gear Silhouette (Centerpiece) -->
+  <g transform="translate(96, 96)">
+    <!-- Pitch Circle Construction -->
+    <circle cx="0" cy="0" r="48" fill="none" stroke="#CDC4B4" stroke-dasharray="3 3" stroke-width="0.8"/>
+    <circle cx="0" cy="0" r="54" fill="none" stroke="#1A1A1A" stroke-width="1.5"/>
+    <circle cx="0" cy="0" r="42" fill="none" stroke="#1A1A1A" stroke-width="1"/>
+
+    <!-- 12 Gear Teeth -->
+    <path d="
+      M -8 -54 L -6 -60 A 60 60 0 0 1 6 -60 L 8 -54
+      M 32 -44 L 38 -47 A 60 60 0 0 1 47 -38 L 44 -32
+      M 54 -8 L 60 -6 A 60 60 0 0 1 60 6 L 54 8
+      M 44 32 L 47 38 A 60 60 0 0 1 38 47 L 32 44
+      M 8 54 L 6 60 A 60 60 0 0 1 -6 60 L -8 54
+      M -32 44 L -38 47 A 60 60 0 0 1 -47 38 L -44 32
+      M -54 8 L -60 6 A 60 60 0 0 1 -60 -6 L -54 -8
+      M -44 -32 L -47 -38 A 60 60 0 0 1 -38 -47 L -32 -44
+    " fill="none" stroke="#1A1A1A" stroke-width="1.8" stroke-linecap="round"/>
+
+    <!-- Lightening 4-Spoke Wheel -->
+    <line x1="-36" y1="0" x2="-14" y2="0" stroke="#1A1A1A" stroke-width="2.4"/>
+    <line x1="14" y1="0" x2="36" y2="0" stroke="#1A1A1A" stroke-width="2.4"/>
+    <line x1="0" y1="-36" x2="0" y2="-14" stroke="#1A1A1A" stroke-width="2.4"/>
+    <line x1="0" y1="14" x2="0" y2="36" stroke="#1A1A1A" stroke-width="2.4"/>
+
+    <!-- Breguet Hairspring Central Coil -->
+    <circle cx="0" cy="0" r="22" fill="none" stroke="#7A7068" stroke-width="0.8"/>
+    <circle cx="0" cy="0" r="16" fill="none" stroke="#7A7068" stroke-width="0.8"/>
+
+    <!-- Gold Center Chaton & Synthetic Ruby Pivot -->
+    <circle cx="0" cy="0" r="12" fill="#EFE9DC" stroke="#1A1A1A" stroke-width="1.2"/>
+    <circle cx="0" cy="0" r="6" fill="#B8934A" stroke="#1A1A1A" stroke-width="0.6"/>
+    <circle cx="0" cy="0" r="2.8" fill="#BA131A"/>
+  </g>
+
+  <!-- Vermilion Seal Mark -->
+  <rect x="136" y="136" width="22" height="22" rx="2" fill="#8B1A1A"/>
+  <text x="147" y="152" font-family="'Noto Serif SC', serif" font-weight="900" font-size="12" fill="#EFE9DC" text-anchor="middle">璇</text>
+</svg>

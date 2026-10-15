@@ -1,0 +1,16 @@
+# Machina Vault (璇玑典藏)
+> Archival Procedural Horology & Kinematic Gearing Vector Engine
+
+## Overview
+Machina Vault is a deterministic procedural vector generation engine for precision horological mechanisms, escapements, tourbillons, and planetary gear trains.
+
+## Endpoints
+- Public URL: https://machina-vault.glassgallery.my.id
+- Mode Embed: https://machina-vault.glassgallery.my.id/?mode=embed&w=3&h=2&seed={seed}&palette={palette}
+- Documentation: https://machina-vault.glassgallery.my.id/docs.html
+
+## Key Specifications
+- Seal Chop: 璇玑典藏 (Xuán Jī Diǎn Cáng)
+- Scale: Metric Chronometer Pitch Module Gauge (0 1.0 2.0mm MODULE 0.8 / 10:1)
+- Formfactor: 3:2 Aspect Ratio
+- Container Port: 8092

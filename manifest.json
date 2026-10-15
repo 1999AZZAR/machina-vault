@@ -1,0 +1,30 @@
+{
+  "name": "Machina Vault | Precision Horological & Kinematic Vector Engine",
+  "short_name": "MachinaVault",
+  "description": "Archival procedural horological synthesis engine, vector Swiss lever escapements, flying tourbillons, and epicyclic planetary gear trains.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#EFE9DC",
+  "theme_color": "#8B1A1A",
+  "orientation": "any",
+  "icons": [
+    {
+      "src": "/icon-192.svg",
+      "sizes": "192x192",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    },
+    {
+      "src": "/icon-512.svg",
+      "sizes": "512x512",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    },
+    {
+      "src": "/icon-maskable.svg",
+      "sizes": "512x512",
+      "type": "image/svg+xml",
+      "purpose": "maskable"
+    }
+  ]
+}

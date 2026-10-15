@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Machina Vault Technical Documentation: Precision Horological & Kinematic Gearing synthesis engine, JavaScript API, Swiss lever escapement, tourbillons, and epicyclic trains.">
+    <title>Technical Documentation | Machina Vault</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Noto+Serif+SC:wght@500;700&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <style>
+        :root {
+            --archival-bg: #EFE9DC;
+            --archival-fg: #1A1A1A;
+            --archival-surface: #F7F3EB;
+            --archival-accent: #8B1A1A;
+            --archival-muted: #CDC4B4;
+            --archival-meta: #7A7068;
+            --grid-color: rgba(122, 112, 104, 0.08);
+        }
+
+        body { 
+            background-color: var(--archival-bg); 
+            background-image: 
+                linear-gradient(to right, var(--grid-color) 1px, transparent 1px),
+                linear-gradient(to bottom, var(--grid-color) 1px, transparent 1px);
+            background-size: 30px 30px;
+            color: var(--archival-fg); 
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            margin: 0;
+            line-height: 1.6;
+        }
+
+        .font-tech { 
+            font-family: 'JetBrains Mono', monospace; 
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+        }
+
+        .surface-card { 
+            background: var(--archival-surface); 
+            border: 1px solid var(--archival-muted); 
+            box-shadow: 0 4px 24px -12px rgba(26, 26, 26, 0.08);
+        }
+
+        code {
+            font-family: 'JetBrains Mono', monospace;
+            background: rgba(205, 196, 180, 0.35);
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-size: 0.85em;
+        }
+
+        pre code {
+            background: transparent;
+            padding: 0;
+            font-size: 0.85rem;
+        }
+    </style>
+</head>
+<body class="min-h-screen py-8 px-4 sm:px-8">
+    <div class="max-w-4xl mx-auto">
+        <header class="mb-10 border-b border-[#CDC4B4] pb-6 flex items-center justify-between">
+            <div>
+                <a href="/" class="font-tech text-xs text-[#8B1A1A] hover:underline mb-2 block">
+                    <i class="fa-solid fa-arrow-left mr-1"></i> BACK TO WORKSPACE
+                </a>
+                <h1 class="text-3xl font-bold tracking-tight text-[#1A1A1A]">MACHINA VAULT SPECIFICATION</h1>
+                <p class="font-tech text-xs text-[#7A7068] mt-1">Archival Horology, Escapement Kinematics & Planetary Gearing Vector Engine</p>
+            </div>
+            <div class="hidden sm:block">
+                <span class="font-tech text-[10px] text-[#8B1A1A] border border-[#8B1A1A] px-2 py-1 rounded bg-[#8B1A1A]/10">
+                    V1.0.0 STABLE
+                </span>
+            </div>
+        </header>
+
+        <section class="surface-card rounded-lg p-6 mb-8">
+            <h2 class="font-tech text-sm font-bold text-[#8B1A1A] mb-3">[ 1. ARCHIVAL ARCHITECTURE ]</h2>
+            <p class="text-sm leading-relaxed mb-4">
+                <strong>Machina Vault</strong> synthesizes mathematically rigorous horological blueprints and kinematic gear assemblies. Generated entirely through deterministic client-side vector trigonometry, each specimen reproduces the drafting conventions of 18th-century master horologists (Abraham-Louis Breguet, John Harrison, Ferdinand Berthoud).
+            </p>
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 font-tech text-xs border-t border-[#CDC4B4] pt-4">
+                <div>
+                    <span class="text-[#7A7068] block text-[9px]">PITCH MODULE</span>
+                    <span class="font-semibold text-[#1A1A1A]">m = 0.8 mm (10:1 Scale)</span>
+                </div>
+                <div>
+                    <span class="text-[#7A7068] block text-[9px]">SEAL CHOP</span>
+                    <span class="font-semibold text-[#8B1A1A]">璇玑典藏 (Xuán Jī Diǎn Cáng)</span>
+                </div>
+                <div>
+                    <span class="text-[#7A7068] block text-[9px]">CANONICAL RATIO</span>
+                    <span class="font-semibold text-[#1A1A1A]">3:2 Precision Formfactor</span>
+                </div>
+            </div>
+        </section>
+
+        <section class="surface-card rounded-lg p-6 mb-8">
+            <h2 class="font-tech text-sm font-bold text-[#8B1A1A] mb-3">[ 2. EMBED SERVICE INTERFACE ]</h2>
+            <p class="text-sm leading-relaxed mb-3">
+                Embed horological specimens directly via iframe. The vault automatically strips non-essential UI chrome and centers the vector drafting plate inside the 3:2 viewport.
+            </p>
+            <pre class="bg-[#1A1A1A] text-[#EFE9DC] p-4 rounded-md overflow-x-auto mb-4"><code>&lt;iframe src="https://machina-vault.glassgallery.my.id/?mode=embed&amp;w=3&amp;h=2&amp;seed=Chronometer-Detent&amp;palette=vellum"
+        width="600" height="400" frameborder="0"
+        style="border:none; aspect-ratio:3/2; width:100%;"
+        loading="lazy"&gt;&lt;/iframe&gt;</code></pre>
+            
+            <h3 class="font-tech text-xs font-bold text-[#1A1A1A] mb-2">Query Parameters</h3>
+            <div class="overflow-x-auto text-xs">
+                <table class="w-full text-left border-collapse">
+                    <thead>
+                        <tr class="border-b border-[#CDC4B4] font-tech text-[#7A7068]">
+                            <th class="py-2">Parameter</th>
+                            <th class="py-2">Type</th>
+                            <th class="py-2">Default</th>
+                            <th class="py-2">Description</th>
+                        </tr>
+                    </thead>
+                    <tbody class="divide-y divide-[#CDC4B4]/40 font-tech">
+                        <tr>
+                            <td class="py-2 font-bold text-[#8B1A1A]">mode</td>
+                            <td>string</td>
+                            <td>workspace</td>
+                            <td>Set to <code>embed</code> for isolated 3:2 specimen rendering.</td>
+                        </tr>
+                        <tr>
+                            <td class="py-2 font-bold text-[#8B1A1A]">seed / narrative</td>
+                            <td>string</td>
+                            <td>random</td>
+                            <td>Alphanumeric seed string driving the deterministic PRNG.</td>
+                        </tr>
+                        <tr>
+                            <td class="py-2 font-bold text-[#8B1A1A]">palette</td>
+                            <td>string</td>
+                            <td>vellum</td>
+                            <td><code>vellum</code>, <code>blueprint</code>, <code>obsidian</code>, <code>sepia</code>, <code>patina</code>.</td>
+                        </tr>
+                        <tr>
+                            <td class="py-2 font-bold text-[#8B1A1A]">w / h</td>
+                            <td>number</td>
+                            <td>3 / 2</td>
+                            <td>Width and height proportion (e.g. <code>w=3&amp;h=2</code>).</td>
+                        </tr>
+                        <tr>
+                            <td class="py-2 font-bold text-[#8B1A1A]">id</td>
+                            <td>string</td>
+                            <td>-</td>
+                            <td>Reconstructs exact specimen from identifier (e.g. <code>MCV-TOR-AU0TC9</code>).</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <section class="surface-card rounded-lg p-6 mb-8">
+            <h2 class="font-tech text-sm font-bold text-[#8B1A1A] mb-3">[ 3. JAVASCRIPT PROGRAMMATIC API ]</h2>
+            <p class="text-sm leading-relaxed mb-3">
+                Include <code>js/machinadraw.js</code> in browser or Node.js environments:
+            </p>
+            <pre class="bg-[#1A1A1A] text-[#EFE9DC] p-4 rounded-md overflow-x-auto mb-4"><code>const MachinaDraw = require('./js/machinadraw.js');
+
+const result = MachinaDraw.synthesize("Breguet-Tourbillon", {
+  width: 600,
+  height: 400,
+  palette: "blueprint"
+});
+
+console.log(result.id);        // "MCV-TOR-XXXXXX"
+console.log(result.archetype); // "tourbillon"
+console.log(result.metrics);   // { calibre: "CALIBRE GG-492F", frequency: "21,600 A/h", ... }
+console.log(result.svg);       // Raw SVG XML string</code></pre>
+        </section>
+
+        <footer class="text-center font-tech text-xs text-[#7A7068] pt-6 border-t border-[#CDC4B4]">
+            [ GLASS GALLERY ARCHIVAL SPECIFICATION • FREA BEHAVIORAL PROTOCOL ]
+        </footer>
+    </div>
+</body>
+</html>
