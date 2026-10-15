@@ -268,18 +268,18 @@
     var svg = [];
 
     // Geometry parameters
-    var escRadius = 88 * scale;
-    var leverLength = 110 * scale;
-    var balRadius = 125 * scale;
+    var escRadius = 84 * scale;
+    var leverLength = 105 * scale;
+    var balRadius = 118 * scale;
 
-    var escCx = cx - 120 * scale;
-    var escCy = cy + 40 * scale;
+    var escCx = cx - 110 * scale;
+    var escCy = cy + 38 * scale;
 
-    var leverPivotX = cx - 25 * scale;
-    var leverPivotY = cy - 20 * scale;
+    var leverPivotX = cx - 20 * scale;
+    var leverPivotY = cy - 6 * scale;
 
-    var balCx = cx + 115 * scale;
-    var balCy = cy - 45 * scale;
+    var balCx = cx + 105 * scale;
+    var balCy = cy - 18 * scale;
 
     // 1. Line of Centers (Kinematic Reference Axes)
     svg.push('<line x1="' + (escCx - 30 * scale).toFixed(1) + '" y1="' + escCy.toFixed(1) + '" x2="' + (balCx + 40 * scale).toFixed(1) + '" y2="' + escCy.toFixed(1) + '" stroke="' + p.grid + '" stroke-dasharray="6 3 2 3" stroke-width="0.75" />');
@@ -724,7 +724,7 @@
     var cx = width / 2;
     var cy = height / 2;
     var minDim = Math.min(width, height);
-    var scale = (minDim / 400) * 0.95;
+    var scale = (minDim / 400) * 0.78;
     var margin = Math.round(18 * scale);
 
     // Generate Mechanism SVG
