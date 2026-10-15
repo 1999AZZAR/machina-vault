@@ -387,10 +387,6 @@
              ' C ' + (balCx + 6 * scale).toFixed(1) + ' ' + (balCy + 8 * scale).toFixed(1) + ', ' + (balCx - 6 * scale).toFixed(1) + ' ' + (balCy + 8 * scale).toFixed(1) + ', ' + (balCx - 9 * scale).toFixed(1) + ' ' + (balCy - 2 * scale).toFixed(1) +
              '" fill="none" stroke="' + p.gold + '" stroke-width="0.8" />');
 
-    // Annotations & Dimension Arcs
-    svg.push('<text x="' + (escCx - 70 * scale).toFixed(1) + '" y="' + (escCy + escRadius + 30 * scale).toFixed(1) + '" font-family="\'JetBrains Mono\', monospace" font-size="' + (9 * scale).toFixed(1) + '" fill="' + p.meta + '" letter-spacing="1">ROUE D\'ÉCHAPPEMENT (15 DENTS)</text>');
-    svg.push('<text x="' + (balCx - 40 * scale).toFixed(1) + '" y="' + (balCy + balRadius + 30 * scale).toFixed(1) + '" font-family="\'JetBrains Mono\', monospace" font-size="' + (9 * scale).toFixed(1) + '" fill="' + p.meta + '" letter-spacing="1">BALANCIER GYROMAX • SPIRAL BREGUET</text>');
-
     return svg.join('\n');
   }
 
@@ -493,8 +489,6 @@
       svg.push('<line x1="' + (scX - 1.2 * scale).toFixed(1) + '" y1="' + scY.toFixed(1) + '" x2="' + (scX + 1.2 * scale).toFixed(1) + '" y2="' + scY.toFixed(1) + '" stroke="' + p.paper + '" stroke-width="0.4" />');
     }
 
-    svg.push('<text x="' + cx.toFixed(1) + '" y="' + (cy + cageR + 52 * scale).toFixed(1) + '" font-family="\'JetBrains Mono\', monospace" font-size="' + (9 * scale).toFixed(1) + '" text-anchor="middle" fill="' + p.meta + '" letter-spacing="1">CAGE DE TOURBILLON ROTATIVE • 1 TOUR / MINUTE (0.0167 HZ)</text>');
-
     return svg.join('\n');
   }
 
@@ -591,9 +585,6 @@
     svg.push('<circle cx="' + cx.toFixed(1) + '" cy="' + cy.toFixed(1) + '" r="' + (5.5 * scale).toFixed(1) + '" fill="' + p.gold + '" stroke="' + p.ink + '" stroke-width="0.7" />');
     svg.push('<circle cx="' + cx.toFixed(1) + '" cy="' + cy.toFixed(1) + '" r="' + (2.4 * scale).toFixed(1) + '" fill="' + p.ruby + '" />');
 
-    // Gear Ratio Formula Equation
-    svg.push('<text x="' + cx.toFixed(1) + '" y="' + (cy + ringRp + 48 * scale).toFixed(1) + '" font-family="\'JetBrains Mono\', monospace" font-size="' + (9 * scale).toFixed(1) + '" text-anchor="middle" fill="' + p.meta + '" letter-spacing="1">TRAIN PLANÉTAIRE ÉPICYCLOÏDAL • RATIO i = 1 + (Z_c / Z_s) = 3.333 : 1</text>');
-
     return svg.join('\n');
   }
 
@@ -638,65 +629,59 @@
   }
 
   // Archival Vermilion Seal Chop: 璇 玑 典 藏 (Xuán Jī Diǎn Cáng)
-  function renderSealChop(x, y, size, p) {
+  function renderSealChop(x, y, size) {
+    var chopColor = "#B83227"; // Imperial cinnabar vermilion
     var sealInset = Math.max(1.5, size * 0.06);
-    var sealBorderWidth = Math.max(0.2, size * 0.05).toFixed(2);
-    var sealInnerWidth = Math.max(0.1, size * 0.02).toFixed(2);
     var sealFontSize = Math.round(size * 0.36);
-    var chopColor = p.accent || "#B83227";
+    var sealBorderWidth = Math.max(1.2, size * 0.05).toFixed(2);
+    var sealInnerWidth = Math.max(0.5, size * 0.02).toFixed(2);
 
     var svg = [];
-    svg.push('<g class="archival-seal" transform="translate(' + x.toFixed(1) + ',' + y.toFixed(1) + ')">');
+    svg.push('<g class="archival-seal" transform="translate(' + x.toFixed(2) + ', ' + y.toFixed(2) + ')">');
     svg.push('  <rect width="' + size + '" height="' + size + '" fill="' + chopColor + '" fill-opacity="0.06" stroke="' + chopColor + '" stroke-width="' + sealBorderWidth + '" />');
-    svg.push('  <rect x="' + sealInset.toFixed(1) + '" y="' + sealInset.toFixed(1) + '" width="' + (size - sealInset * 2).toFixed(1) + '" height="' + (size - sealInset * 2).toFixed(1) + '" fill="none" stroke="' + chopColor + '" stroke-width="' + sealInnerWidth + '" />');
-    svg.push('  <line x1="' + (size / 2).toFixed(1) + '" y1="' + sealInset.toFixed(1) + '" x2="' + (size / 2).toFixed(1) + '" y2="' + (size - sealInset).toFixed(1) + '" stroke="' + chopColor + '" stroke-opacity="0.35" stroke-width="0.5" />');
-    svg.push('  <line x1="' + sealInset.toFixed(1) + '" y1="' + (size / 2).toFixed(1) + '" x2="' + (size - sealInset).toFixed(1) + '" y2="' + (size / 2).toFixed(1) + '" stroke="' + chopColor + '" stroke-opacity="0.35" stroke-width="0.5" />');
-    svg.push('  <text x="' + (size * 0.28).toFixed(1) + '" y="' + (size * 0.38).toFixed(1) + '" font-family="\'Noto Serif SC\', \'Source Han Serif\', \'Songti SC\', \'SimSun\', serif" font-weight="bold" font-size="' + sealFontSize + '" fill="' + chopColor + '" text-anchor="middle">璇</text>');
-    svg.push('  <text x="' + (size * 0.72).toFixed(1) + '" y="' + (size * 0.38).toFixed(1) + '" font-family="\'Noto Serif SC\', \'Source Han Serif\', \'Songti SC\', \'SimSun\', serif" font-weight="bold" font-size="' + sealFontSize + '" fill="' + chopColor + '" text-anchor="middle">典</text>');
-    svg.push('  <text x="' + (size * 0.28).toFixed(1) + '" y="' + (size * 0.80).toFixed(1) + '" font-family="\'Noto Serif SC\', \'Source Han Serif\', \'Songti SC\', \'SimSun\', serif" font-weight="bold" font-size="' + sealFontSize + '" fill="' + chopColor + '" text-anchor="middle">玑</text>');
-    svg.push('  <text x="' + (size * 0.72).toFixed(1) + '" y="' + (size * 0.80).toFixed(1) + '" font-family="\'Noto Serif SC\', \'Source Han Serif\', \'Songti SC\', \'SimSun\', serif" font-weight="bold" font-size="' + sealFontSize + '" fill="' + chopColor + '" text-anchor="middle">藏</text>');
+    svg.push('  <rect x="' + sealInset.toFixed(2) + '" y="' + sealInset.toFixed(2) + '" width="' + (size - sealInset * 2).toFixed(2) + '" height="' + (size - sealInset * 2).toFixed(2) + '" fill="none" stroke="' + chopColor + '" stroke-width="' + sealInnerWidth + '" />');
+    svg.push('  <line x1="' + (size / 2).toFixed(2) + '" y1="' + sealInset.toFixed(2) + '" x2="' + (size / 2).toFixed(2) + '" y2="' + (size - sealInset).toFixed(2) + '" stroke="' + chopColor + '" stroke-opacity="0.35" stroke-width="0.5" />');
+    svg.push('  <line x1="' + sealInset.toFixed(2) + '" y1="' + (size / 2).toFixed(2) + '" x2="' + (size - sealInset).toFixed(2) + '" y2="' + (size / 2).toFixed(2) + '" stroke="' + chopColor + '" stroke-opacity="0.35" stroke-width="0.5" />');
+    svg.push('  <text x="' + (size * 0.28).toFixed(2) + '" y="' + (size * 0.38).toFixed(2) + '" font-family="\'Noto Serif SC\', \'Source Han Serif\', \'Songti SC\', \'SimSun\', serif" font-weight="bold" font-size="' + sealFontSize + '" fill="' + chopColor + '" text-anchor="middle">璇</text>');
+    svg.push('  <text x="' + (size * 0.72).toFixed(2) + '" y="' + (size * 0.38).toFixed(2) + '" font-family="\'Noto Serif SC\', \'Source Han Serif\', \'Songti SC\', \'SimSun\', serif" font-weight="bold" font-size="' + sealFontSize + '" fill="' + chopColor + '" text-anchor="middle">典</text>');
+    svg.push('  <text x="' + (size * 0.28).toFixed(2) + '" y="' + (size * 0.80).toFixed(2) + '" font-family="\'Noto Serif SC\', \'Source Han Serif\', \'Songti SC\', \'SimSun\', serif" font-weight="bold" font-size="' + sealFontSize + '" fill="' + chopColor + '" text-anchor="middle">玑</text>');
+    svg.push('  <text x="' + (size * 0.72).toFixed(2) + '" y="' + (size * 0.80).toFixed(2) + '" font-family="\'Noto Serif SC\', \'Source Han Serif\', \'Songti SC\', \'SimSun\', serif" font-weight="bold" font-size="' + sealFontSize + '" fill="' + chopColor + '" text-anchor="middle">藏</text>');
     svg.push('</g>');
     return svg.join('\n');
   }
 
   // Metric Chronometer Pitch Module Gauge
-  function renderScaleBar(x, y, scale, p) {
-    var scaleFactor = Math.max(0.65, scale);
-    var barW = Math.round(72 * scaleFactor);
+  function renderScaleBar(x, y, scaleFactor, p) {
+    var barW = Math.round(64 * scaleFactor);
     var barH = Math.max(3, Math.round(3.5 * scaleFactor));
     var segW = barW / 4;
     var tickH = Math.max(2, Math.round(3 * scaleFactor));
-    var scaleFontSize = Math.max(7, Math.round(8 * scaleFactor));
+    var scaleFontSize = Math.max(7, Math.round(7.5 * scaleFactor));
     var captionFontSize = Math.max(6, Math.round(6.5 * scaleFactor));
 
     var svg = [];
-    svg.push('<g class="drafting-scale-bar" transform="translate(' + x.toFixed(1) + ',' + y.toFixed(1) + ')">');
-    svg.push('  <rect x="0" y="0" width="' + segW.toFixed(1) + '" height="' + barH.toFixed(1) + '" fill="' + p.ink + '" />');
-    svg.push('  <rect x="' + segW.toFixed(1) + '" y="0" width="' + segW.toFixed(1) + '" height="' + barH.toFixed(1) + '" fill="none" stroke="' + p.ink + '" stroke-width="0.8" />');
-    svg.push('  <rect x="' + (segW * 2).toFixed(1) + '" y="0" width="' + segW.toFixed(1) + '" height="' + barH.toFixed(1) + '" fill="' + p.ink + '" />');
-    svg.push('  <rect x="' + (segW * 3).toFixed(1) + '" y="0" width="' + segW.toFixed(1) + '" height="' + barH.toFixed(1) + '" fill="none" stroke="' + p.ink + '" stroke-width="0.8" />');
-    svg.push('  <rect x="0" y="0" width="' + barW.toFixed(1) + '" height="' + barH.toFixed(1) + '" fill="none" stroke="' + p.ink + '" stroke-width="0.8" />');
+    svg.push('<g class="drafting-scale-bar" transform="translate(' + x.toFixed(2) + ', ' + y.toFixed(2) + ')">');
+    svg.push('  <rect x="0" y="0" width="' + segW.toFixed(2) + '" height="' + barH.toFixed(2) + '" fill="' + p.ink + '" />');
+    svg.push('  <rect x="' + segW.toFixed(2) + '" y="0" width="' + segW.toFixed(2) + '" height="' + barH.toFixed(2) + '" fill="none" stroke="' + p.ink + '" stroke-width="0.75" />');
+    svg.push('  <rect x="' + (segW * 2).toFixed(2) + '" y="0" width="' + segW.toFixed(2) + '" height="' + barH.toFixed(2) + '" fill="' + p.ink + '" />');
+    svg.push('  <rect x="' + (segW * 3).toFixed(2) + '" y="0" width="' + segW.toFixed(2) + '" height="' + barH.toFixed(2) + '" fill="none" stroke="' + p.ink + '" stroke-width="0.75" />');
+    svg.push('  <rect x="0" y="0" width="' + barW.toFixed(2) + '" height="' + barH.toFixed(2) + '" fill="none" stroke="' + p.ink + '" stroke-width="0.75" />');
 
-    svg.push('  <line x1="0" y1="' + (-tickH) + '" x2="0" y2="0" stroke="' + p.ink + '" stroke-width="0.8" />');
-    svg.push('  <line x1="' + (segW * 2).toFixed(1) + '" y1="' + (-tickH) + '" x2="' + (segW * 2).toFixed(1) + '" y2="0" stroke="' + p.ink + '" stroke-width="0.8" />');
-    svg.push('  <line x1="' + barW.toFixed(1) + '" y1="' + (-tickH) + '" x2="' + barW.toFixed(1) + '" y2="0" stroke="' + p.ink + '" stroke-width="0.8" />');
+    svg.push('  <line x1="0" y1="' + (-tickH) + '" x2="0" y2="0" stroke="' + p.ink + '" stroke-width="0.75" />');
+    svg.push('  <line x1="' + (segW * 2).toFixed(2) + '" y1="' + (-tickH) + '" x2="' + (segW * 2).toFixed(2) + '" y2="0" stroke="' + p.ink + '" stroke-width="0.75" />');
+    svg.push('  <line x1="' + barW.toFixed(2) + '" y1="' + (-tickH) + '" x2="' + barW.toFixed(2) + '" y2="0" stroke="' + p.ink + '" stroke-width="0.75" />');
 
     svg.push('  <text x="0" y="' + (-tickH - 2) + '" font-family="\'JetBrains Mono\', monospace" font-size="' + scaleFontSize + '" font-weight="600" fill="' + p.ink + '" text-anchor="middle">0</text>');
-    svg.push('  <text x="' + (segW * 2).toFixed(1) + '" y="' + (-tickH - 2) + '" font-family="\'JetBrains Mono\', monospace" font-size="' + scaleFontSize + '" font-weight="600" fill="' + p.ink + '" text-anchor="middle">1.0</text>');
-    svg.push('  <text x="' + barW.toFixed(1) + '" y="' + (-tickH - 2) + '" font-family="\'JetBrains Mono\', monospace" font-size="' + scaleFontSize + '" font-weight="600" fill="' + p.ink + '" text-anchor="middle">2.0mm</text>');
-    svg.push('  <text x="0" y="' + (barH + captionFontSize + 2) + '" font-family="\'JetBrains Mono\', monospace" font-size="' + captionFontSize + '" font-weight="500" fill="' + p.meta + '" letter-spacing="1">CHRONOMETRIC SCALE 1:1</text>');
+    svg.push('  <text x="' + (segW * 2).toFixed(2) + '" y="' + (-tickH - 2) + '" font-family="\'JetBrains Mono\', monospace" font-size="' + scaleFontSize + '" font-weight="600" fill="' + p.ink + '" text-anchor="middle">1.0</text>');
+    svg.push('  <text x="' + barW.toFixed(2) + '" y="' + (-tickH - 2) + '" font-family="\'JetBrains Mono\', monospace" font-size="' + scaleFontSize + '" font-weight="600" fill="' + p.ink + '" text-anchor="middle">2.0mm</text>');
+    svg.push('  <text x="0" y="' + (barH + captionFontSize + 2) + '" font-family="\'JetBrains Mono\', monospace" font-size="' + captionFontSize + '" font-weight="500" fill="' + p.meta + '">CHRONOMETRIC SCALE 1:1</text>');
     svg.push('</g>');
     return svg.join('\n');
   }
 
-  // --- 6. Main Synthesis Engine ---
+  // --- 6. Main Synthesis Engine (Data Model Generation) ---
   function synthesize(seed, options) {
     options = options || {};
-    var width = options.width || 600;
-    var height = options.height || 400; // 3:2 default ratio
-    var paletteKey = (options.palette || 'vellum').toLowerCase();
-    var p = PALETTES[paletteKey] || PALETTES.vellum;
-
     var hashVal;
     if (typeof seed === 'number') {
       hashVal = seed >>> 0;
@@ -715,41 +700,38 @@
 
     var seqId = generateSequenceIdentifier(hashVal, typeKey);
 
-    // Dynamic Geometry Scaling adapting safely to any aspect ratio
-    var cx = width / 2;
-    var cy = height / 2;
-    var minDim = Math.min(width, height);
-    var margin = Math.round(minDim * 0.034);
-    var availW = width - margin * 2 - 24;
-    var availH = height - margin * 2 - 56;
-    var scale = Math.min(availW / 440, availH / 320, 1.15);
-    var mechCy = cy - 4 * scale;
-
-    // Generate Mechanism SVG
-    var mechanismSvg;
     var mechanismTitle;
     var beatRate;
     var jewelsCount;
     var reductionRatio;
+    var escapementAngle;
+    var balanceInertia;
+    var trainEfficiency;
 
     if (typeKey === 'escapement') {
-      mechanismSvg = renderSwissLeverEscapement(prng, cx, mechCy, scale, p);
       mechanismTitle = "Échappement à Ancre Suisse & Spiral Breguet";
       beatRate = "28,800 A/h (4.0 Hz)";
       jewelsCount = "21 Rubis Synthétiques";
       reductionRatio = "Échappement 15 Dents";
+      escapementAngle = "52.5° Lift Angle";
+      balanceInertia = "12.5 mg·cm²";
+      trainEfficiency = "94.2% Involute";
     } else if (typeKey === 'tourbillon') {
-      mechanismSvg = renderFlyingTourbillon(prng, cx, mechCy, scale, p);
       mechanismTitle = "Tourbillon Volant à Cage Tri-Axe 60s";
       beatRate = "21,600 A/h (3.0 Hz)";
       jewelsCount = "25 Rubis Synthétiques";
       reductionRatio = "1 Tour / Minute (0.0167 Hz)";
+      escapementAngle = "Tri-Axial 360° Spherical";
+      balanceInertia = "9.8 mg·cm²";
+      trainEfficiency = "96.5% Cage Inertia";
     } else {
-      mechanismSvg = renderEpicyclicGearTrain(prng, cx, mechCy, scale, p);
       mechanismTitle = "Train d'Engrenages Épicycloïdal Planétaire";
       beatRate = "Constante Chronométrique";
       jewelsCount = "19 Rubis Synthétiques";
       reductionRatio = "i = 3.333 : 1";
+      escapementAngle = "20.0° Pressure Angle";
+      balanceInertia = "18.2 mg·cm²";
+      trainEfficiency = "98.1% Epicyclic";
     }
 
     // Calibre Serial & Taxonomy
@@ -757,73 +739,187 @@
     var calibreSuffix = String.fromCharCode(65 + ((hashVal >>> 8) % 6));
     var calibreStr = "CALIBRE GG-" + calibreNum + calibreSuffix;
 
-    // Archival Frame, Scale Bar, Seal Chop
-    var frameSvg = renderArchivalFrame(width, height, margin, p);
-    var sealSize = Math.max(26, Math.min(42, Math.round(minDim * 0.08)));
-    var sealX = width - margin - sealSize - 12;
-    var sealY = height - margin - sealSize - 10;
-    var sealSvg = renderSealChop(sealX, sealY, sealSize, p);
+    var metrics = {
+      calibre: calibreStr,
+      mechanism: mechanismTitle,
+      frequency: beatRate,
+      jewels: jewelsCount,
+      ratio: reductionRatio,
+      module: "m = 0.8 mm (Scale 1:1)",
+      escapementAngle: escapementAngle,
+      balanceInertia: balanceInertia,
+      trainEfficiency: trainEfficiency,
+      hashHex: "0x" + hashVal.toString(16).toUpperCase(),
+      narrative: String(seed || "GlassGallery-Machina")
+    };
 
-    var scaleX = margin + 12;
-    var scaleY = height - margin - 22 * scale;
-    var scaleBarSvg = renderScaleBar(scaleX, scaleY, scale, p);
+    return {
+      hashVal: hashVal,
+      accessionId: seqId,
+      hexHash: "0x" + hashVal.toString(16).toUpperCase(),
+      calibre: calibreStr,
+      mechanism: mechanismTitle,
+      archetype: typeKey,
+      beatRate: beatRate,
+      jewelsCount: jewelsCount,
+      reductionRatio: reductionRatio,
+      metrics: metrics
+    };
+  }
+
+  // --- 7. Standalone SVG Plate Generator (Swiss-Archival Format) ---
+  function generateSvgPlate(targetSpecimen, options) {
+    options = options || {};
+    var specimen = targetSpecimen;
+    if (!specimen || !specimen.archetype) {
+      specimen = synthesize(options.seed || options.narrative || "GlassGallery-Machina", options);
+    }
+
+    var width = options.width || 600;
+    var height = options.height || 400; // 3:2 default ratio
+    var minDim = Math.min(width, height);
+    var margin = options.margin || Math.round(minDim * 0.024);
+    var borderGap = Math.max(3, Math.round(minDim * 0.007));
+    var outerLineWidth = Math.max(1.0, (minDim / 600) * 1.0);
+    var innerLineWidth = Math.max(0.5, (minDim / 600) * 0.5);
+
+    var paletteKey = (options.palette || 'vellum').toLowerCase();
+    var p = PALETTES[paletteKey] || PALETTES.vellum;
+    var strokeColor = options.stroke || p.ink;
+    var metaColor = options.metaColor || p.meta;
+
+    var cx = width / 2;
+    var cy = height / 2;
+
+    var maxSpanW = width - (margin + borderGap) * 2 - 40;
+    var maxSpanH = height - (margin + borderGap) * 2 - 76;
+    var scale;
+    if (specimen.archetype === 'tourbillon') {
+      scale = Math.min(maxSpanW / 380, maxSpanH / 370);
+    } else if (specimen.archetype === 'escapement') {
+      scale = Math.min(maxSpanW / 440, maxSpanH / 270);
+    } else {
+      scale = Math.min(maxSpanW / 360, maxSpanH / 250);
+    }
+    scale = Math.min(scale, 1.15);
+    var mechCy = cy - 2;
+
+    var prng = Mulberry32(specimen.hashVal);
+    var mechanismSvg;
+    if (specimen.archetype === 'escapement') {
+      mechanismSvg = renderSwissLeverEscapement(prng, cx, mechCy, scale, p);
+    } else if (specimen.archetype === 'tourbillon') {
+      mechanismSvg = renderFlyingTourbillon(prng, cx, mechCy, scale, p);
+    } else {
+      mechanismSvg = renderEpicyclicGearTrain(prng, cx, mechCy, scale, p);
+    }
+
+    // Archival Frame Neatlines (Dual Swiss-Archival Borders)
+    var borderW = width - margin * 2;
+    var borderH = height - margin * 2;
+    var innerW = borderW - borderGap * 2;
+    var innerH = borderH - borderGap * 2;
+
+    var frameSvg = [
+      '<rect x="' + margin + '" y="' + margin + '" width="' + borderW + '" height="' + borderH + '" fill="none" stroke="' + strokeColor + '" stroke-width="' + outerLineWidth.toFixed(2) + '" />',
+      '<rect x="' + (margin + borderGap) + '" y="' + (margin + borderGap) + '" width="' + innerW + '" height="' + innerH + '" fill="none" stroke="' + metaColor + '" stroke-width="' + innerLineWidth.toFixed(2) + '" />'
+    ].join('\n');
+
+    // Archival Vermilion Seal Chop: 璇 玑 典 藏 (Bottom-Right)
+    var sealSize = Math.max(26, Math.round(minDim * 0.062));
+    var sealX = width - margin - borderGap - sealSize - Math.round(minDim * 0.02);
+    var sealY = height - margin - borderGap - sealSize - Math.max(4, Math.round(minDim * 0.012));
+    var sealSvg = renderSealChop(sealX, sealY, sealSize);
+
+    // Metric Scale Bar (Bottom-Left)
+    var scaleFactor = minDim / 600;
+    var barH = Math.max(3, Math.round(3.5 * scaleFactor));
+    var scaleBarCaptionFontSize = Math.max(6, Math.round(6.5 * scaleFactor));
+    var scaleBarX = margin + borderGap + Math.round(minDim * 0.02);
+    var scaleBarY = height - margin - borderGap - barH - scaleBarCaptionFontSize - Math.max(4, Math.round(minDim * 0.012));
+    var scaleBarSvg = renderScaleBar(scaleBarX, scaleBarY, scaleFactor, p);
 
     // Top Designation & Bottom Latin Taxon
-    var topSerialY = margin + 14 * scale;
-    var serialText = '<text x="' + cx.toFixed(1) + '" y="' + topSerialY.toFixed(1) + '" font-family="\'JetBrains Mono\', monospace" font-size="' + (8 * scale).toFixed(1) + '" font-weight="600" text-anchor="middle" fill="' + p.meta + '" letter-spacing="2">[ ' + calibreStr + ' • ' + seqId + ' ]</text>';
+    var captionFontSize = Math.max(7, Math.round(8 * scaleFactor));
+    var topSerialY = margin + borderGap + Math.round(minDim * 0.035);
+    var serialText = '<text x="' + cx.toFixed(1) + '" y="' + topSerialY.toFixed(1) + '" font-family="\'JetBrains Mono\', monospace" font-size="' + (captionFontSize * 1.05).toFixed(1) + '" font-weight="600" text-anchor="middle" fill="' + metaColor + '" letter-spacing="2">[ ' + specimen.calibre + ' • ' + specimen.accessionId + ' ]</text>';
 
-    var bottomTitleY = height - margin - 12 * scale;
-    var latinTaxon = '<text x="' + cx.toFixed(1) + '" y="' + bottomTitleY.toFixed(1) + '" font-family="\'Noto Serif SC\', \'Noto Serif\', serif" font-style="italic" font-weight="700" font-size="' + (11 * scale).toFixed(1) + '" text-anchor="middle" fill="' + p.ink + '">' + mechanismTitle + '.</text>';
+    var bottomTitleY = sealY + sealSize * 0.65;
+    var latinTaxon = '<text x="' + cx.toFixed(1) + '" y="' + bottomTitleY.toFixed(1) + '" font-family="\'Noto Serif SC\', \'Noto Serif\', serif" font-style="italic" font-weight="700" font-size="' + (captionFontSize * 1.35).toFixed(1) + '" text-anchor="middle" fill="' + strokeColor + '">' + specimen.mechanism + '.</text>';
 
-    // Assemble Full SVG
-    var svg = [
+    var lines = [
       '<?xml version="1.0" encoding="UTF-8"?>',
       '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ' + width + ' ' + height + '" width="' + width + '" height="' + height + '" style="background-color:' + p.paper + '">',
       '  <!-- Archival Drafting Paper Surface -->',
       '  <rect width="100%" height="100%" fill="' + p.paper + '" />',
       '',
       '  <!-- Drafting Frame & Neatlines -->',
-      frameSvg,
+      '  ' + frameSvg,
       '',
       '  <!-- Calibre Top Nomenclature -->',
       '  ' + serialText,
       '',
       '  <!-- Horological Vector Mechanism -->',
       '  <g class="horological-mechanism">',
-      mechanismSvg,
+      '    ' + mechanismSvg,
       '  </g>',
       '',
       '  <!-- Calibre Bottom Title -->',
       '  ' + latinTaxon,
       '',
       '  <!-- Imperial Vermilion Seal Chop -->',
-      sealSvg,
+      '  ' + sealSvg,
       '',
       '  <!-- Metric Module Scale Bar -->',
-      scaleBarSvg,
+      '  ' + scaleBarSvg,
       '</svg>'
-    ].join('\n');
+    ];
 
-    return {
-      svg: svg,
-      id: seqId,
-      archetype: typeKey,
-      metrics: {
-        calibre: calibreStr,
-        mechanism: mechanismTitle,
-        frequency: beatRate,
-        jewels: jewelsCount,
-        ratio: reductionRatio,
-        module: "m = 0.8 mm (Scale 10:1)",
-        hashHex: "0x" + hashVal.toString(16).toUpperCase()
-      },
-      aspectRatio: { w: width, h: height }
-    };
+    return lines.join('\n');
+  }
+
+  // --- 8. Canvas Direct Renderer (300 DPI Export Support) ---
+  function renderToCanvas(data, canvas, options) {
+    options = options || {};
+    var width = canvas.width;
+    var height = canvas.height;
+    var ctx = canvas.getContext("2d");
+    var svgString = generateSvgPlate(data, {
+      width: width,
+      height: height,
+      palette: options.palette || "vellum"
+    });
+
+    var blob = new Blob([svgString], { type: "image/svg+xml;charset=utf-8" });
+    var url = URL.createObjectURL(blob);
+    var img = new Image();
+
+    return new Promise(function (resolve, reject) {
+      img.onload = function () {
+        ctx.clearRect(0, 0, width, height);
+        ctx.drawImage(img, 0, 0, width, height);
+        URL.revokeObjectURL(url);
+        resolve(canvas);
+      };
+      img.onerror = function (err) {
+        URL.revokeObjectURL(url);
+        reject(err);
+      };
+      img.src = url;
+    });
   }
 
   return {
     PALETTES: PALETTES,
     synthesize: synthesize,
+    generateSpecimen: function(options) {
+      options = options || {};
+      var seed = options.narrative || options.seed || options.id || "GlassGallery-Machina";
+      return synthesize(seed, options);
+    },
+    generateSvgPlate: generateSvgPlate,
+    renderToCanvas: renderToCanvas,
+    fnv1a: fnv1a,
     recoverHashFromId: recoverHashFromId,
     generateSequenceIdentifier: generateSequenceIdentifier
   };

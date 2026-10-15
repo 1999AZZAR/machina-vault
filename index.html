@@ -3,105 +3,35 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script>
-        (function() {
-            try {
-                var params = new URLSearchParams(window.location.search);
-                if (params.get('mode') === 'embed') {
-                    document.documentElement.dataset.mode = 'embed';
-                }
-            } catch(e) {}
-        })();
-    </script>
-    <title>Machina Vault | Precision Horological & Kinematic Vector Engine</title>
-    <meta name="description" content="Archival procedural horological synthesis engine. Generates vector Swiss lever escapements, flying tourbillons, and epicyclic planetary gear trains in Swiss-Archival drafting style.">
+    <title>Machina Vault | Archival Horology & Kinematic Chronometry Engine</title>
+    <meta name="description" content="Archival horology, procedural kinematic escapements, flying tourbillons, and epicyclic planetary gearing adhering to the Swiss-Archival standard.">
     <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
     <link rel="canonical" href="https://machina-vault.glassgallery.my.id/">
     
-    <!-- PWA & Favicons -->
-    <link rel="manifest" href="/manifest.json">
-    <link rel="icon" href="/icon-192.svg" type="image/svg+xml">
-    <meta name="theme-color" content="#8B1A1A">
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <link rel="apple-touch-icon" href="/icon-192.svg">
-    
-    <!-- Structured Data (Schema.org) -->
-    <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@graph": [
-        {
-          "@type": "Person",
-          "@id": "https://glassgallery.my.id/porto/#person",
-          "name": "Azzar Budiyanto",
-          "jobTitle": "Lead Architect",
-          "sameAs": [
-            "https://github.com/1999AZZAR",
-            "https://glassgallery.my.id"
-          ]
-        },
-        {
-          "@type": "Organization",
-          "@id": "https://glassgallery.my.id/#organization",
-          "name": "Machina Vault",
-          "url": "https://machina-vault.glassgallery.my.id/",
-          "founder": {
-            "@id": "https://glassgallery.my.id/porto/#person"
-          }
-        },
-        {
-          "@type": "WebSite",
-          "@id": "https://machina-vault.glassgallery.my.id/#website",
-          "url": "https://machina-vault.glassgallery.my.id/",
-          "name": "Machina Vault | Horological Chronometry Synthesis",
-          "description": "Archival horology and kinematic vector synthesis engine.",
-          "publisher": {
-            "@id": "https://glassgallery.my.id/#organization"
-          }
-        },
-        {
-          "@type": "FAQPage",
-          "mainEntity": [
-            {
-              "@type": "Question",
-              "name": "What is Machina Vault?",
-              "acceptedAnswer": {
-                "@type": "Answer",
-                "text": "Machina Vault (璇玑典藏) is an archival procedural vector engine generating Swiss lever escapements, flying tourbillons, and epicyclic planetary gearing with authentic horological geometry."
-              }
-            },
-            {
-              "@type": "Question",
-              "name": "How does the kinematic synthesis engine work?",
-              "acceptedAnswer": {
-                "@type": "Answer",
-                "text": "The engine hashes narrative inputs with FNV-1a into deterministic seeds, calculating true involute gear tooth flanks, Archimedean hairspring coils, balance wheel inertia collets, and pallet jewels."
-              }
-            },
-            {
-              "@type": "Question",
-              "name": "How can I embed Machina Vault specimens?",
-              "acceptedAnswer": {
-                "@type": "Answer",
-                "text": "Add '?mode=embed&w=3&h=2' to any specimen URL to get an isolated 3:2 plate without control chrome."
-              }
-            }
-          ]
-        }
-      ]
-    }
-    </script>
+    <!-- Open Graph & Twitter Cards -->
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="Machina Vault">
+    <meta property="og:title" content="Machina Vault | Archival Horology & Kinematic Chronometry Engine">
+    <meta property="og:description" content="Deterministic procedural horological escapement archive and vector chronometry synthesis engine adhering to the Swiss-Archival standard.">
+    <meta property="og:url" content="https://machina-vault.glassgallery.my.id/">
+    <meta property="og:image" content="https://machina-vault.glassgallery.my.id/icon-512.svg">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Machina Vault | Archival Horology & Kinematic Chronometry Engine">
+    <meta name="twitter:description" content="Procedural horological escapements, flying tourbillons, and epicyclic planetary gear trains.">
+    <meta name="twitter:image" content="https://machina-vault.glassgallery.my.id/icon-512.svg">
 
-    <!-- Fonts -->
+    <!-- PWA & Favicons -->
+    <link rel="manifest" href="manifest.json">
+    <link rel="icon" type="image/svg+xml" href="icon-192.svg">
+    <link rel="apple-touch-icon" href="icon-192.svg">
+    <meta name="theme-color" content="#E8E0D0">
+
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Noto+Serif+SC:wght@700;900&display=swap" rel="stylesheet">
-    
-    <!-- Icons & Tailwind CDN -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <script src="https://cdn.tailwindcss.com"></script>
-
+    
     <style>
         :root {
             --archival-bg: #E8E0D0;
@@ -126,6 +56,15 @@
             line-height: 1.6;
         }
 
+        .noise-layer {
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            z-index: 50;
+            opacity: 0.04;
+            mix-blend-mode: multiply;
+        }
+
         .font-tech { 
             font-family: 'JetBrains Mono', monospace; 
             letter-spacing: 0.1em;
@@ -138,218 +77,148 @@
             box-shadow: 0 4px 24px -12px rgba(42, 37, 32, 0.08);
         }
 
-        .noise-layer {
-            position: fixed;
-            inset: 0;
-            pointer-events: none;
-            z-index: 50;
-            opacity: 0.04;
-            mix-blend-mode: multiply;
+        input {
+            background: var(--archival-bg);
+            border: 1px solid var(--archival-muted);
+            color: var(--archival-fg);
+            transition: all 0.2s cubic-bezier(0.25, 1, 0.5, 1);
         }
 
-        /* Custom Hardware-Accelerated Cursor */
-        @media (pointer: fine) {
-            body:not([data-mode="embed"]) *:not(#fullscreen-btn):not(#fullscreen-btn *) { cursor: none !important; }
-            .custom-cursor, .custom-cursor-trail {
-                position: fixed;
-                top: 0; left: 0;
-                border-radius: 50%;
-                pointer-events: none;
-                z-index: 9999;
-                transform: translate3d(calc(var(--x, -100px) - 50%), calc(var(--y, -100px) - 50%), 0) scale(var(--scale, 1));
-            }
-            .custom-cursor {
-                width: 6px; height: 6px;
-                background-color: var(--archival-accent);
-                transition: transform 0.1s cubic-bezier(0.25, 1, 0.5, 1);
-            }
-            .custom-cursor-trail {
-                width: 28px; height: 28px;
-                border: 1px solid var(--archival-accent);
-                z-index: 9998;
-                transition: transform 0.05s linear, background-color 0.2s, border-color 0.2s;
-            }
-            .custom-cursor.hover { --scale: 1.5; }
-            .custom-cursor-trail.hover { --scale: 1.5; background-color: rgba(139, 26, 26, 0.1); }
+        input:focus { 
+            outline: none; 
+            border-color: var(--archival-accent); 
         }
-        @media print {
-            .custom-cursor, .custom-cursor-trail { display: none !important; }
+
+        #render-target svg, #render-target canvas {
+            transition: all 0.3s cubic-bezier(0.25, 1, 0.5, 1);
+            max-width: 95%;
+            max-height: 95%;
+            width: auto;
+            height: auto;
+            object-fit: contain;
+            box-shadow: 0 6px 20px -8px rgba(42, 37, 32, 0.12);
         }
 
         /* Matrix Control Styling */
-        .ratio-btn {
+        .ratio-btn, .palette-chip {
             border: 1px solid var(--archival-muted);
             transition: all 0.2s cubic-bezier(0.25, 1, 0.5, 1);
+            cursor: pointer;
         }
-        .ratio-btn:hover { border-color: var(--archival-accent); color: var(--archival-accent); }
-        .ratio-btn[data-active="true"] {
+        .ratio-btn:hover, .palette-chip:hover { border-color: var(--archival-accent); color: var(--archival-accent); }
+        .ratio-btn[data-active="true"], .palette-chip[data-active="true"] {
             background: var(--archival-accent);
             color: var(--archival-surface);
             border-color: var(--archival-accent);
         }
 
-        /* Palette Chips */
-        .palette-chip {
-            border: 1px solid var(--archival-muted);
-            transition: all 0.2s cubic-bezier(0.25, 1, 0.5, 1);
-            cursor: pointer;
+        /* Interactive Hardware Cursor */
+        .custom-cursor, .custom-cursor-trail {
+            position: fixed;
+            top: 0;
+            left: 0;
+            pointer-events: none;
+            border-radius: 50%;
+            z-index: 9999;
+            transform: translate3d(calc(var(--x, -100px) - 50%), calc(var(--y, -100px) - 50%), 0) scale(var(--scale, 1));
+            will-change: transform;
+            display: none;
         }
-        .palette-chip:hover { border-color: var(--archival-accent); }
-        .palette-chip[data-active="true"] {
-            border-color: var(--archival-accent) !important;
-            box-shadow: 0 0 0 1.5px var(--archival-accent) !important;
+        @media (pointer: fine) {
+            .custom-cursor, .custom-cursor-trail { display: block; }
         }
+        .custom-cursor {
+            width: 6px;
+            height: 6px;
+            background-color: var(--archival-accent);
+            transition: transform 0.1s ease-out;
+        }
+        .custom-cursor-trail {
+            width: 24px;
+            height: 24px;
+            border: 1px solid var(--archival-accent);
+            opacity: 0.35;
+            transition: transform 0.25s cubic-bezier(0.25, 1, 0.5, 1), opacity 0.2s ease;
+        }
+        .custom-cursor.hover { --scale: 1.5; }
+        .custom-cursor-trail.hover { --scale: 1.5; background-color: rgba(139, 26, 26, 0.08); opacity: 0.8; }
 
         /* Fullscreen Viewer */
         #fullscreen-btn {
-            opacity: 0.85;
-            transition: opacity 0.2s ease, border-color 0.2s ease;
-            pointer-events: auto !important;
+            opacity: 0;
+            transition: opacity 0.3s ease;
             cursor: pointer !important;
             z-index: 30;
         }
         .group:hover #fullscreen-btn { opacity: 1; }
 
         #fullscreen-viewer.active {
-            display: block !important;
-            animation: fadeIn 0.25s ease-out;
+            display: block;
+            animation: fadeIn 0.3s ease-out;
         }
         @keyframes fadeIn {
             from { opacity: 0; }
             to { opacity: 1; }
         }
 
-        #viewer-content svg {
-            max-width: 100%;
-            max-height: 100%;
-            width: auto;
-            height: auto;
-            object-fit: contain;
-        }
-
-        /* Specimen Viewport SVG */
-        .specimen-svg { 
-            transition: all 0.3s cubic-bezier(0.25, 1, 0.5, 1);
-            max-width: 100%;
-            max-height: 100%;
-            object-fit: contain;
-        }
-
-        /* --- Embed Mode (Pure Specimen Plate Isolation) --- */
-        html[data-mode="embed"],
+        /* Embed Mode */
         body[data-mode="embed"] { 
-            background-color: var(--archival-surface, #EFE9DC) !important;
+            background: transparent !important;
             padding: 0 !important; 
             margin: 0 !important;
-            display: block !important;
             overflow: hidden !important;
-            width: 100vw !important;
-            height: 100vh !important;
-            min-height: 100vh !important;
         }
-        html[data-mode="embed"] .noise-layer,
-        body[data-mode="embed"] .noise-layer {
-            display: block !important;
-            opacity: 0.04 !important;
-            pointer-events: none !important;
-        }
-        html[data-mode="embed"] *,
-        body[data-mode="embed"] * {
-            cursor: auto !important;
-        }
-        html[data-mode="embed"] .custom-cursor,
-        html[data-mode="embed"] .custom-cursor-trail,
-        html[data-mode="embed"] #fullscreen-viewer,
-        html[data-mode="embed"] #fullscreen-btn,
-        html[data-mode="embed"] #embed-modal,
-        html[data-mode="embed"] header,
-        html[data-mode="embed"] footer,
-        html[data-mode="embed"] section,
-        html[data-mode="embed"] .drafting-dots,
-        html[data-mode="embed"] main > *:not(#specimen-viewport-card),
         body[data-mode="embed"] .custom-cursor,
         body[data-mode="embed"] .custom-cursor-trail,
+        body[data-mode="embed"] .noise-layer,
         body[data-mode="embed"] #fullscreen-viewer,
         body[data-mode="embed"] #fullscreen-btn,
         body[data-mode="embed"] #embed-modal,
-        body[data-mode="embed"] header,
-        body[data-mode="embed"] footer,
         body[data-mode="embed"] section,
+        body[data-mode="embed"] footer,
+        body[data-mode="embed"] #docs-section,
+        body[data-mode="embed"] #specimen-metadata,
         body[data-mode="embed"] .drafting-dots,
         body[data-mode="embed"] main > *:not(#specimen-viewport-card) {
             display: none !important;
         }
-        html[data-mode="embed"] main,
-        body[data-mode="embed"] main { 
-            max-width: none !important; 
-            width: 100vw !important; 
-            height: 100vh !important; 
-            margin: 0 !important; 
+        body[data-mode="embed"] main {
+            max-width: none !important;
+            width: 100vw !important;
+            height: 100vh !important;
             padding: 0 !important;
-            display: flex !important;
-            align-items: center !important;
-            justify-content: center !important;
-            grid-template-columns: none !important;
-            gap: 0 !important;
-            space-y: 0 !important;
-            overflow: hidden !important;
-            position: relative !important;
-        }
-        html[data-mode="embed"] #specimen-viewport-card,
-        body[data-mode="embed"] #specimen-viewport-card { 
-            border: none !important; 
-            box-shadow: none !important; 
-            background: transparent !important; 
-            width: 100vw !important; 
-            height: 100vh !important; 
-            max-width: 100vw !important;
-            max-height: 100vh !important;
-            padding: 0 !important; 
             margin: 0 !important;
-            border-radius: 0 !important;
-            aspect-ratio: auto !important;
             display: flex !important;
             align-items: center !important;
             justify-content: center !important;
-            position: relative !important;
-            overflow: hidden !important;
         }
-        html[data-mode="embed"] #render-target,
+        body[data-mode="embed"] .surface-card {
+            border: none !important;
+            box-shadow: none !important;
+            background: transparent !important;
+            width: 100vw !important;
+            height: 100vh !important;
+            padding: 0 !important;
+        }
         body[data-mode="embed"] #render-target {
             width: 100% !important;
             height: 100% !important;
             margin: 0 !important;
             padding: 0 !important;
-            min-height: 0 !important;
-            box-sizing: border-box !important;
             display: flex !important;
             align-items: center !important;
             justify-content: center !important;
         }
-        html[data-mode="embed"] #render-target svg,
-        body[data-mode="embed"] #render-target svg,
-        html[data-mode="embed"] .specimen-svg,
-        body[data-mode="embed"] .specimen-svg {
-            max-width: 100% !important;
-            max-height: 100% !important;
-            width: 100% !important;
-            height: 100% !important;
+        body[data-mode="embed"] #render-target svg {
+            max-width: 100vw !important;
+            max-height: 100vh !important;
+            width: 100vw !important;
+            height: 100vh !important;
             object-fit: contain !important;
-            box-shadow: none !important;
         }
     </style>
 </head>
-<body class="min-h-screen flex flex-col items-center justify-start p-4 sm:p-8">
-    <script>
-        (function() {
-            try {
-                var params = new URLSearchParams(window.location.search);
-                if (params.get('mode') === 'embed') {
-                    document.body.dataset.mode = 'embed';
-                }
-            } catch(e) {}
-        })();
-    </script>
+<body class="min-h-screen flex flex-col items-center justify-center p-4 sm:p-8">
 
     <div class="custom-cursor" aria-hidden="true"></div>
     <div class="custom-cursor-trail" aria-hidden="true"></div>
@@ -360,31 +229,6 @@
         </filter>
         <rect width="100%" height="100%" filter="url(#fractalNoise)"/>
     </svg>
-
-    <!-- Header Navigation -->
-    <header class="w-full max-w-[80rem] mb-6 flex flex-col sm:flex-row items-start sm:items-center justify-between border-b border-[#DDD5C5] pb-4 gap-4">
-        <div>
-            <div class="font-tech text-[10px] text-[#8B1A1A] tracking-wider uppercase flex items-center gap-2">
-                <span class="inline-block w-2 h-2 rounded-full bg-[#8B1A1A]"></span>
-                [ ARCHIVAL_SPECIFICATION_V1.0.0 | CHRONOMETRY_BLUEPRINT ]
-            </div>
-            <h1 class="text-2xl sm:text-3xl font-bold tracking-tight text-[#2A2520] mt-1 font-sans">
-                MACHINA VAULT
-            </h1>
-            <p class="font-tech text-xs text-[#7A7068] mt-0.5">
-                Archival Horology, Escapement Kinematics & Epicyclic Chronometry
-            </p>
-        </div>
-
-        <div class="flex items-center gap-3">
-            <a href="https://glassgallery.my.id" target="_blank" class="font-tech text-xs text-[#7A7068] hover:text-[#2A2520] border border-[#DDD5C5] px-3 py-1.5 rounded transition">
-                <i class="fa-solid fa-arrow-left mr-1"></i> APEX
-            </a>
-            <a href="/docs.html" class="font-tech text-xs text-[#EFE9DC] bg-[#2A2520] hover:bg-[#8B1A1A] px-3 py-1.5 rounded transition">
-                <i class="fa-solid fa-book-open mr-1"></i> DOCS
-            </a>
-        </div>
-    </header>
 
     <!-- Fullscreen Viewer Modal -->
     <div id="fullscreen-viewer" class="fixed inset-0 z-[100] hidden">
@@ -436,9 +280,10 @@
 
     <!-- Main Workspace -->
     <main class="max-w-[80rem] w-full space-y-6 relative z-10 grid grid-cols-1 md:grid-cols-5 gap-6">
-
+        
         <!-- Left: Specimen Plate Viewport (Col 1-3) -->
         <div id="specimen-viewport-card" class="surface-card w-full aspect-square md:aspect-auto md:h-full md:col-span-3 rounded-sm p-8 overflow-hidden relative group">
+            
             <!-- Drafting Dot Matrix -->
             <div class="drafting-dots absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAiIGhlaWdodD0iMjAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGNpcmNsZSBjeD0iMSIgY3k9IjEiIHI9IjEiIGZpbGw9InJnYmEoMTIyLCAxMTIsIDEwNCwgMC4xKSIvPjwvc3ZnPg==')] opacity-80 pointer-events-none"></div>
 
@@ -449,7 +294,7 @@
             <!-- Specimen Display Target -->
             <div id="render-target" class="w-full h-full flex items-center justify-center">
                 <div class="font-tech text-[10px] text-[#7A7068] flex items-center gap-2">
-                    <i class="fa-solid fa-circle-notch fa-spin text-[#8B1A1A]"></i> COMPUTING CHRONOMETRIC ESCAPEMENT...
+                    <i class="fa-solid fa-circle-notch fa-spin text-[#8B1A1A]"></i> COMPUTING CHRONOMETRIC PROJECTION...
                 </div>
             </div>
         </div>
@@ -459,14 +304,14 @@
             <div class="space-y-6">
                 <header class="flex items-center justify-between border-b border-[#DDD5C5] pb-4">
                     <h1 class="font-tech text-[11px] font-semibold text-[#2A2520] flex items-center gap-2">
-                        <i class="fa-solid fa-gears text-xs text-[#8B1A1A]"></i> Synthesis Engine
+                        <i class="fa-solid fa-gear text-xs text-[#8B1A1A]"></i> Synthesis Engine
                     </h1>
                 </header>
 
                 <div class="space-y-4">
                     <!-- 01. Aspect Ratio Matrix -->
                     <div class="space-y-2">
-                        <label class="font-tech text-[9px] text-[#7A7068]">01 // FORMAT_MATRIX</label>
+                        <label class="font-tech text-[9px] text-[#7A7068]">FORMAT_MATRIX</label>
                         <div class="grid grid-cols-3 gap-2" id="format-matrix">
                             <button class="ratio-btn py-2 text-[10px] font-tech font-semibold bg-[#E8E0D0]" data-w="9" data-h="16">9:16</button>
                             <button class="ratio-btn py-2 text-[10px] font-tech font-semibold bg-[#E8E0D0]" data-w="2" data-h="3">2:3</button>
@@ -482,32 +327,27 @@
                         </div>
                     </div>
 
-                    <!-- 02. Archival Horological Palette -->
+                    <!-- 02. Archival Horology Palette -->
                     <div class="space-y-2">
                         <div class="flex justify-between items-center">
-                            <label class="font-tech text-[9px] text-[#7A7068]">02 // ARCHIVAL_HOROLOGY_PALETTE</label>
+                            <label class="font-tech text-[9px] text-[#7A7068]">ARCHIVAL_HOROLOGY_PALETTE</label>
                             <span id="palette-active-label" class="font-tech text-[8px] text-[#8B1A1A] font-semibold">VELLUM</span>
                         </div>
-                        <div class="grid grid-cols-5 gap-2">
-                            <button class="palette-chip p-2 border border-[#DDD5C5] rounded flex flex-col items-center justify-center transition bg-[#EFE9DC]" data-palette="vellum" data-active="true" title="Archival Vellum">
-                                <span class="w-4 h-4 rounded-full border border-black/20" style="background:#1A1A1A;"></span>
-                                <span class="font-tech text-[8px] mt-1 text-[#1A1A1A]">Vellum</span>
+                        <div class="grid grid-cols-5 gap-1.5" id="palette-matrix">
+                            <button class="palette-chip py-1.5 px-1 text-[8px] font-tech flex items-center justify-center gap-1 bg-[#E8E0D0]" data-palette="vellum" data-active="true" title="Archival Vellum">
+                                <span class="w-2 h-2 rounded-full bg-[#EFE9DC] border border-[#2A2520]"></span> VELLUM
                             </button>
-                            <button class="palette-chip p-2 border border-[#DDD5C5] rounded flex flex-col items-center justify-center transition bg-[#0B1E2E]" data-palette="blueprint" title="Cyanotype Blueprint">
-                                <span class="w-4 h-4 rounded-full border border-white/20" style="background:#62B6CB;"></span>
-                                <span class="font-tech text-[8px] mt-1 text-[#EFE9DC]">Blueprint</span>
+                            <button class="palette-chip py-1.5 px-1 text-[8px] font-tech flex items-center justify-center gap-1 bg-[#E8E0D0]" data-palette="blueprint" title="Cyanotype Blueprint">
+                                <span class="w-2 h-2 rounded-full bg-[#0B1E2E]"></span> CYAN
                             </button>
-                            <button class="palette-chip p-2 border border-[#DDD5C5] rounded flex flex-col items-center justify-center transition bg-[#121316]" data-palette="obsidian" title="Titanium Obsidian">
-                                <span class="w-4 h-4 rounded-full border border-white/20" style="background:#D4AF37;"></span>
-                                <span class="font-tech text-[8px] mt-1 text-[#EAEAEA]">Obsidian</span>
+                            <button class="palette-chip py-1.5 px-1 text-[8px] font-tech flex items-center justify-center gap-1 bg-[#E8E0D0]" data-palette="obsidian" title="Titanium Obsidian">
+                                <span class="w-2 h-2 rounded-full bg-[#121316]"></span> OBSID
                             </button>
-                            <button class="palette-chip p-2 border border-[#DDD5C5] rounded flex flex-col items-center justify-center transition bg-[#F4ECE1]" data-palette="sepia" title="Horology Sepia">
-                                <span class="w-4 h-4 rounded-full border border-black/20" style="background:#B85D19;"></span>
-                                <span class="font-tech text-[8px] mt-1 text-[#382923]">Sepia</span>
+                            <button class="palette-chip py-1.5 px-1 text-[8px] font-tech flex items-center justify-center gap-1 bg-[#E8E0D0]" data-palette="sepia" title="Horology Sepia">
+                                <span class="w-2 h-2 rounded-full bg-[#F4ECE1] border border-[#382923]"></span> SEPIA
                             </button>
-                            <button class="palette-chip p-2 border border-[#DDD5C5] rounded flex flex-col items-center justify-center transition bg-[#E8ECE6]" data-palette="patina" title="Verdigris Patina">
-                                <span class="w-4 h-4 rounded-full border border-black/20" style="background:#2A7B72;"></span>
-                                <span class="font-tech text-[8px] mt-1 text-[#243038]">Patina</span>
+                            <button class="palette-chip py-1.5 px-1 text-[8px] font-tech flex items-center justify-center gap-1 bg-[#E8E0D0]" data-palette="patina" title="Verdigris Patina">
+                                <span class="w-2 h-2 rounded-full bg-[#2A7B72]"></span> PATINA
                             </button>
                         </div>
                     </div>
@@ -515,80 +355,91 @@
                     <!-- 03. Narrative Injection Seed -->
                     <div class="space-y-1.5 pt-1">
                         <div class="flex justify-between items-center">
-                            <label class="font-tech text-[9px] text-[#7A7068]">03 // KINEMATIC_SEED_NARRATIVE</label>
+                            <label class="font-tech text-[9px] text-[#7A7068]">NARRATIVE_INJECTION_SEED</label>
                             <button id="random-btn" class="font-tech text-[9px] text-[#8B1A1A] hover:underline flex items-center gap-1 cursor-pointer">
                                 <i class="fa-solid fa-dice"></i> [ RANDOM NARRATIVE ]
                             </button>
                         </div>
                         <div class="relative group">
                             <i class="fa-solid fa-terminal absolute left-4 top-1/2 -translate-y-1/2 text-[#7A7068] group-focus-within:text-[#8B1A1A] transition-colors mt-0.5"></i>
-                            <input type="text" id="seed-input" value="Breguet-Overcoil-Chrono" placeholder="Inject kinematic narrative sequence..." 
-                                   class="w-full pl-10 pr-4 py-2.5 text-xs font-mono font-medium rounded-sm border border-[#DDD5C5] bg-[#E8E0D0] focus:outline-none focus:border-[#8B1A1A]"
-                                   autocomplete="off" maxlength="128" spellcheck="false">
+                            <input type="text" id="seed-input" placeholder="Inject horological narrative sequence..." 
+                                   class="w-full pl-10 pr-4 py-2.5 text-xs font-mono font-medium rounded-sm"
+                                   autocomplete="off" maxlength="128" spellcheck="false" value="Breguet Overcoil Escapement & Flying Tourbillon">
                         </div>
                     </div>
 
                     <!-- 04. Recover From ID -->
                     <div class="space-y-1.5">
-                        <label class="font-tech text-[9px] text-[#7A7068]">04 // RECOVER_FROM_ID</label>
+                        <label class="font-tech text-[9px] text-[#7A7068]">RECOVER_FROM_ID</label>
                         <div class="relative group">
                             <i class="fa-solid fa-fingerprint absolute left-4 top-1/2 -translate-y-1/2 text-[#7A7068] group-focus-within:text-[#8B1A1A] transition-colors"></i>
-                            <input type="text" id="id-load-input" placeholder="Recover from ID (e.g. MCV-ESC-PW03DB)..." 
-                                   class="w-full pl-10 pr-4 py-2.5 text-xs font-mono font-medium rounded-sm border border-[#DDD5C5] bg-[#E8E0D0] focus:outline-none focus:border-[#8B1A1A]"
-                                   autocomplete="off" maxlength="24" spellcheck="false">
+                            <input type="text" id="id-load-input" placeholder="Recover from ID (e.g. MCV-ESC-0019U5)..." 
+                                   class="w-full pl-10 pr-4 py-2.5 text-xs font-mono font-medium rounded-sm"
+                                   autocomplete="off" maxlength="18" spellcheck="false">
                         </div>
                     </div>
 
-                    <!-- 05. Chronometric Telemetry Matrix -->
+                    <!-- 05. Chronometric Telemetry Matrix / Info Card -->
                     <div class="space-y-2 border border-[#DDD5C5] bg-[#E8E0D0] p-3 rounded-sm">
                         <div class="flex justify-between items-center border-b border-[#DDD5C5] pb-1.5">
-                            <span class="font-tech text-[9px] font-bold text-[#2A2520]">05 // CHRONOMETRIC_TELEMETRY</span>
+                            <span class="font-tech text-[9px] font-bold text-[#2A2520]">03 // CHRONOMETRIC_TELEMETRY</span>
                             <span id="accession-badge" class="font-tech text-[8px] text-[#8B1A1A] font-semibold">MCV-ESC-000000</span>
                         </div>
 
-                        <!-- Derived Archetype / Calibre -->
+                        <!-- Highlighted Derived Calibre from Narrative -->
                         <div class="border-b border-[#DDD5C5] pb-2 pt-0.5">
                             <div class="flex justify-between items-center text-[9px] font-tech">
-                                <span class="text-[#7A7068] text-[8px] uppercase tracking-wider">CALIBRE DESIGNATION</span>
-                                <span class="text-[#7A7068] text-[7px] font-mono">NARRATIVE &rarr; SEED &rarr; ID</span>
+                                <span class="text-[#7A7068] text-[8px] uppercase tracking-wider">DERIVED HOROLOGICAL CALIBRE</span>
+                                <span class="text-[#7A7068] text-[7px] font-mono">NARRATIVE &rarr; SEED &rarr; ID &rarr; CALIBRE</span>
                             </div>
                             <div class="flex items-center gap-2 mt-0.5">
-                                <i class="fa-solid fa-gear text-[#8B1A1A] text-[10px]"></i>
-                                <span id="tel-calibre" class="text-xs font-serif italic font-bold text-[#2A2520] tracking-wide">CALIBRE GG-492F</span>
+                                <i class="fa-solid fa-compass-drafting text-[#8B1A1A] text-[10px]"></i>
+                                <span id="tel-calibre" class="text-xs font-serif italic font-bold text-[#2A2520] tracking-wide">CALIBRE GG-101A</span>
                             </div>
+                            <div id="tel-mechanism" class="text-[8px] font-mono text-[#7A7068] italic truncate">Échappement à Ancre Suisse & Spiral Breguet</div>
                         </div>
 
                         <div class="grid grid-cols-2 gap-x-3 gap-y-1.5 text-[9px] font-tech pt-1">
                             <div>
-                                <span class="text-[#7A7068] block text-[8px]">MECHANISM CLASS</span>
-                                <span id="tel-mechanism" class="text-[#2A2520] font-semibold truncate block">Swiss Lever</span>
+                                <span class="text-[#7A7068] block text-[8px]">BEAT FREQUENCY</span>
+                                <span id="tel-frequency" class="text-[#2A2520] font-semibold truncate block">28,800 A/h (4.0 Hz)</span>
                             </div>
                             <div>
-                                <span class="text-[#7A7068] block text-[8px]">OSCILLATION</span>
-                                <span id="tel-frequency" class="text-[#2A2520] font-semibold truncate block">28,800 A/h</span>
-                            </div>
-                            <div>
-                                <span class="text-[#7A7068] block text-[8px]">BEARING JEWELS</span>
-                                <span id="tel-jewels" class="text-[#2A2520] font-semibold truncate block">21 Rubis</span>
+                                <span class="text-[#7A7068] block text-[8px]">JEWELED BEARINGS</span>
+                                <span id="tel-jewels" class="text-[#2A2520] font-semibold truncate block">21 Rubis Synthétiques</span>
                             </div>
                             <div>
                                 <span class="text-[#7A7068] block text-[8px]">GEAR REDUCTION</span>
-                                <span id="tel-ratio" class="text-[#2A2520] font-semibold truncate block">15 Dents</span>
+                                <span id="tel-ratio" class="text-[#2A2520] font-semibold truncate block">Échappement 15 Dents</span>
                             </div>
                             <div>
-                                <span class="text-[#7A7068] block text-[8px]">PITCH MODULE</span>
-                                <span id="tel-module" class="text-[#2A2520] font-semibold truncate block">m = 0.8 mm</span>
+                                <span class="text-[#7A7068] block text-[8px]">ESCAPEMENT ANGLE</span>
+                                <span id="tel-angle" class="text-[#2A2520] font-semibold truncate block">52.5° Lift Angle</span>
                             </div>
                             <div>
-                                <span class="text-[#7A7068] block text-[8px]">PTR HASH / METRIC</span>
-                                <span id="tel-hash" class="text-[#8B1A1A] font-semibold truncate block">0x00000000</span>
+                                <span class="text-[#7A7068] block text-[8px]">BALANCE INERTIA</span>
+                                <span id="tel-inertia" class="text-[#2A2520] font-semibold truncate block">12.5 mg·cm²</span>
+                            </div>
+                            <div>
+                                <span class="text-[#7A7068] block text-[8px]">TRAIN EFFICIENCY</span>
+                                <span id="tel-efficiency" class="text-[#2A2520] font-semibold truncate block">94.2% Involute</span>
+                            </div>
+                            <div class="col-span-2 flex justify-between items-center pt-0.5 border-t border-[#DDD5C5]">
+                                <div>
+                                    <span class="text-[#7A7068] text-[8px]">SCALE GAUGE: </span>
+                                    <span class="text-[#2A2520] font-semibold">1:1 Metric Chronometer</span>
+                                </div>
+                                <div>
+                                    <span class="text-[#7A7068] text-[8px]">PTR: </span>
+                                    <span id="tel-hash" class="text-[#2A2520] font-semibold">0x00000000</span>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <!-- Panel Footer Actions -->
+            <!-- Action & Export Footer -->
             <footer class="space-y-4 pt-4 border-t border-[#DDD5C5]">
                 <div class="flex justify-between items-center bg-[#E8E0D0] px-3 py-2 border border-[#DDD5C5]">
                     <span id="specimen-id" class="font-tech text-[10px] text-[#2A2520] font-semibold">SEQ: MCV-ESC-000000</span>
@@ -604,74 +455,79 @@
                     </button>
                 </div>
                 <button id="embed-btn" class="font-tech text-[10px] text-[#7A7068] hover:text-[#8B1A1A] transition-all flex items-center justify-center gap-2 px-4 py-2 border border-[#DDD5C5] hover:border-[#8B1A1A] bg-[#E8E0D0] w-full cursor-pointer">
-                    <i class="fa-solid fa-share-nodes"></i> [ GENERATE EMBED ]
+                    <i class="fa-solid fa-share-nodes"></i> [ GENERATE EMBED PROTOCOL ]
                 </button>
             </footer>
         </section>
 
-        <!-- Archival Documentation Section -->
-        <section class="md:col-span-5 surface-card p-8 rounded-sm space-y-8 mt-6">
+        <!-- Archival Metadata Section for SEO/AIO -->
+        <section id="specimen-metadata" class="md:col-span-5 surface-card p-8 rounded-sm space-y-8 mt-6">
             <div class="prose max-w-none">
-                <h2 class="font-tech text-sm font-semibold border-b border-[#DDD5C5] pb-2 text-[#8B1A1A]">01. ARCHIVAL_HOROLOGY_SYNTHESIS_OVERVIEW</h2>
-                <p class="text-xs text-[#2A2520] mt-3 leading-relaxed">
-                    Machina Vault (璇玑典藏) is an archival procedural vector chronometry engine designed in the Swiss-Archival drafting standard. 
-                    It synthesizes deterministic mechanical watch escapements, flying tourbillons, and epicyclic planetary gearing trains directly from narrative strings.
+                <h2 class="font-tech text-sm font-semibold border-b border-[#DDD5C5] pb-2 text-[#8B1A1A]">01. ARCHIVAL_HOROLOGY_OVERVIEW</h2>
+                <p class="text-sm text-[#2A2520] leading-relaxed">
+                    Machina Vault (璇玑典藏) is an archival procedural horological synthesis engine and kinematic drafting plate repository adhering to the Swiss-Archival design system. Drawing upon historical chronometry from Abraham-Louis Breguet, Thomas Mudge, John Harrison, and George Daniels, the engine procedurally synthesizes vector Swiss lever escapements, flying tourbillon carriages, and epicyclic planetary gear trains using deterministic mathematical seeds.
                 </p>
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mt-4">
-                    <div class="p-3 bg-[#E8E0D0] border border-[#DDD5C5] rounded-sm">
-                        <h3 class="font-tech text-[10px] font-bold text-[#8B1A1A] mb-1">01. INVOLUTE GEARING</h3>
-                        <p class="text-[11px] text-[#7A7068]">True circular pitch dedendum, addendum, flank involute curves, and root fillets computed per module calibration.</p>
-                    </div>
-                    <div class="p-3 bg-[#E8E0D0] border border-[#DDD5C5] rounded-sm">
-                        <h3 class="font-tech text-[10px] font-bold text-[#8B1A1A] mb-1">02. BREGUET OVERCOIL</h3>
-                        <p class="text-[11px] text-[#7A7068]">Archimedean spiral balance spring with outer raised terminal curve ensuring concentric expansion and isochronism.</p>
-                    </div>
-                    <div class="p-3 bg-[#E8E0D0] border border-[#DDD5C5] rounded-sm">
-                        <h3 class="font-tech text-[10px] font-bold text-[#8B1A1A] mb-1">03. ARCHIVAL EMBED MESH</h3>
-                        <p class="text-[11px] text-[#7A7068]">100% clean 3:2 embed mode with postMessage cross-iframe communication and automatic failover routing.</p>
-                    </div>
+
+                <h2 class="font-tech text-sm font-semibold border-b border-[#DDD5C5] pb-2 text-[#8B1A1A] mt-8">02. PROCEDURAL_KINEMATICS_LOGIC</h2>
+                <p class="text-sm text-[#2A2520] leading-relaxed">
+                    By injecting narrative sequences into the matrix, the engine hashes the input to establish horological calibre designation, true involute gear tooth flanks (20° pressure angle), Archimedean hairspring coils, balance wheel inertia collets, and synthetic ruby pallet jewels. Every specimen is an immutable archival record, traceable via its accession identifier (e.g. MCV-ESC-0019U5) and memory pointer hash.
+                </p>
+
+                <h2 class="font-tech text-sm font-semibold border-b border-[#DDD5C5] pb-2 text-[#8B1A1A] mt-8">03. ARCHIVAL_EXPORT_PROTOCOL</h2>
+                <p class="text-sm text-[#2A2520] leading-relaxed">
+                    Specimens can be exported as high-resolution standalone SVG documents or 300 DPI PNG prints adhering to the Swiss-Archival design system. Each exported plate incorporates Swiss-Archival dual drafting borders, a Chronometric Scale Bar (Metric 1:1 Rule), an Imperial Vermilion Seal Chop (朱砂印章 &middot; 璇玑典藏), and an authentic Latin/French calibre title.
+                </p>
+
+                <h2 class="font-tech text-sm font-semibold border-b border-[#DDD5C5] pb-2 text-[#8B1A1A] mt-8">04. EMBED_INTEGRATION_PROTOCOL</h2>
+                <p class="text-sm text-[#2A2520] leading-relaxed">
+                    Machina Vault functions as an embeddable service. Utilizing the <code>mode=embed</code> URL parameter, the interface is reduced to a strictly archival specimen view with transparent background, optimized for 3:2 iframe integration across digital galleries. Developers can control the synthesis engine in real-time via the <code>postMessage</code> API.
+                </p>
+
+                <h2 class="font-tech text-sm font-semibold border-b border-[#DDD5C5] pb-2 text-[#8B1A1A] mt-8">05. PROGRAMMATIC_ARCHIVAL_ACCESS</h2>
+                <p class="text-sm text-[#2A2520] leading-relaxed">
+                    The engine exposes zero-dependency JavaScript access via <code>window.MachinaDraw</code>. Developers can synthesize horological specimens, extract telemetry metrics, and generate archival plates programmatically in Node.js or client-side environments.
+                </p>
+
+                <div class="mt-8 pt-4 border-t border-[#DDD5C5]">
+                    <a href="/docs.html" class="font-tech text-[10px] text-[#7A7068] hover:text-[#8B1A1A] transition-colors flex items-center gap-2">
+                        <i class="fa-solid fa-file-code"></i> READ_FULL_DOCUMENTATION_PROTOCOL
+                    </a>
                 </div>
             </div>
-
-            <div class="prose max-w-none pt-4 border-t border-[#DDD5C5]">
-                <h2 class="font-tech text-sm font-semibold border-b border-[#DDD5C5] pb-2 text-[#8B1A1A]">02. EMBED_INTEGRATION_SPECIFICATION</h2>
-                <p class="text-xs text-[#7A7068] mt-2 leading-relaxed">
-                    To embed a specimen in any site or headless application, append <code class="font-mono bg-[#E8E0D0] px-1 py-0.5 text-[#2A2520]">?mode=embed&w=3&h=2</code> to the vault endpoint.
-                    The iframe displays only the clean drafting plate with zero controls or toolbars.
-                </p>
-                <pre class="bg-[#E8E0D0] p-3 text-[11px] font-mono text-[#2A2520] border border-[#DDD5C5] overflow-x-auto mt-2">&lt;iframe src="https://machina-vault.glassgallery.my.id/?mode=embed&w=3&h=2&seed=Breguet-Overcoil-Chrono" width="600" height="400" frameborder="0" style="aspect-ratio:3/2; width:100%;"&gt;&lt;/iframe&gt;</pre>
-            </div>
         </section>
-
-        <footer class="md:col-span-5 text-center py-8">
-            <p class="font-tech text-[10px] text-[#7A7068]">MACHINA_VAULT &copy; 2026 | AZZAR_BUDIYANTO | GLASSGALLERY_SUITE</p>
+        
+        <footer class="md:col-span-5 text-center py-12">
+            <p class="font-tech text-[10px] text-[#7A7068]">MACHINA_VAULT &copy; 2026 | AZZAR_BUDIYANTO</p>
         </footer>
     </main>
 
-    <!-- Scripts -->
-    <script src="js/machinadraw.js"></script>
+    <!-- Core Engine Scripts -->
+    <script src="js/machinadraw.js?v=1.4.0"></script>
     <script>
         (function() {
             const NARRATIVE_TOPICS = [
-                "Breguet-Tourbillon-Cage",
-                "Swiss-Lever-Escapement-Impulse",
-                "Planetary-Differential-Annulus",
-                "Marine-Chronometer-Detent",
-                "Constant-Force-Remontoire",
-                "Equation-Of-Time-Snail",
-                "Gyromax-Glucydur-Balance",
-                "Perpetual-Calendar-Cam",
-                "Geneva-Drive-Cross-Stopwork",
-                "Deadbeat-Graham-Escapement",
-                "Su-Song-Water-Clock-Escapement",
-                "Antikythera-Epicyclic-Differential"
+                "Breguet Overcoil Escapement & Flying Tourbillon",
+                "Thomas Mudge Lever Escapement with Jeweled Pallet Stones",
+                "John Harrison H4 Marine Chronometer Gridiron Pendulum",
+                "George Daniels Co-Axial Escapement Chronometer",
+                "Antikythera Mechanism Epicyclic Differential Planetary Train",
+                "Christiaan Huygens Cycloidal Pendulum & Balance Spring",
+                "Patek Philippe Henry Graves Supercomplication Calibre",
+                "Ferdinand Berthoud Marine Chronometer Gimbals & Balance",
+                "Su Song Water-Driven Astronomical Clock Tower Escapement",
+                "Giovanni de Dondi Astrarium Planetary Gearing Calibre",
+                "Flying Tourbillon One-Minute Carriage with Blued Screws",
+                "Glucydur Gyromax Free-Sprung Variable Inertia Balance",
+                "Swiss Glashütte Ribbed Bridge with Solar Finish",
+                "Involute Gear Flank Epicycloid Pinion Metric Module 0.8",
+                "Constant-Force Remontoire d'Égalité Chronometer Calibre"
             ];
 
             const STATE = {
                 currentRatio: { w: 3, h: 2 },
                 currentPalette: 'vellum',
                 currentSpecimen: null,
-                currentSeed: 'Breguet-Overcoil-Chrono'
+                currentSeed: 'Breguet Overcoil Escapement & Flying Tourbillon'
             };
 
             const DOM = {
@@ -706,7 +562,9 @@
                 telFrequency: document.getElementById('tel-frequency'),
                 telJewels: document.getElementById('tel-jewels'),
                 telRatio: document.getElementById('tel-ratio'),
-                telModule: document.getElementById('tel-module'),
+                telAngle: document.getElementById('tel-angle'),
+                telInertia: document.getElementById('tel-inertia'),
+                telEfficiency: document.getElementById('tel-efficiency'),
                 telHash: document.getElementById('tel-hash'),
                 // Cursor
                 cursor: document.querySelector('.custom-cursor'),
@@ -762,75 +620,94 @@
             }
 
             function synthesizeSpecimen() {
-                try {
-                    const t0 = performance.now();
-                    const idLoadVal = DOM.idLoadInput.value.trim();
-                    let seedVal = DOM.seedInput.value.trim();
-                    const dims = getDimensions(STATE.currentRatio);
+              try {
+                const t0 = performance.now();
+                const idLoadVal = DOM.idLoadInput.value.trim();
+                let seedVal = DOM.seedInput.value.trim();
+                const dims = getDimensions(STATE.currentRatio);
 
-                    let opts = {
-                        width: dims.w,
-                        height: dims.h,
-                        palette: STATE.currentPalette
-                    };
+                let opts = {
+                    width: dims.w,
+                    height: dims.h,
+                    palette: STATE.currentPalette
+                };
 
-                    if (idLoadVal && idLoadVal.includes('-')) {
-                        opts.id = idLoadVal;
-                        STATE.currentSeed = idLoadVal;
-                    } else {
-                        seedVal = seedVal || 'Breguet-Overcoil-Chrono';
-                        opts.narrative = seedVal;
-                        STATE.currentSeed = seedVal;
-                    }
-
-                    const specimen = window.MachinaDraw.synthesize(opts.narrative || opts.id, opts);
-                    STATE.currentSpecimen = specimen;
-
-                    // Update Viewport
-                    DOM.target.innerHTML = specimen.svg;
-                    const svgEl = DOM.target.querySelector('svg');
-                    if (svgEl) {
-                        svgEl.style.aspectRatio = `${dims.w} / ${dims.h}`;
-                        svgEl.classList.add('specimen-svg', 'w-full', 'h-full', 'object-contain');
-                    }
-
-                    // Update Telemetry Panel
-                    if (DOM.accessionBadge) DOM.accessionBadge.textContent = specimen.id;
-                    if (DOM.specimenId) DOM.specimenId.textContent = `SEQ: ${specimen.id}`;
-                    if (DOM.telCalibre) DOM.telCalibre.textContent = specimen.metrics.calibre;
-                    if (DOM.telMechanism) DOM.telMechanism.textContent = specimen.metrics.mechanism;
-                    if (DOM.telFrequency) DOM.telFrequency.textContent = specimen.metrics.frequency;
-                    if (DOM.telJewels) DOM.telJewels.textContent = specimen.metrics.jewels;
-                    if (DOM.telRatio) DOM.telRatio.textContent = specimen.metrics.ratio;
-                    if (DOM.telModule) DOM.telModule.textContent = specimen.metrics.module;
-                    if (DOM.telHash) DOM.telHash.textContent = specimen.metrics.hashHex;
-
-                    const tElapsed = (performance.now() - t0).toFixed(1);
-                    if (DOM.hashMetric) DOM.hashMetric.textContent = `${tElapsed}MS // ${specimen.archetype.toUpperCase()}`;
-
-                    // Sync URL if not in embed mode
-                    if (document.body.dataset.mode !== 'embed') {
-                        const url = new URL(window.location);
-                        if (idLoadVal && idLoadVal.includes('-')) {
-                            url.searchParams.set('id', idLoadVal);
-                            url.searchParams.delete('narrative');
-                            url.searchParams.delete('seed');
-                        } else {
-                            url.searchParams.set('narrative', seedVal);
-                            url.searchParams.delete('id');
-                        }
-                        url.searchParams.set('w', STATE.currentRatio.w);
-                        url.searchParams.set('h', STATE.currentRatio.h);
-                        url.searchParams.set('palette', STATE.currentPalette);
-                        window.history.replaceState({}, '', url);
-                    }
-                } catch (err) {
-                    console.error('[MachinaDraw] Synthesis fault:', err);
+                if (idLoadVal && idLoadVal.includes('-')) {
+                    opts.id = idLoadVal;
+                    STATE.currentSeed = idLoadVal;
+                } else {
+                    seedVal = seedVal || 'Archival Horological Specimen';
+                    opts.narrative = seedVal;
+                    STATE.currentSeed = seedVal;
                 }
+
+                const specimen = window.MachinaDraw.synthesize(opts.narrative || opts.id, opts);
+                STATE.currentSpecimen = specimen;
+
+                // Update Telemetry Panel
+                if (DOM.accessionBadge) DOM.accessionBadge.textContent = specimen.accessionId;
+                if (DOM.specimenId) DOM.specimenId.textContent = `SEQ: ${specimen.accessionId}`;
+                if (DOM.telCalibre) DOM.telCalibre.textContent = specimen.calibre;
+                if (DOM.telMechanism) DOM.telMechanism.textContent = specimen.mechanism;
+                if (DOM.telFrequency) DOM.telFrequency.textContent = specimen.metrics.frequency;
+                if (DOM.telJewels) DOM.telJewels.textContent = specimen.metrics.jewels;
+                if (DOM.telRatio) DOM.telRatio.textContent = specimen.metrics.ratio;
+                if (DOM.telAngle) DOM.telAngle.textContent = specimen.metrics.escapementAngle;
+                if (DOM.telInertia) DOM.telInertia.textContent = specimen.metrics.balanceInertia;
+                if (DOM.telEfficiency) DOM.telEfficiency.textContent = specimen.metrics.trainEfficiency;
+                if (DOM.telHash) DOM.telHash.textContent = specimen.metrics.hashHex;
+
+                const tElapsed = (performance.now() - t0).toFixed(1);
+                if (DOM.hashMetric) DOM.hashMetric.textContent = `${tElapsed}MS // ${specimen.archetype.toUpperCase()}`;
+
+                renderViewport();
+
+                // Sync URL if not in embed mode
+                if (document.body.dataset.mode !== 'embed') {
+                    const url = new URL(window.location);
+                    if (idLoadVal && idLoadVal.includes('-')) {
+                        url.searchParams.set('id', idLoadVal);
+                        url.searchParams.delete('narrative');
+                        url.searchParams.delete('seed');
+                    } else {
+                        url.searchParams.set('narrative', seedVal);
+                        url.searchParams.delete('id');
+                    }
+                    url.searchParams.set('w', STATE.currentRatio.w);
+                    url.searchParams.set('h', STATE.currentRatio.h);
+                    url.searchParams.set('palette', STATE.currentPalette);
+                    window.history.replaceState({}, '', url);
+                }
+              } catch (err) {
+                renderFault(err);
+              }
+            }
+
+            function renderFault(err) {
+                console.error('[MachinaDraw] synthesis fault:', err);
+                if (DOM.target) {
+                    DOM.target.innerHTML = '<div class="font-tech text-[10px] text-[#8B1A1A] text-center leading-relaxed">' +
+                        '<i class="fa-solid fa-triangle-exclamation"></i> SYNTHESIS FAULT<br>' +
+                        '<span class="text-[#7A7068]">' + (err && err.message ? err.message : 'unknown error') + '</span></div>';
+                }
+                if (DOM.hashMetric) DOM.hashMetric.textContent = 'FAULT';
             }
 
             function renderViewport() {
-                synthesizeSpecimen();
+                if (!STATE.currentSpecimen) return;
+                const dims = getDimensions(STATE.currentRatio);
+                const svgMarkup = window.MachinaDraw.generateSvgPlate(STATE.currentSpecimen, {
+                    width: dims.w,
+                    height: dims.h,
+                    palette: STATE.currentPalette
+                });
+
+                DOM.target.innerHTML = svgMarkup;
+                const svgEl = DOM.target.querySelector('svg');
+                if (svgEl) {
+                    svgEl.style.aspectRatio = `${dims.w} / ${dims.h}`;
+                    svgEl.classList.add('w-full', 'h-full', 'max-h-[500px]', 'object-contain', 'transition-all');
+                }
             }
 
             // Aspect Ratio Matrix Selection
@@ -855,7 +732,8 @@
                     if (DOM.paletteActiveLabel) {
                         DOM.paletteActiveLabel.textContent = STATE.currentPalette.toUpperCase();
                     }
-                    synthesizeSpecimen();
+                    if (STATE.currentSpecimen) renderViewport();
+                    else synthesizeSpecimen();
                 });
             });
 
@@ -919,25 +797,46 @@
                 }, 2200);
             }
 
-            // Export 1: SVG Copy
+            // Export 1: SVG Copy & Download
             DOM.copyBtn.addEventListener('click', async () => {
                 if (!STATE.currentSpecimen) return;
-                await copyToClipboard(STATE.currentSpecimen.svg);
-                buttonFeedback(DOM.copyBtn, DOM.copyBtn.innerHTML, '<i class="fa-solid fa-check"></i> [ COPIED ]');
+                const dims = getDimensions(STATE.currentRatio);
+                const svgContent = window.MachinaDraw.generateSvgPlate(STATE.currentSpecimen, {
+                    width: dims.w,
+                    height: dims.h,
+                    palette: STATE.currentPalette
+                });
+
+                const blob = new Blob([svgContent], { type: 'image/svg+xml;charset=utf-8' });
+                const url = URL.createObjectURL(blob);
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = `machina_${STATE.currentSpecimen.accessionId}_${STATE.currentSpecimen.calibre.replace(/\s+/g, '_')}.svg`;
+                a.click();
+                URL.revokeObjectURL(url);
+
+                const copied = await copyToClipboard(svgContent);
+                buttonFeedback(DOM.copyBtn, DOM.copyBtn.innerHTML, copied ? '<i class="fa-solid fa-check"></i> [ SVG SAVED & COPIED ]' : '<i class="fa-solid fa-check"></i> [ SVG SAVED ]');
             });
 
-            // Export 2: PNG Download
+            // Export 2: PNG 300DPI Render
             DOM.pngBtn.addEventListener('click', () => {
                 if (!STATE.currentSpecimen) return;
-                const originalHtml = DOM.pngBtn.innerHTML;
-                DOM.pngBtn.innerHTML = '<i class="fa-solid fa-circle-notch fa-spin"></i> [ RENDERING ]';
+                const origHtml = DOM.pngBtn.innerHTML;
+                DOM.pngBtn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> [ RENDERING ]';
 
                 const dims = getDimensions(STATE.currentRatio);
-                const scaleFactor = 2400 / Math.max(dims.w, dims.h);
-                const canvasW = Math.round(dims.w * scaleFactor);
-                const canvasH = Math.round(dims.h * scaleFactor);
+                const scale = 2.5;
+                const canvasW = Math.round(dims.w * scale);
+                const canvasH = Math.round(dims.h * scale);
 
-                const blob = new Blob([STATE.currentSpecimen.svg], { type: 'image/svg+xml;charset=utf-8' });
+                const svgMarkup = window.MachinaDraw.generateSvgPlate(STATE.currentSpecimen, {
+                    width: dims.w,
+                    height: dims.h,
+                    palette: STATE.currentPalette
+                });
+
+                const blob = new Blob([svgMarkup], { type: 'image/svg+xml;charset=utf-8' });
                 const url = URL.createObjectURL(blob);
                 const img = new Image();
 
@@ -952,55 +851,52 @@
                     const pngUrl = canvas.toDataURL('image/png');
                     const a = document.createElement('a');
                     a.href = pngUrl;
-                    a.download = `machina_${STATE.currentSpecimen.id}.png`;
+                    a.download = `machina_${STATE.currentSpecimen.accessionId}_${STATE.currentSpecimen.calibre.replace(/\s+/g, '_')}_300dpi.png`;
                     a.click();
-                    DOM.pngBtn.innerHTML = originalHtml;
+
+                    buttonFeedback(DOM.pngBtn, origHtml, '<i class="fa-solid fa-check"></i> [ PNG SAVED ]');
                 };
                 img.src = url;
             });
 
-            // Export 3: Generate Embed Snippet
+            // Embed Protocol Generator
             DOM.embedBtn.addEventListener('click', async () => {
                 const ratio = STATE.currentRatio;
+                const dims = getDimensions(ratio);
                 const baseUrl = window.location.origin + window.location.pathname;
-                let query = '?mode=embed';
+                let query = `?mode=embed`;
                 if (DOM.idLoadInput.value.trim()) query += `&id=${encodeURIComponent(DOM.idLoadInput.value.trim())}`;
-                else if (DOM.seedInput.value.trim()) query += `&seed=${encodeURIComponent(DOM.seedInput.value.trim())}`;
+                else if (DOM.seedInput.value.trim()) query += `&narrative=${encodeURIComponent(DOM.seedInput.value.trim())}`;
                 query += `&w=${ratio.w}&h=${ratio.h}&palette=${STATE.currentPalette}`;
 
                 const embedUrl = `${baseUrl}${query}`;
-                const iframeCode = `<iframe src="${embedUrl}" width="600" height="400" frameborder="0" style="border:1px solid #DDD5C5; border-radius:4px; aspect-ratio:3/2; width:100%;" title="Machina Vault // ${STATE.currentSpecimen ? STATE.currentSpecimen.id : 'Chronometry'}"></iframe>`;
+                const iframeCode = `<iframe src="${embedUrl}" width="600" height="400" frameborder="0" style="border:1px solid #DDD5C5; border-radius:4px; background:#EFE9DC;" title="Machina Vault // ${STATE.currentSpecimen ? STATE.currentSpecimen.calibre : 'Horology'}"></iframe>`;
 
-                if (DOM.embedModalTextarea) {
-                    DOM.embedModalTextarea.value = iframeCode;
-                    DOM.embedModal.classList.remove('hidden');
-                    DOM.embedModal.classList.add('flex');
-                } else {
-                    await copyToClipboard(iframeCode);
-                    buttonFeedback(DOM.embedBtn, DOM.embedBtn.innerHTML, '<i class="fa-solid fa-check"></i> [ EMBED_COPIED ]');
-                }
+                await copyToClipboard(iframeCode);
+                buttonFeedback(DOM.embedBtn, DOM.embedBtn.innerHTML, '<i class="fa-solid fa-check"></i> [ EMBED_CODE_COPIED ]');
             });
-
-            if (DOM.embedModalClose) {
-                DOM.embedModalClose.addEventListener('click', () => {
-                    DOM.embedModal.classList.add('hidden');
-                    DOM.embedModal.classList.remove('flex');
-                });
-            }
-
-            if (DOM.embedModalCopyBtn) {
-                DOM.embedModalCopyBtn.addEventListener('click', async () => {
-                    await copyToClipboard(DOM.embedModalTextarea.value);
-                    buttonFeedback(DOM.embedModalCopyBtn, DOM.embedModalCopyBtn.innerHTML, '<i class="fa-solid fa-check"></i> [ COPIED ]');
-                });
-            }
 
             // Fullscreen Viewer Functions
             DOM.fullscreenBtn.addEventListener('click', () => {
                 if (!STATE.currentSpecimen) return;
-                DOM.viewerTitle.textContent = `SPECIMEN PLATE // ${STATE.currentSpecimen.id}`;
-                DOM.viewerSeq.textContent = `CALIBRE: ${STATE.currentSpecimen.metrics.calibre} | PTR: ${STATE.currentSpecimen.metrics.hashHex}`;
-                DOM.viewerContent.innerHTML = STATE.currentSpecimen.svg;
+                const svgElement = DOM.target.querySelector('svg');
+                if (!svgElement) return;
+
+                DOM.viewerTitle.textContent = `SPECIMEN PLATE // ${STATE.currentSpecimen.calibre.toUpperCase()}`;
+                DOM.viewerSeq.textContent = `ACCESSION: ${STATE.currentSpecimen.accessionId} | PTR: ${STATE.currentSpecimen.metrics.hashHex}`;
+
+                const svgClone = svgElement.cloneNode(true);
+                svgClone.removeAttribute('width');
+                svgClone.removeAttribute('height');
+                svgClone.style.maxWidth = '100%';
+                svgClone.style.maxHeight = '100%';
+                svgClone.style.width = 'auto';
+                svgClone.style.height = 'auto';
+                svgClone.style.objectFit = 'contain';
+
+                DOM.viewerContent.innerHTML = '';
+                DOM.viewerContent.appendChild(svgClone);
+
                 DOM.fullscreenViewer.classList.add('active');
                 DOM.fullscreenViewer.classList.remove('hidden');
                 document.body.style.overflow = 'hidden';
@@ -1013,12 +909,14 @@
             });
 
             DOM.viewerDownloadSvg.addEventListener('click', async () => {
-                if (!STATE.currentSpecimen) return;
-                const blob = new Blob([STATE.currentSpecimen.svg], { type: 'image/svg+xml;charset=utf-8' });
+                const svgEl = DOM.viewerContent.querySelector('svg');
+                if (!svgEl) return;
+                const svgContent = svgEl.outerHTML;
+                const blob = new Blob([svgContent], { type: 'image/svg+xml;charset=utf-8' });
                 const url = URL.createObjectURL(blob);
                 const a = document.createElement('a');
                 a.href = url;
-                a.download = `machina_${STATE.currentSpecimen.id}.svg`;
+                a.download = `machina_${STATE.currentSpecimen.accessionId}_${STATE.currentSpecimen.calibre.replace(/\s+/g, '_')}.svg`;
                 a.click();
                 URL.revokeObjectURL(url);
                 buttonFeedback(DOM.viewerDownloadSvg, DOM.viewerDownloadSvg.innerHTML, '<i class="fa-solid fa-check"></i> [ SAVED ]');
@@ -1099,7 +997,7 @@
                 synthesizeSpecimen();
             });
 
-            // Initial Synthesis
+            // Synthesize initial specimen on boot
             synthesizeSpecimen();
 
             // PWA Service Worker Registration
