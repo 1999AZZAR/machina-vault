@@ -3,14 +3,96 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script>
+        (function() {
+            try {
+                var params = new URLSearchParams(window.location.search);
+                if (params.get('mode') === 'embed') {
+                    document.documentElement.dataset.mode = 'embed';
+                }
+            } catch(e) {}
+        })();
+    </script>
     <title>Machina Vault | Precision Horological & Kinematic Vector Engine</title>
     <meta name="description" content="Archival procedural horological synthesis engine. Generates vector Swiss lever escapements, flying tourbillons, and epicyclic planetary gear trains in Swiss-Archival drafting style.">
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+    <link rel="canonical" href="https://machina-vault.glassgallery.my.id/">
     
-    <!-- PWA & Theme -->
+    <!-- PWA & Favicons -->
     <link rel="manifest" href="/manifest.json">
     <link rel="icon" href="/icon-192.svg" type="image/svg+xml">
     <meta name="theme-color" content="#8B1A1A">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <link rel="apple-touch-icon" href="/icon-192.svg">
     
+    <!-- Structured Data (Schema.org) -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "Person",
+          "@id": "https://glassgallery.my.id/porto/#person",
+          "name": "Azzar Budiyanto",
+          "jobTitle": "Lead Architect",
+          "sameAs": [
+            "https://github.com/1999AZZAR",
+            "https://glassgallery.my.id"
+          ]
+        },
+        {
+          "@type": "Organization",
+          "@id": "https://glassgallery.my.id/#organization",
+          "name": "Machina Vault",
+          "url": "https://machina-vault.glassgallery.my.id/",
+          "founder": {
+            "@id": "https://glassgallery.my.id/porto/#person"
+          }
+        },
+        {
+          "@type": "WebSite",
+          "@id": "https://machina-vault.glassgallery.my.id/#website",
+          "url": "https://machina-vault.glassgallery.my.id/",
+          "name": "Machina Vault | Horological Chronometry Synthesis",
+          "description": "Archival horology and kinematic vector synthesis engine.",
+          "publisher": {
+            "@id": "https://glassgallery.my.id/#organization"
+          }
+        },
+        {
+          "@type": "FAQPage",
+          "mainEntity": [
+            {
+              "@type": "Question",
+              "name": "What is Machina Vault?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Machina Vault (璇玑典藏) is an archival procedural vector engine generating Swiss lever escapements, flying tourbillons, and epicyclic planetary gearing with authentic horological geometry."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "How does the kinematic synthesis engine work?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "The engine hashes narrative inputs with FNV-1a into deterministic seeds, calculating true involute gear tooth flanks, Archimedean hairspring coils, balance wheel inertia collets, and pallet jewels."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "How can I embed Machina Vault specimens?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Add '?mode=embed&w=3&h=2' to any specimen URL to get an isolated 3:2 plate without control chrome."
+              }
+            }
+          ]
+        }
+      ]
+    }
+    </script>
+
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -22,114 +104,139 @@
 
     <style>
         :root {
+            --archival-bg: #E8E0D0;
+            --archival-fg: #2A2520;
             --archival-surface: #EFE9DC;
-            --archival-card: #E8E0D0;
-            --archival-border: #CDC4B4;
             --archival-accent: #8B1A1A;
-            --archival-ink: #1A1A1A;
+            --archival-muted: #DDD5C5;
             --archival-meta: #7A7068;
+            --grid-color: rgba(191, 182, 166, 0.2);
         }
 
-        body {
-            background-color: var(--archival-surface);
-            color: var(--archival-ink);
+        ::selection { background: var(--archival-accent); color: var(--archival-surface); }
+
+        body { 
+            background-color: var(--archival-bg); 
+            background-image: linear-gradient(to right, var(--grid-color) 1px, transparent 1px);
+            background-size: 10% 100%;
+            color: var(--archival-fg); 
             font-family: 'Plus Jakarta Sans', sans-serif;
+            margin: 0;
             overflow-x: hidden;
+            line-height: 1.6;
         }
 
-        .font-tech { font-family: 'JetBrains Mono', monospace; }
-        .font-serif-sc { font-family: 'Noto Serif SC', serif; }
+        .font-tech { 
+            font-family: 'JetBrains Mono', monospace; 
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+        }
 
-        /* Subtle Noise Texture */
+        .surface-card { 
+            background: var(--archival-surface); 
+            border: 1px solid var(--archival-muted); 
+            box-shadow: 0 4px 24px -12px rgba(42, 37, 32, 0.08);
+        }
+
         .noise-layer {
             position: fixed;
             inset: 0;
-            width: 100%;
-            height: 100%;
             pointer-events: none;
-            opacity: 0.035;
-            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
-            z-index: 99;
-        }
-
-        /* Subtle Drafting Grid Dots */
-        .drafting-dots {
-            background-image: radial-gradient(var(--archival-border) 1px, transparent 1px);
-            background-size: 24px 24px;
+            z-index: 50;
+            opacity: 0.04;
+            mix-blend-mode: multiply;
         }
 
         /* Custom Hardware-Accelerated Cursor */
-        .custom-cursor {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 8px;
-            height: 8px;
-            border-radius: 50%;
-            background-color: var(--archival-accent);
-            pointer-events: none;
-            z-index: 1000;
-            transform: translate3d(var(--x, -100px), var(--y, -100px), 0);
-            transition: width 0.15s ease, height 0.15s ease, background-color 0.15s ease;
+        @media (pointer: fine) {
+            body:not([data-mode="embed"]) *:not(#fullscreen-btn):not(#fullscreen-btn *) { cursor: none !important; }
+            .custom-cursor, .custom-cursor-trail {
+                position: fixed;
+                top: 0; left: 0;
+                border-radius: 50%;
+                pointer-events: none;
+                z-index: 9999;
+                transform: translate3d(calc(var(--x, -100px) - 50%), calc(var(--y, -100px) - 50%), 0) scale(var(--scale, 1));
+            }
+            .custom-cursor {
+                width: 6px; height: 6px;
+                background-color: var(--archival-accent);
+                transition: transform 0.1s cubic-bezier(0.25, 1, 0.5, 1);
+            }
+            .custom-cursor-trail {
+                width: 28px; height: 28px;
+                border: 1px solid var(--archival-accent);
+                z-index: 9998;
+                transition: transform 0.05s linear, background-color 0.2s, border-color 0.2s;
+            }
+            .custom-cursor.hover { --scale: 1.5; }
+            .custom-cursor-trail.hover { --scale: 1.5; background-color: rgba(139, 26, 26, 0.1); }
+        }
+        @media print {
+            .custom-cursor, .custom-cursor-trail { display: none !important; }
         }
 
-        .custom-cursor-trail {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 28px;
-            height: 28px;
-            border-radius: 50%;
-            border: 1px solid var(--archival-accent);
-            opacity: 0.5;
-            pointer-events: none;
-            z-index: 999;
-            transform: translate3d(calc(var(--x, -100px) - 10px), calc(var(--y, -100px) - 10px), 0);
-            transition: transform 0.08s ease-out, border-color 0.15s ease;
+        /* Matrix Control Styling */
+        .ratio-btn {
+            border: 1px solid var(--archival-muted);
+            transition: all 0.2s cubic-bezier(0.25, 1, 0.5, 1);
+        }
+        .ratio-btn:hover { border-color: var(--archival-accent); color: var(--archival-accent); }
+        .ratio-btn[data-active="true"] {
+            background: var(--archival-accent);
+            color: var(--archival-surface);
+            border-color: var(--archival-accent);
         }
 
-        .custom-cursor.hover {
-            width: 14px;
-            height: 14px;
-            background-color: #BA131A;
+        /* Palette Chips */
+        .palette-chip {
+            border: 1px solid var(--archival-muted);
+            transition: all 0.2s cubic-bezier(0.25, 1, 0.5, 1);
+            cursor: pointer;
         }
-
-        .custom-cursor-trail.hover {
-            border-color: #BA131A;
-            transform: translate3d(calc(var(--x, -100px) - 12px), calc(var(--y, -100px) - 12px), 0) scale(1.3);
-        }
-
-        /* Card Framing */
-        .surface-card {
-            background: #EFE9DC;
-            border: 1px solid var(--archival-border);
-            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.02);
-        }
-
-        /* Palette Buttons Active State */
-        .palette-btn[data-active="true"] {
+        .palette-chip:hover { border-color: var(--archival-accent); }
+        .palette-chip[data-active="true"] {
             border-color: var(--archival-accent) !important;
             box-shadow: 0 0 0 1.5px var(--archival-accent) !important;
         }
-        .palette-btn[data-active="true"] span.check-icon {
-            display: inline-block !important;
+
+        /* Fullscreen Viewer */
+        #fullscreen-btn {
+            opacity: 0.85;
+            transition: opacity 0.2s ease, border-color 0.2s ease;
+            pointer-events: auto !important;
+            cursor: pointer !important;
+            z-index: 30;
+        }
+        .group:hover #fullscreen-btn { opacity: 1; }
+
+        #fullscreen-viewer.active {
+            display: block !important;
+            animation: fadeIn 0.25s ease-out;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
         }
 
-        /* Aspect Ratio Buttons Active State */
-        .ratio-btn[data-active="true"] {
-            background-color: var(--archival-accent) !important;
-            color: #EFE9DC !important;
-            border-color: var(--archival-accent) !important;
-        }
-
-        /* Responsive Viewport */
-        #render-target svg {
-            width: 100%;
-            height: 100%;
+        #viewer-content svg {
+            max-width: 100%;
+            max-height: 100%;
+            width: auto;
+            height: auto;
             object-fit: contain;
         }
 
-        /* --- Embed Mode (Mandatory 3:2 Precision Formfactor) --- */
+        /* Specimen Viewport SVG */
+        .specimen-svg { 
+            transition: all 0.3s cubic-bezier(0.25, 1, 0.5, 1);
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain;
+        }
+
+        /* --- Embed Mode (Pure Specimen Plate Isolation) --- */
+        html[data-mode="embed"],
         body[data-mode="embed"] { 
             background-color: var(--archival-surface, #EFE9DC) !important;
             padding: 0 !important; 
@@ -138,15 +245,28 @@
             overflow: hidden !important;
             width: 100vw !important;
             height: 100vh !important;
+            min-height: 100vh !important;
         }
+        html[data-mode="embed"] .noise-layer,
         body[data-mode="embed"] .noise-layer {
             display: block !important;
-            opacity: 0.035 !important;
+            opacity: 0.04 !important;
             pointer-events: none !important;
         }
+        html[data-mode="embed"] *,
         body[data-mode="embed"] * {
             cursor: auto !important;
         }
+        html[data-mode="embed"] .custom-cursor,
+        html[data-mode="embed"] .custom-cursor-trail,
+        html[data-mode="embed"] #fullscreen-viewer,
+        html[data-mode="embed"] #fullscreen-btn,
+        html[data-mode="embed"] #embed-modal,
+        html[data-mode="embed"] header,
+        html[data-mode="embed"] footer,
+        html[data-mode="embed"] section,
+        html[data-mode="embed"] .drafting-dots,
+        html[data-mode="embed"] main > *:not(#specimen-viewport-card),
         body[data-mode="embed"] .custom-cursor,
         body[data-mode="embed"] .custom-cursor-trail,
         body[data-mode="embed"] #fullscreen-viewer,
@@ -159,72 +279,96 @@
         body[data-mode="embed"] main > *:not(#specimen-viewport-card) {
             display: none !important;
         }
+        html[data-mode="embed"] main,
         body[data-mode="embed"] main { 
             max-width: none !important; 
             width: 100vw !important; 
             height: 100vh !important; 
             margin: 0 !important; 
             padding: 0 !important;
-            display: block !important;
-            grid-template-columns: none !important;
-            gap: 0 !important;
-            overflow: hidden !important;
-        }
-        body[data-mode="embed"] #specimen-viewport-card {
-            width: 100vw !important;
-            height: 100vh !important;
-            max-width: 100vw !important;
-            max-height: 100vh !important;
-            border: none !important;
-            border-radius: 0 !important;
-            padding: 0 !important;
-            margin: 0 !important;
             display: flex !important;
             align-items: center !important;
             justify-content: center !important;
-            box-shadow: none !important;
-            background: transparent !important;
+            grid-template-columns: none !important;
+            gap: 0 !important;
+            space-y: 0 !important;
+            overflow: hidden !important;
+            position: relative !important;
         }
+        html[data-mode="embed"] #specimen-viewport-card,
+        body[data-mode="embed"] #specimen-viewport-card { 
+            border: none !important; 
+            box-shadow: none !important; 
+            background: transparent !important; 
+            width: 100vw !important; 
+            height: 100vh !important; 
+            max-width: 100vw !important;
+            max-height: 100vh !important;
+            padding: 0 !important; 
+            margin: 0 !important;
+            border-radius: 0 !important;
+            aspect-ratio: auto !important;
+            display: flex !important;
+            align-items: center !important;
+            justify-content: center !important;
+            position: relative !important;
+            overflow: hidden !important;
+        }
+        html[data-mode="embed"] #render-target,
         body[data-mode="embed"] #render-target {
             width: 100% !important;
             height: 100% !important;
             margin: 0 !important;
-            padding: 8px !important;
+            padding: 0 !important;
             min-height: 0 !important;
             box-sizing: border-box !important;
             display: flex !important;
             align-items: center !important;
             justify-content: center !important;
         }
-        body[data-mode="embed"] #render-target svg {
+        html[data-mode="embed"] #render-target svg,
+        body[data-mode="embed"] #render-target svg,
+        html[data-mode="embed"] .specimen-svg,
+        body[data-mode="embed"] .specimen-svg {
             max-width: 100% !important;
             max-height: 100% !important;
             width: 100% !important;
             height: 100% !important;
             object-fit: contain !important;
+            box-shadow: none !important;
         }
     </style>
 </head>
 <body class="min-h-screen flex flex-col items-center justify-start p-4 sm:p-8">
     <script>
         (function() {
-            var params = new URLSearchParams(window.location.search);
-            if (params.get('mode') === 'embed') { document.body.dataset.mode = 'embed'; }
+            try {
+                var params = new URLSearchParams(window.location.search);
+                if (params.get('mode') === 'embed') {
+                    document.body.dataset.mode = 'embed';
+                }
+            } catch(e) {}
         })();
     </script>
 
-    <div class="noise-layer" aria-hidden="true"></div>
     <div class="custom-cursor" aria-hidden="true"></div>
     <div class="custom-cursor-trail" aria-hidden="true"></div>
 
+    <svg class="noise-layer" aria-hidden="true">
+        <filter id="fractalNoise">
+            <feTurbulence type="fractalNoise" baseFrequency="0.65" numOctaves="3" stitchTiles="stitch"/>
+        </filter>
+        <rect width="100%" height="100%" filter="url(#fractalNoise)"/>
+    </svg>
+
     <!-- Header Navigation -->
-    <header class="w-full max-w-7xl mb-8 flex flex-col sm:flex-row items-start sm:items-center justify-between border-b border-[#CDC4B4] pb-4 gap-4">
+    <header class="w-full max-w-[80rem] mb-6 flex flex-col sm:flex-row items-start sm:items-center justify-between border-b border-[#DDD5C5] pb-4 gap-4">
         <div>
             <div class="font-tech text-[10px] text-[#8B1A1A] tracking-wider uppercase flex items-center gap-2">
                 <span class="inline-block w-2 h-2 rounded-full bg-[#8B1A1A]"></span>
                 [ ARCHIVAL_SPECIFICATION_V1.0.0 | CHRONOMETRY_BLUEPRINT ]
             </div>
-            <h1 class="text-2xl sm:text-3xl font-bold tracking-tight text-[#1A1A1A] mt-1">
+            <h1 class="text-2xl sm:text-3xl font-bold tracking-tight text-[#2A2520] mt-1 font-sans">
                 MACHINA VAULT
             </h1>
             <p class="font-tech text-xs text-[#7A7068] mt-0.5">
@@ -233,238 +377,330 @@
         </div>
 
         <div class="flex items-center gap-3">
-            <a href="https://glassgallery.my.id" target="_blank" class="font-tech text-xs text-[#7A7068] hover:text-[#1A1A1A] border border-[#CDC4B4] px-3 py-1.5 rounded transition">
+            <a href="https://glassgallery.my.id" target="_blank" class="font-tech text-xs text-[#7A7068] hover:text-[#2A2520] border border-[#DDD5C5] px-3 py-1.5 rounded transition">
                 <i class="fa-solid fa-arrow-left mr-1"></i> APEX
             </a>
-            <a href="/docs.html" class="font-tech text-xs text-[#EFE9DC] bg-[#1A1A1A] hover:bg-[#8B1A1A] px-3 py-1.5 rounded transition">
+            <a href="/docs.html" class="font-tech text-xs text-[#EFE9DC] bg-[#2A2520] hover:bg-[#8B1A1A] px-3 py-1.5 rounded transition">
                 <i class="fa-solid fa-book-open mr-1"></i> DOCS
             </a>
         </div>
     </header>
 
-    <!-- Main Workspace -->
-    <main class="w-full max-w-7xl grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
-
-        <!-- Left / Primary Card: Specimen Viewport -->
-        <div id="specimen-viewport-card" class="surface-card rounded-lg p-4 lg:col-span-8 flex flex-col items-center justify-center relative overflow-hidden">
-            <!-- Drafting Header Bar -->
-            <div class="w-full flex items-center justify-between border-b border-[#CDC4B4] pb-2 mb-3">
-                <div class="flex items-center gap-3">
-                    <span class="font-tech text-[11px] font-bold text-[#8B1A1A]" id="specimen-id-display">MCV-ESC-000000</span>
-                    <span class="font-tech text-[10px] text-[#7A7068]" id="render-latency-display">12ms</span>
+    <!-- Fullscreen Viewer Modal -->
+    <div id="fullscreen-viewer" class="fixed inset-0 z-[100] hidden">
+        <div class="absolute inset-0 bg-[#2A2520] bg-opacity-95 backdrop-blur-sm cursor-pointer"></div>
+        <div class="absolute inset-0 flex items-center justify-center p-8 pointer-events-none">
+            <div class="relative w-full h-full max-w-7xl max-h-[90vh] flex flex-col pointer-events-auto">
+                <div class="flex justify-between items-center mb-4 px-2">
+                    <div class="flex items-center gap-4">
+                        <span id="viewer-title" class="font-tech text-[12px] text-[#E8E0D0]">SPECIMEN VIEWER</span>
+                        <span id="viewer-seq" class="font-tech text-[10px] text-[#7A7068]"></span>
+                    </div>
+                    <div class="flex gap-2">
+                        <button id="viewer-download-svg" class="font-tech text-[10px] text-[#E8E0D0] hover:text-[#8B1A1A] transition-all flex items-center gap-2 px-3 py-2 border border-[#7A7068] hover:border-[#8B1A1A] bg-[#2A2520] cursor-pointer">
+                            <i class="fa-solid fa-code"></i> SVG
+                        </button>
+                        <button id="viewer-download-png" class="font-tech text-[10px] text-[#E8E0D0] hover:text-[#8B1A1A] transition-all flex items-center gap-2 px-3 py-2 border border-[#7A7068] hover:border-[#8B1A1A] bg-[#2A2520] cursor-pointer">
+                            <i class="fa-solid fa-download"></i> PNG
+                        </button>
+                        <button id="viewer-close" class="font-tech text-[10px] text-[#E8E0D0] hover:text-[#8B1A1A] transition-all flex items-center gap-2 px-3 py-2 border border-[#7A7068] hover:border-[#8B1A1A] bg-[#2A2520] cursor-pointer">
+                            <i class="fa-solid fa-times"></i> CLOSE
+                        </button>
+                    </div>
                 </div>
-                <div class="flex items-center gap-1.5">
-                    <button class="ratio-btn font-tech text-[10px] px-2 py-0.5 border border-[#CDC4B4] rounded" data-w="1" data-h="1">1:1</button>
-                    <button class="ratio-btn font-tech text-[10px] px-2 py-0.5 border border-[#CDC4B4] rounded" data-w="4" data-h="3">4:3</button>
-                    <button class="ratio-btn font-tech text-[10px] px-2 py-0.5 border border-[#CDC4B4] rounded" data-w="3" data-h="2" data-active="true">3:2</button>
-                    <button class="ratio-btn font-tech text-[10px] px-2 py-0.5 border border-[#CDC4B4] rounded" data-w="16" data-h="9">16:9</button>
-                </div>
-            </div>
-
-            <!-- Viewport Rendering Target -->
-            <div id="render-target" class="w-full flex items-center justify-center min-h-[420px] aspect-[3/2] bg-[#EFE9DC] rounded relative overflow-hidden">
-                <!-- SVG dynamically injected here -->
-            </div>
-
-            <!-- Floating Action Bar -->
-            <div class="w-full flex flex-wrap items-center justify-between border-t border-[#CDC4B4] pt-3 mt-3 gap-2">
-                <div class="flex items-center gap-2">
-                    <button id="copy-svg-btn" class="font-tech text-xs px-3 py-1.5 border border-[#CDC4B4] hover:border-[#1A1A1A] rounded transition bg-white/40">
-                        <i class="fa-solid fa-code mr-1"></i> SVG
-                    </button>
-                    <button id="copy-png-btn" class="font-tech text-xs px-3 py-1.5 border border-[#CDC4B4] hover:border-[#1A1A1A] rounded transition bg-white/40">
-                        <i class="fa-solid fa-image mr-1"></i> PNG
-                    </button>
-                    <button id="embed-btn" class="font-tech text-xs px-3 py-1.5 border border-[#CDC4B4] hover:border-[#1A1A1A] rounded transition bg-white/40">
-                        <i class="fa-solid fa-share-nodes mr-1"></i> EMBED
-                    </button>
-                </div>
-
-                <div class="flex items-center gap-2">
-                    <button id="fullscreen-btn" class="font-tech text-xs px-3 py-1.5 border border-[#CDC4B4] hover:border-[#1A1A1A] rounded transition bg-white/40" title="Full Inspection Mode">
-                        <i class="fa-solid fa-expand"></i>
-                    </button>
+                <div id="viewer-content" class="flex-1 flex items-center justify-center bg-[#EFE9DC] rounded-sm border border-[#7A7068] overflow-hidden">
                 </div>
             </div>
         </div>
-
-        <!-- Right Card: Specimen Controls & Technical Telemetry -->
-        <div id="specimen-metadata" class="surface-card rounded-lg p-5 lg:col-span-4 flex flex-col gap-5">
-            <!-- Narrative / Seed Synthesis Control -->
-            <div>
-                <label class="font-tech text-[11px] font-bold text-[#8B1A1A] uppercase tracking-wider block mb-1.5">
-                    [ KINEMATIC SEED NARRATIVE ]
-                </label>
-                <div class="flex gap-2">
-                    <input type="text" id="seed-input" value="Breguet-Overcoil-Chrono" placeholder="Enter topic, seed or title..." class="font-tech text-xs w-full bg-white/70 border border-[#CDC4B4] rounded px-3 py-2 text-[#1A1A1A] focus:outline-none focus:border-[#8B1A1A]">
-                    <button id="dice-btn" class="px-3 py-2 border border-[#CDC4B4] hover:border-[#8B1A1A] rounded bg-white/70 text-[#1A1A1A] transition" title="Randomize Narrative Seed">
-                        <i class="fa-solid fa-dice"></i>
-                    </button>
-                </div>
-            </div>
-
-            <!-- Quick Topic Presets -->
-            <div>
-                <label class="font-tech text-[10px] text-[#7A7068] uppercase tracking-wider block mb-1.5">
-                    ARCHIVAL PRESETS
-                </label>
-                <div class="flex flex-wrap gap-1.5">
-                    <button class="preset-btn font-tech text-[10px] px-2.5 py-1 bg-white/50 border border-[#CDC4B4] hover:border-[#8B1A1A] rounded transition" data-topic="Breguet-Tourbillon-1801">Breguet 1801</button>
-                    <button class="preset-btn font-tech text-[10px] px-2.5 py-1 bg-white/50 border border-[#CDC4B4] hover:border-[#8B1A1A] rounded transition" data-topic="Swiss-Lever-Escapement">Lever Anchor</button>
-                    <button class="preset-btn font-tech text-[10px] px-2.5 py-1 bg-white/50 border border-[#CDC4B4] hover:border-[#8B1A1A] rounded transition" data-topic="Planetary-Sun-Planet">Epicyclic Train</button>
-                    <button class="preset-btn font-tech text-[10px] px-2.5 py-1 bg-white/50 border border-[#CDC4B4] hover:border-[#8B1A1A] rounded transition" data-topic="Chronometer-Detent-Marine">Marine Detent</button>
-                </div>
-            </div>
-
-            <!-- Specimen ID Recovery Loader -->
-            <div>
-                <label class="font-tech text-[11px] font-bold text-[#8B1A1A] uppercase tracking-wider block mb-1.5">
-                    [ LOAD BY SPECIMEN ID ]
-                </label>
-                <div class="flex gap-2">
-                    <input type="text" id="id-load-input" placeholder="e.g. MCV-ESC-4409J7" class="font-tech text-xs w-full bg-white/70 border border-[#CDC4B4] rounded px-3 py-2 text-[#1A1A1A] focus:outline-none focus:border-[#8B1A1A]">
-                    <button id="id-load-btn" class="font-tech text-xs px-3 py-2 bg-[#1A1A1A] text-[#EFE9DC] hover:bg-[#8B1A1A] rounded transition">
-                        LOAD
-                    </button>
-                </div>
-            </div>
-
-            <!-- Color Palette Selector -->
-            <div>
-                <div class="flex justify-between items-center mb-1.5">
-                    <label class="font-tech text-[11px] font-bold text-[#8B1A1A] uppercase tracking-wider">
-                        [ DRAFTING PALETTE ]
-                    </label>
-                    <span id="palette-active-label" class="font-tech text-[10px] text-[#7A7068] font-bold">VELLUM</span>
-                </div>
-                <div class="grid grid-cols-5 gap-2">
-                    <button class="palette-btn p-2 border border-[#CDC4B4] rounded flex flex-col items-center justify-center transition bg-[#EFE9DC]" data-palette="vellum" data-active="true" title="Archival Vellum">
-                        <span class="w-4 h-4 rounded-full border border-black/20" style="background:#1A1A1A;"></span>
-                        <span class="font-tech text-[8px] mt-1 text-[#1A1A1A]">Vellum</span>
-                    </button>
-                    <button class="palette-btn p-2 border border-[#CDC4B4] rounded flex flex-col items-center justify-center transition bg-[#0B1E2E]" data-palette="blueprint" title="Cyanotype Blueprint">
-                        <span class="w-4 h-4 rounded-full border border-white/20" style="background:#38EF7D;"></span>
-                        <span class="font-tech text-[8px] mt-1 text-[#EFE9DC]">Blueprint</span>
-                    </button>
-                    <button class="palette-btn p-2 border border-[#CDC4B4] rounded flex flex-col items-center justify-center transition bg-[#121316]" data-palette="obsidian" title="Titanium Obsidian">
-                        <span class="w-4 h-4 rounded-full border border-white/20" style="background:#D4AF37;"></span>
-                        <span class="font-tech text-[8px] mt-1 text-[#EAEAEA]">Obsidian</span>
-                    </button>
-                    <button class="palette-btn p-2 border border-[#CDC4B4] rounded flex flex-col items-center justify-center transition bg-[#F4ECE1]" data-palette="sepia" title="Horology Sepia">
-                        <span class="w-4 h-4 rounded-full border border-black/20" style="background:#B85D19;"></span>
-                        <span class="font-tech text-[8px] mt-1 text-[#382923]">Sepia</span>
-                    </button>
-                    <button class="palette-btn p-2 border border-[#CDC4B4] rounded flex flex-col items-center justify-center transition bg-[#E8ECE6]" data-palette="patina" title="Verdigris Patina">
-                        <span class="w-4 h-4 rounded-full border border-black/20" style="background:#2A7B72;"></span>
-                        <span class="font-tech text-[8px] mt-1 text-[#243038]">Patina</span>
-                    </button>
-                </div>
-            </div>
-
-            <!-- Technical Horology Telemetry -->
-            <div class="border-t border-[#CDC4B4] pt-4">
-                <label class="font-tech text-[11px] font-bold text-[#8B1A1A] uppercase tracking-wider block mb-2.5">
-                    [ CHRONOMETRIC TELEMETRY ]
-                </label>
-                <div class="grid grid-cols-2 gap-3 font-tech text-xs">
-                    <div>
-                        <span class="text-[#7A7068] block text-[9px]">CALIBRE DESIGNATION</span>
-                        <span id="tel-calibre" class="text-[#1A1A1A] font-semibold truncate block">CALIBRE GG-492F</span>
-                    </div>
-                    <div>
-                        <span class="text-[#7A7068] block text-[9px]">MECHANISM CLASS</span>
-                        <span id="tel-mechanism" class="text-[#1A1A1A] font-semibold truncate block">Swiss Lever</span>
-                    </div>
-                    <div>
-                        <span class="text-[#7A7068] block text-[9px]">OSCILLATION FREQUENCY</span>
-                        <span id="tel-frequency" class="text-[#1A1A1A] font-semibold truncate block">28,800 A/h (4.0 Hz)</span>
-                    </div>
-                    <div>
-                        <span class="text-[#7A7068] block text-[9px]">BEARING JEWELS</span>
-                        <span id="tel-jewels" class="text-[#1A1A1A] font-semibold truncate block">21 Rubis</span>
-                    </div>
-                    <div>
-                        <span class="text-[#7A7068] block text-[9px]">GEAR REDUCTION</span>
-                        <span id="tel-ratio" class="text-[#1A1A1A] font-semibold truncate block">i = 3.333 : 1</span>
-                    </div>
-                    <div>
-                        <span class="text-[#7A7068] block text-[9px]">PITCH MODULE</span>
-                        <span id="tel-module" class="text-[#1A1A1A] font-semibold truncate block">m = 0.8 mm</span>
-                    </div>
-                    <div class="col-span-2">
-                        <span class="text-[#7A7068] block text-[9px]">DETERMINISTIC HASH</span>
-                        <span id="tel-hash" class="text-[#8B1A1A] font-semibold font-tech tracking-wider block">0x295C6D89</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-    </main>
+    </div>
 
     <!-- Embed Code Modal -->
-    <div id="embed-modal" class="fixed inset-0 z-50 hidden bg-black/60 backdrop-blur-sm flex items-center justify-center p-4">
-        <div class="surface-card rounded-lg p-6 max-w-lg w-full shadow-xl">
-            <div class="flex items-center justify-between border-b border-[#CDC4B4] pb-3 mb-4">
-                <span class="font-tech text-xs font-bold text-[#8B1A1A] uppercase tracking-wider">[ 3:2 EMBED IFRAME SNIPPET ]</span>
-                <button id="embed-modal-close" class="text-[#7A7068] hover:text-[#1A1A1A]">
-                    <i class="fa-solid fa-xmark"></i>
+    <div id="embed-modal" class="fixed inset-0 z-[100] hidden items-center justify-center p-4 bg-black/60 backdrop-blur-sm">
+        <div class="surface-card p-6 rounded-sm max-w-lg w-full space-y-4 border border-[var(--archival-muted)]">
+            <div class="flex items-center justify-between border-b border-[var(--archival-muted)] pb-3">
+                <span class="font-tech text-[11px] font-bold text-[var(--archival-fg)] flex items-center gap-2">
+                    <i class="fa-solid fa-code text-xs text-[var(--archival-accent)]"></i> EMBED_IFRAME_SNIPPET
+                </span>
+                <button id="embed-modal-close" class="font-tech text-[10px] text-[var(--archival-meta)] hover:text-[var(--archival-accent)]">
+                    <i class="fa-solid fa-times"></i>
                 </button>
             </div>
-            <p class="font-tech text-xs text-[#7A7068] mb-3 leading-relaxed">
-                Copy this embed code to insert this horological specimen into any website. It preserves the 3:2 aspect ratio and connects with the GlassGallery failover mesh.
-            </p>
-            <textarea id="embed-code-area" rows="4" class="font-tech text-[11px] w-full bg-white/80 border border-[#CDC4B4] rounded p-3 text-[#1A1A1A] mb-4 focus:outline-none" readonly></textarea>
+            <textarea id="embed-modal-textarea" readonly rows="4" class="w-full font-tech text-[10px] p-3 bg-[var(--archival-bg)] border border-[var(--archival-muted)] resize-none text-[var(--archival-fg)] focus:outline-none"></textarea>
             <div class="flex justify-end gap-2">
-                <button id="embed-modal-copy" class="font-tech text-xs px-4 py-2 bg-[#8B1A1A] text-[#EFE9DC] hover:bg-[#1A1A1A] rounded transition">
-                    <i class="fa-solid fa-copy mr-1"></i> COPY EMBED CODE
+                <button id="embed-modal-copy-btn" class="font-tech text-[10px] px-3 py-1.5 border border-[var(--archival-muted)] bg-[var(--archival-surface)] hover:border-[var(--archival-accent)] transition-all">
+                    <i class="fa-solid fa-copy"></i> [ COPY SNIPPET ]
                 </button>
             </div>
         </div>
     </div>
 
-    <!-- Fullscreen Viewer Container -->
-    <div id="fullscreen-viewer" class="fixed inset-0 z-40 hidden bg-[#EFE9DC] flex flex-col items-center justify-center p-6">
-        <button id="fullscreen-close" class="absolute top-6 right-6 font-tech text-xs px-3 py-1.5 bg-[#1A1A1A] text-[#EFE9DC] rounded hover:bg-[#8B1A1A] transition">
-            <i class="fa-solid fa-compress mr-1"></i> EXIT FULLSCREEN
-        </button>
-        <div id="fullscreen-target" class="w-full h-full flex items-center justify-center"></div>
-    </div>
+    <!-- Main Workspace -->
+    <main class="max-w-[80rem] w-full space-y-6 relative z-10 grid grid-cols-1 md:grid-cols-5 gap-6">
+
+        <!-- Left: Specimen Plate Viewport (Col 1-3) -->
+        <div id="specimen-viewport-card" class="surface-card w-full aspect-square md:aspect-auto md:h-full md:col-span-3 rounded-sm p-8 overflow-hidden relative group">
+            <!-- Drafting Dot Matrix -->
+            <div class="drafting-dots absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAiIGhlaWdodD0iMjAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGNpcmNsZSBjeD0iMSIgY3k9IjEiIHI9IjEiIGZpbGw9InJnYmEoMTIyLCAxMTIsIDEwNCwgMC4xKSIvPjwvc3ZnPg==')] opacity-80 pointer-events-none"></div>
+
+            <button id="fullscreen-btn" class="absolute top-4 right-4 font-tech text-[10px] text-[#2A2520] hover:text-[#8B1A1A] flex items-center justify-center gap-2 px-3 py-2 border border-[#DDD5C5] hover:border-[#8B1A1A] bg-[#EFE9DC] z-10 transition-all cursor-pointer">
+                <i class="fa-solid fa-expand"></i> [ EXPAND ]
+            </button>
+
+            <!-- Specimen Display Target -->
+            <div id="render-target" class="w-full h-full flex items-center justify-center">
+                <div class="font-tech text-[10px] text-[#7A7068] flex items-center gap-2">
+                    <i class="fa-solid fa-circle-notch fa-spin text-[#8B1A1A]"></i> COMPUTING CHRONOMETRIC ESCAPEMENT...
+                </div>
+            </div>
+        </div>
+
+        <!-- Right: Controls & Parameters (Cols 4-5) -->
+        <section class="surface-card p-6 rounded-sm space-y-6 md:col-span-2 flex flex-col justify-between">
+            <div class="space-y-6">
+                <header class="flex items-center justify-between border-b border-[#DDD5C5] pb-4">
+                    <h1 class="font-tech text-[11px] font-semibold text-[#2A2520] flex items-center gap-2">
+                        <i class="fa-solid fa-gears text-xs text-[#8B1A1A]"></i> Synthesis Engine
+                    </h1>
+                </header>
+
+                <div class="space-y-4">
+                    <!-- 01. Aspect Ratio Matrix -->
+                    <div class="space-y-2">
+                        <label class="font-tech text-[9px] text-[#7A7068]">01 // FORMAT_MATRIX</label>
+                        <div class="grid grid-cols-3 gap-2" id="format-matrix">
+                            <button class="ratio-btn py-2 text-[10px] font-tech font-semibold bg-[#E8E0D0]" data-w="9" data-h="16">9:16</button>
+                            <button class="ratio-btn py-2 text-[10px] font-tech font-semibold bg-[#E8E0D0]" data-w="2" data-h="3">2:3</button>
+                            <button class="ratio-btn py-2 text-[10px] font-tech font-semibold bg-[#E8E0D0]" data-w="3" data-h="4">3:4</button>
+                            
+                            <button class="ratio-btn py-2 text-[10px] font-tech font-semibold bg-[#E8E0D0]" data-w="4" data-h="5">4:5</button>
+                            <button class="ratio-btn py-2 text-[10px] font-tech font-semibold bg-[#E8E0D0]" data-w="1" data-h="1">1:1</button>
+                            <button class="ratio-btn py-2 text-[10px] font-tech font-semibold bg-[#E8E0D0]" data-w="5" data-h="4">5:4</button>
+                            
+                            <button class="ratio-btn py-2 text-[10px] font-tech font-semibold bg-[#E8E0D0]" data-w="4" data-h="3">4:3</button>
+                            <button class="ratio-btn py-2 text-[10px] font-tech font-semibold bg-[#E8E0D0]" data-w="3" data-h="2" data-active="true">3:2</button>
+                            <button class="ratio-btn py-2 text-[10px] font-tech font-semibold bg-[#E8E0D0]" data-w="16" data-h="9">16:9</button>
+                        </div>
+                    </div>
+
+                    <!-- 02. Archival Horological Palette -->
+                    <div class="space-y-2">
+                        <div class="flex justify-between items-center">
+                            <label class="font-tech text-[9px] text-[#7A7068]">02 // ARCHIVAL_HOROLOGY_PALETTE</label>
+                            <span id="palette-active-label" class="font-tech text-[8px] text-[#8B1A1A] font-semibold">VELLUM</span>
+                        </div>
+                        <div class="grid grid-cols-5 gap-2">
+                            <button class="palette-chip p-2 border border-[#DDD5C5] rounded flex flex-col items-center justify-center transition bg-[#EFE9DC]" data-palette="vellum" data-active="true" title="Archival Vellum">
+                                <span class="w-4 h-4 rounded-full border border-black/20" style="background:#1A1A1A;"></span>
+                                <span class="font-tech text-[8px] mt-1 text-[#1A1A1A]">Vellum</span>
+                            </button>
+                            <button class="palette-chip p-2 border border-[#DDD5C5] rounded flex flex-col items-center justify-center transition bg-[#0B1E2E]" data-palette="blueprint" title="Cyanotype Blueprint">
+                                <span class="w-4 h-4 rounded-full border border-white/20" style="background:#62B6CB;"></span>
+                                <span class="font-tech text-[8px] mt-1 text-[#EFE9DC]">Blueprint</span>
+                            </button>
+                            <button class="palette-chip p-2 border border-[#DDD5C5] rounded flex flex-col items-center justify-center transition bg-[#121316]" data-palette="obsidian" title="Titanium Obsidian">
+                                <span class="w-4 h-4 rounded-full border border-white/20" style="background:#D4AF37;"></span>
+                                <span class="font-tech text-[8px] mt-1 text-[#EAEAEA]">Obsidian</span>
+                            </button>
+                            <button class="palette-chip p-2 border border-[#DDD5C5] rounded flex flex-col items-center justify-center transition bg-[#F4ECE1]" data-palette="sepia" title="Horology Sepia">
+                                <span class="w-4 h-4 rounded-full border border-black/20" style="background:#B85D19;"></span>
+                                <span class="font-tech text-[8px] mt-1 text-[#382923]">Sepia</span>
+                            </button>
+                            <button class="palette-chip p-2 border border-[#DDD5C5] rounded flex flex-col items-center justify-center transition bg-[#E8ECE6]" data-palette="patina" title="Verdigris Patina">
+                                <span class="w-4 h-4 rounded-full border border-black/20" style="background:#2A7B72;"></span>
+                                <span class="font-tech text-[8px] mt-1 text-[#243038]">Patina</span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- 03. Narrative Injection Seed -->
+                    <div class="space-y-1.5 pt-1">
+                        <div class="flex justify-between items-center">
+                            <label class="font-tech text-[9px] text-[#7A7068]">03 // KINEMATIC_SEED_NARRATIVE</label>
+                            <button id="random-btn" class="font-tech text-[9px] text-[#8B1A1A] hover:underline flex items-center gap-1 cursor-pointer">
+                                <i class="fa-solid fa-dice"></i> [ RANDOM NARRATIVE ]
+                            </button>
+                        </div>
+                        <div class="relative group">
+                            <i class="fa-solid fa-terminal absolute left-4 top-1/2 -translate-y-1/2 text-[#7A7068] group-focus-within:text-[#8B1A1A] transition-colors mt-0.5"></i>
+                            <input type="text" id="seed-input" value="Breguet-Overcoil-Chrono" placeholder="Inject kinematic narrative sequence..." 
+                                   class="w-full pl-10 pr-4 py-2.5 text-xs font-mono font-medium rounded-sm border border-[#DDD5C5] bg-[#E8E0D0] focus:outline-none focus:border-[#8B1A1A]"
+                                   autocomplete="off" maxlength="128" spellcheck="false">
+                        </div>
+                    </div>
+
+                    <!-- 04. Recover From ID -->
+                    <div class="space-y-1.5">
+                        <label class="font-tech text-[9px] text-[#7A7068]">04 // RECOVER_FROM_ID</label>
+                        <div class="relative group">
+                            <i class="fa-solid fa-fingerprint absolute left-4 top-1/2 -translate-y-1/2 text-[#7A7068] group-focus-within:text-[#8B1A1A] transition-colors"></i>
+                            <input type="text" id="id-load-input" placeholder="Recover from ID (e.g. MCV-ESC-PW03DB)..." 
+                                   class="w-full pl-10 pr-4 py-2.5 text-xs font-mono font-medium rounded-sm border border-[#DDD5C5] bg-[#E8E0D0] focus:outline-none focus:border-[#8B1A1A]"
+                                   autocomplete="off" maxlength="24" spellcheck="false">
+                        </div>
+                    </div>
+
+                    <!-- 05. Chronometric Telemetry Matrix -->
+                    <div class="space-y-2 border border-[#DDD5C5] bg-[#E8E0D0] p-3 rounded-sm">
+                        <div class="flex justify-between items-center border-b border-[#DDD5C5] pb-1.5">
+                            <span class="font-tech text-[9px] font-bold text-[#2A2520]">05 // CHRONOMETRIC_TELEMETRY</span>
+                            <span id="accession-badge" class="font-tech text-[8px] text-[#8B1A1A] font-semibold">MCV-ESC-000000</span>
+                        </div>
+
+                        <!-- Derived Archetype / Calibre -->
+                        <div class="border-b border-[#DDD5C5] pb-2 pt-0.5">
+                            <div class="flex justify-between items-center text-[9px] font-tech">
+                                <span class="text-[#7A7068] text-[8px] uppercase tracking-wider">CALIBRE DESIGNATION</span>
+                                <span class="text-[#7A7068] text-[7px] font-mono">NARRATIVE &rarr; SEED &rarr; ID</span>
+                            </div>
+                            <div class="flex items-center gap-2 mt-0.5">
+                                <i class="fa-solid fa-gear text-[#8B1A1A] text-[10px]"></i>
+                                <span id="tel-calibre" class="text-xs font-serif italic font-bold text-[#2A2520] tracking-wide">CALIBRE GG-492F</span>
+                            </div>
+                        </div>
+
+                        <div class="grid grid-cols-2 gap-x-3 gap-y-1.5 text-[9px] font-tech pt-1">
+                            <div>
+                                <span class="text-[#7A7068] block text-[8px]">MECHANISM CLASS</span>
+                                <span id="tel-mechanism" class="text-[#2A2520] font-semibold truncate block">Swiss Lever</span>
+                            </div>
+                            <div>
+                                <span class="text-[#7A7068] block text-[8px]">OSCILLATION</span>
+                                <span id="tel-frequency" class="text-[#2A2520] font-semibold truncate block">28,800 A/h</span>
+                            </div>
+                            <div>
+                                <span class="text-[#7A7068] block text-[8px]">BEARING JEWELS</span>
+                                <span id="tel-jewels" class="text-[#2A2520] font-semibold truncate block">21 Rubis</span>
+                            </div>
+                            <div>
+                                <span class="text-[#7A7068] block text-[8px]">GEAR REDUCTION</span>
+                                <span id="tel-ratio" class="text-[#2A2520] font-semibold truncate block">15 Dents</span>
+                            </div>
+                            <div>
+                                <span class="text-[#7A7068] block text-[8px]">PITCH MODULE</span>
+                                <span id="tel-module" class="text-[#2A2520] font-semibold truncate block">m = 0.8 mm</span>
+                            </div>
+                            <div>
+                                <span class="text-[#7A7068] block text-[8px]">PTR HASH / METRIC</span>
+                                <span id="tel-hash" class="text-[#8B1A1A] font-semibold truncate block">0x00000000</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Panel Footer Actions -->
+            <footer class="space-y-4 pt-4 border-t border-[#DDD5C5]">
+                <div class="flex justify-between items-center bg-[#E8E0D0] px-3 py-2 border border-[#DDD5C5]">
+                    <span id="specimen-id" class="font-tech text-[10px] text-[#2A2520] font-semibold">SEQ: MCV-ESC-000000</span>
+                    <span id="hash-metric" class="font-tech text-[9px] text-[#7A7068]">AWAITING...</span>
+                </div>
+                
+                <div class="flex gap-2">
+                    <button id="copy-btn" class="font-tech text-[10px] text-[#2A2520] hover:text-[#8B1A1A] transition-all flex items-center justify-center gap-2 px-4 py-2 border border-[#DDD5C5] hover:border-[#8B1A1A] bg-[#E8E0D0] w-1/2 cursor-pointer">
+                        <i class="fa-solid fa-code"></i> [ SVG ]
+                    </button>
+                    <button id="png-btn" class="font-tech text-[10px] text-[#2A2520] hover:text-[#8B1A1A] transition-all flex items-center justify-center gap-2 px-4 py-2 border border-[#DDD5C5] hover:border-[#8B1A1A] bg-[#E8E0D0] w-1/2 cursor-pointer">
+                        <i class="fa-solid fa-download"></i> [ PNG ]
+                    </button>
+                </div>
+                <button id="embed-btn" class="font-tech text-[10px] text-[#7A7068] hover:text-[#8B1A1A] transition-all flex items-center justify-center gap-2 px-4 py-2 border border-[#DDD5C5] hover:border-[#8B1A1A] bg-[#E8E0D0] w-full cursor-pointer">
+                    <i class="fa-solid fa-share-nodes"></i> [ GENERATE EMBED ]
+                </button>
+            </footer>
+        </section>
+
+        <!-- Archival Documentation Section -->
+        <section class="md:col-span-5 surface-card p-8 rounded-sm space-y-8 mt-6">
+            <div class="prose max-w-none">
+                <h2 class="font-tech text-sm font-semibold border-b border-[#DDD5C5] pb-2 text-[#8B1A1A]">01. ARCHIVAL_HOROLOGY_SYNTHESIS_OVERVIEW</h2>
+                <p class="text-xs text-[#2A2520] mt-3 leading-relaxed">
+                    Machina Vault (璇玑典藏) is an archival procedural vector chronometry engine designed in the Swiss-Archival drafting standard. 
+                    It synthesizes deterministic mechanical watch escapements, flying tourbillons, and epicyclic planetary gearing trains directly from narrative strings.
+                </p>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mt-4">
+                    <div class="p-3 bg-[#E8E0D0] border border-[#DDD5C5] rounded-sm">
+                        <h3 class="font-tech text-[10px] font-bold text-[#8B1A1A] mb-1">01. INVOLUTE GEARING</h3>
+                        <p class="text-[11px] text-[#7A7068]">True circular pitch dedendum, addendum, flank involute curves, and root fillets computed per module calibration.</p>
+                    </div>
+                    <div class="p-3 bg-[#E8E0D0] border border-[#DDD5C5] rounded-sm">
+                        <h3 class="font-tech text-[10px] font-bold text-[#8B1A1A] mb-1">02. BREGUET OVERCOIL</h3>
+                        <p class="text-[11px] text-[#7A7068]">Archimedean spiral balance spring with outer raised terminal curve ensuring concentric expansion and isochronism.</p>
+                    </div>
+                    <div class="p-3 bg-[#E8E0D0] border border-[#DDD5C5] rounded-sm">
+                        <h3 class="font-tech text-[10px] font-bold text-[#8B1A1A] mb-1">03. ARCHIVAL EMBED MESH</h3>
+                        <p class="text-[11px] text-[#7A7068]">100% clean 3:2 embed mode with postMessage cross-iframe communication and automatic failover routing.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="prose max-w-none pt-4 border-t border-[#DDD5C5]">
+                <h2 class="font-tech text-sm font-semibold border-b border-[#DDD5C5] pb-2 text-[#8B1A1A]">02. EMBED_INTEGRATION_SPECIFICATION</h2>
+                <p class="text-xs text-[#7A7068] mt-2 leading-relaxed">
+                    To embed a specimen in any site or headless application, append <code class="font-mono bg-[#E8E0D0] px-1 py-0.5 text-[#2A2520]">?mode=embed&w=3&h=2</code> to the vault endpoint.
+                    The iframe displays only the clean drafting plate with zero controls or toolbars.
+                </p>
+                <pre class="bg-[#E8E0D0] p-3 text-[11px] font-mono text-[#2A2520] border border-[#DDD5C5] overflow-x-auto mt-2">&lt;iframe src="https://machina-vault.glassgallery.my.id/?mode=embed&w=3&h=2&seed=Breguet-Overcoil-Chrono" width="600" height="400" frameborder="0" style="aspect-ratio:3/2; width:100%;"&gt;&lt;/iframe&gt;</pre>
+            </div>
+        </section>
+
+        <footer class="md:col-span-5 text-center py-8">
+            <p class="font-tech text-[10px] text-[#7A7068]">MACHINA_VAULT &copy; 2026 | AZZAR_BUDIYANTO | GLASSGALLERY_SUITE</p>
+        </footer>
+    </main>
 
     <!-- Scripts -->
     <script src="js/machinadraw.js"></script>
     <script>
         (function() {
+            const NARRATIVE_TOPICS = [
+                "Breguet-Tourbillon-Cage",
+                "Swiss-Lever-Escapement-Impulse",
+                "Planetary-Differential-Annulus",
+                "Marine-Chronometer-Detent",
+                "Constant-Force-Remontoire",
+                "Equation-Of-Time-Snail",
+                "Gyromax-Glucydur-Balance",
+                "Perpetual-Calendar-Cam",
+                "Geneva-Drive-Cross-Stopwork",
+                "Deadbeat-Graham-Escapement",
+                "Su-Song-Water-Clock-Escapement",
+                "Antikythera-Epicyclic-Differential"
+            ];
+
             const STATE = {
-                currentSeed: 'Breguet-Overcoil-Chrono',
-                currentPalette: 'vellum',
                 currentRatio: { w: 3, h: 2 },
-                currentSpecimen: null
+                currentPalette: 'vellum',
+                currentSpecimen: null,
+                currentSeed: 'Breguet-Overcoil-Chrono'
             };
 
             const DOM = {
                 target: document.getElementById('render-target'),
                 seedInput: document.getElementById('seed-input'),
-                diceBtn: document.getElementById('dice-btn'),
-                presetBtns: document.querySelectorAll('.preset-btn'),
                 idLoadInput: document.getElementById('id-load-input'),
-                idLoadBtn: document.getElementById('id-load-btn'),
-                paletteBtns: document.querySelectorAll('.palette-btn'),
-                paletteActiveLabel: document.getElementById('palette-active-label'),
+                randomBtn: document.getElementById('random-btn'),
                 ratioBtns: document.querySelectorAll('.ratio-btn'),
-                specimenIdDisplay: document.getElementById('specimen-id-display'),
-                renderLatencyDisplay: document.getElementById('render-latency-display'),
-                copySvgBtn: document.getElementById('copy-svg-btn'),
-                copyPngBtn: document.getElementById('copy-png-btn'),
-                embedBtn: document.getElementById('embed-btn'),
-                embedModal: document.getElementById('embed-modal'),
-                embedModalClose: document.getElementById('embed-modal-close'),
-                embedModalCopy: document.getElementById('embed-modal-copy'),
-                embedCodeArea: document.getElementById('embed-code-area'),
+                paletteBtns: document.querySelectorAll('.palette-chip'),
+                paletteActiveLabel: document.getElementById('palette-active-label'),
+                accessionBadge: document.getElementById('accession-badge'),
+                specimenId: document.getElementById('specimen-id'),
+                hashMetric: document.getElementById('hash-metric'),
                 fullscreenBtn: document.getElementById('fullscreen-btn'),
                 fullscreenViewer: document.getElementById('fullscreen-viewer'),
-                fullscreenClose: document.getElementById('fullscreen-close'),
-                fullscreenTarget: document.getElementById('fullscreen-target'),
-                // Telemetry
+                viewerContent: document.getElementById('viewer-content'),
+                viewerClose: document.getElementById('viewer-close'),
+                viewerTitle: document.getElementById('viewer-title'),
+                viewerSeq: document.getElementById('viewer-seq'),
+                viewerDownloadSvg: document.getElementById('viewer-download-svg'),
+                viewerDownloadPng: document.getElementById('viewer-download-png'),
+                copyBtn: document.getElementById('copy-btn'),
+                pngBtn: document.getElementById('png-btn'),
+                embedBtn: document.getElementById('embed-btn'),
+                embedModal: document.getElementById('embed-modal'),
+                embedModalTextarea: document.getElementById('embed-modal-textarea'),
+                embedModalClose: document.getElementById('embed-modal-close'),
+                embedModalCopyBtn: document.getElementById('embed-modal-copy-btn'),
+                // Telemetry Elements
                 telCalibre: document.getElementById('tel-calibre'),
                 telMechanism: document.getElementById('tel-mechanism'),
                 telFrequency: document.getElementById('tel-frequency'),
@@ -530,32 +766,37 @@
                     const t0 = performance.now();
                     const idLoadVal = DOM.idLoadInput.value.trim();
                     let seedVal = DOM.seedInput.value.trim();
-
-                    if (idLoadVal) {
-                        seedVal = idLoadVal;
-                    } else if (!seedVal) {
-                        seedVal = 'Breguet-Overcoil-Chrono';
-                        DOM.seedInput.value = seedVal;
-                    }
-
-                    STATE.currentSeed = seedVal;
                     const dims = getDimensions(STATE.currentRatio);
 
-                    const specimen = window.MachinaDraw.synthesize(seedVal, {
+                    let opts = {
                         width: dims.w,
                         height: dims.h,
                         palette: STATE.currentPalette
-                    });
+                    };
 
+                    if (idLoadVal && idLoadVal.includes('-')) {
+                        opts.id = idLoadVal;
+                        STATE.currentSeed = idLoadVal;
+                    } else {
+                        seedVal = seedVal || 'Breguet-Overcoil-Chrono';
+                        opts.narrative = seedVal;
+                        STATE.currentSeed = seedVal;
+                    }
+
+                    const specimen = window.MachinaDraw.synthesize(opts.narrative || opts.id, opts);
                     STATE.currentSpecimen = specimen;
-                    const latency = (performance.now() - t0).toFixed(1);
 
                     // Update Viewport
                     DOM.target.innerHTML = specimen.svg;
-                    DOM.specimenIdDisplay.textContent = specimen.id;
-                    DOM.renderLatencyDisplay.textContent = `${latency}ms`;
+                    const svgEl = DOM.target.querySelector('svg');
+                    if (svgEl) {
+                        svgEl.style.aspectRatio = `${dims.w} / ${dims.h}`;
+                        svgEl.classList.add('specimen-svg', 'w-full', 'h-full', 'object-contain');
+                    }
 
-                    // Update Telemetry
+                    // Update Telemetry Panel
+                    if (DOM.accessionBadge) DOM.accessionBadge.textContent = specimen.id;
+                    if (DOM.specimenId) DOM.specimenId.textContent = `SEQ: ${specimen.id}`;
                     if (DOM.telCalibre) DOM.telCalibre.textContent = specimen.metrics.calibre;
                     if (DOM.telMechanism) DOM.telMechanism.textContent = specimen.metrics.mechanism;
                     if (DOM.telFrequency) DOM.telFrequency.textContent = specimen.metrics.frequency;
@@ -564,13 +805,23 @@
                     if (DOM.telModule) DOM.telModule.textContent = specimen.metrics.module;
                     if (DOM.telHash) DOM.telHash.textContent = specimen.metrics.hashHex;
 
-                    // Sync URL (non-embed mode)
+                    const tElapsed = (performance.now() - t0).toFixed(1);
+                    if (DOM.hashMetric) DOM.hashMetric.textContent = `${tElapsed}MS // ${specimen.archetype.toUpperCase()}`;
+
+                    // Sync URL if not in embed mode
                     if (document.body.dataset.mode !== 'embed') {
-                        const url = new URL(window.location.href);
-                        url.searchParams.set('seed', seedVal);
-                        url.searchParams.set('palette', STATE.currentPalette);
+                        const url = new URL(window.location);
+                        if (idLoadVal && idLoadVal.includes('-')) {
+                            url.searchParams.set('id', idLoadVal);
+                            url.searchParams.delete('narrative');
+                            url.searchParams.delete('seed');
+                        } else {
+                            url.searchParams.set('narrative', seedVal);
+                            url.searchParams.delete('id');
+                        }
                         url.searchParams.set('w', STATE.currentRatio.w);
                         url.searchParams.set('h', STATE.currentRatio.h);
+                        url.searchParams.set('palette', STATE.currentPalette);
                         window.history.replaceState({}, '', url);
                     }
                 } catch (err) {
@@ -579,80 +830,10 @@
             }
 
             function renderViewport() {
-                if (!STATE.currentSpecimen) {
-                    synthesizeSpecimen();
-                    return;
-                }
-                const dims = getDimensions(STATE.currentRatio);
-                const specimen = window.MachinaDraw.synthesize(STATE.currentSeed, {
-                    width: dims.w,
-                    height: dims.h,
-                    palette: STATE.currentPalette
-                });
-                STATE.currentSpecimen = specimen;
-                DOM.target.innerHTML = specimen.svg;
+                synthesizeSpecimen();
             }
 
-            // Event Listeners
-            DOM.seedInput.addEventListener('keydown', (e) => {
-                if (e.key === 'Enter') {
-                    DOM.idLoadInput.value = '';
-                    synthesizeSpecimen();
-                }
-            });
-
-            DOM.diceBtn.addEventListener('click', () => {
-                const randomTopics = [
-                    'Breguet-Tourbillon-Cage',
-                    'Swiss-Lever-Escapement-Impulse',
-                    'Planetary-Differential-Annulus',
-                    'Marine-Chronometer-Detent',
-                    'Constant-Force-Remontoire',
-                    'Equation-Of-Time-Snail',
-                    'Gyromax-Glucydur-Balance',
-                    'Perpetual-Calendar-Cam'
-                ];
-                DOM.seedInput.value = randomTopics[Math.floor(Math.random() * randomTopics.length)];
-                DOM.idLoadInput.value = '';
-                synthesizeSpecimen();
-            });
-
-            DOM.presetBtns.forEach(btn => {
-                btn.addEventListener('click', () => {
-                    DOM.seedInput.value = btn.dataset.topic;
-                    DOM.idLoadInput.value = '';
-                    synthesizeSpecimen();
-                });
-            });
-
-            DOM.idLoadBtn.addEventListener('click', () => {
-                if (DOM.idLoadInput.value.trim()) {
-                    synthesizeSpecimen();
-                }
-            });
-
-            DOM.idLoadInput.addEventListener('keydown', (e) => {
-                if (e.key === 'Enter' && DOM.idLoadInput.value.trim()) {
-                    synthesizeSpecimen();
-                }
-            });
-
-            // Palette Switcher (Pure re-render)
-            DOM.paletteBtns.forEach(btn => {
-                btn.addEventListener('click', () => {
-                    STATE.currentPalette = btn.dataset.palette;
-                    DOM.paletteBtns.forEach(b => {
-                        if (b.dataset.palette === STATE.currentPalette) b.setAttribute('data-active', 'true');
-                        else b.removeAttribute('data-active');
-                    });
-                    if (DOM.paletteActiveLabel) {
-                        DOM.paletteActiveLabel.textContent = STATE.currentPalette.toUpperCase();
-                    }
-                    renderViewport();
-                });
-            });
-
-            // Aspect Ratio Switcher
+            // Aspect Ratio Matrix Selection
             DOM.ratioBtns.forEach(btn => {
                 btn.addEventListener('click', () => {
                     DOM.ratioBtns.forEach(b => b.removeAttribute('data-active'));
@@ -661,77 +842,190 @@
                         w: parseInt(btn.dataset.w, 10),
                         h: parseInt(btn.dataset.h, 10)
                     };
-                    renderViewport();
+                    synthesizeSpecimen();
                 });
             });
 
-            // Copy SVG
-            DOM.copySvgBtn.addEventListener('click', () => {
-                if (!STATE.currentSpecimen) return;
-                navigator.clipboard.writeText(STATE.currentSpecimen.svg).then(() => {
-                    const orig = DOM.copySvgBtn.innerHTML;
-                    DOM.copySvgBtn.innerHTML = '<i class="fa-solid fa-check mr-1 text-[#8B1A1A]"></i> COPIED';
-                    setTimeout(() => { DOM.copySvgBtn.innerHTML = orig; }, 1800);
+            // Palette Selection Matrix
+            DOM.paletteBtns.forEach(btn => {
+                btn.addEventListener('click', () => {
+                    DOM.paletteBtns.forEach(b => b.removeAttribute('data-active'));
+                    btn.setAttribute('data-active', 'true');
+                    STATE.currentPalette = btn.dataset.palette;
+                    if (DOM.paletteActiveLabel) {
+                        DOM.paletteActiveLabel.textContent = STATE.currentPalette.toUpperCase();
+                    }
+                    synthesizeSpecimen();
                 });
             });
 
-            // Copy PNG via Offscreen Canvas
-            DOM.copyPngBtn.addEventListener('click', () => {
+            // Random Narrative Injection
+            DOM.randomBtn.addEventListener('click', () => {
+                const topic = NARRATIVE_TOPICS[Math.floor(Math.random() * NARRATIVE_TOPICS.length)];
+                DOM.seedInput.value = topic;
+                DOM.idLoadInput.value = '';
+                synthesizeSpecimen();
+            });
+
+            // Seed Input Debounce
+            let debounceTimer = null;
+            DOM.seedInput.addEventListener('input', () => {
+                clearTimeout(debounceTimer);
+                debounceTimer = setTimeout(() => {
+                    DOM.idLoadInput.value = '';
+                    synthesizeSpecimen();
+                }, 350);
+            });
+
+            // Recover from ID
+            DOM.idLoadInput.addEventListener('input', () => {
+                if (DOM.idLoadInput.value.trim().length > 0) {
+                    DOM.seedInput.value = '';
+                }
+                clearTimeout(debounceTimer);
+                debounceTimer = setTimeout(() => {
+                    synthesizeSpecimen();
+                }, 350);
+            });
+
+            // Clipboard Copy Helper
+            async function copyToClipboard(text) {
+                if (navigator.clipboard && window.isSecureContext) {
+                    try {
+                        await navigator.clipboard.writeText(text);
+                        return true;
+                    } catch (e) {}
+                }
+                try {
+                    const ta = document.createElement('textarea');
+                    ta.value = text;
+                    ta.style.position = 'fixed';
+                    ta.style.left = '-9999px';
+                    document.body.appendChild(ta);
+                    ta.select();
+                    const success = document.execCommand('copy');
+                    document.body.removeChild(ta);
+                    if (success) return true;
+                } catch (e) {}
+                return false;
+            }
+
+            function buttonFeedback(buttonDom, originalHtml, successHtml) {
+                buttonDom.innerHTML = successHtml;
+                buttonDom.classList.add('border-[#8B1A1A]', 'text-[#8B1A1A]');
+                setTimeout(() => {
+                    buttonDom.innerHTML = originalHtml;
+                    buttonDom.classList.remove('border-[#8B1A1A]', 'text-[#8B1A1A]');
+                }, 2200);
+            }
+
+            // Export 1: SVG Copy
+            DOM.copyBtn.addEventListener('click', async () => {
                 if (!STATE.currentSpecimen) return;
-                const svgBlob = new Blob([STATE.currentSpecimen.svg], { type: 'image/svg+xml;charset=utf-8' });
-                const URL = window.URL || window.webkitURL || window;
-                const blobURL = URL.createObjectURL(svgBlob);
-                const image = new Image();
-                image.onload = () => {
+                await copyToClipboard(STATE.currentSpecimen.svg);
+                buttonFeedback(DOM.copyBtn, DOM.copyBtn.innerHTML, '<i class="fa-solid fa-check"></i> [ COPIED ]');
+            });
+
+            // Export 2: PNG Download
+            DOM.pngBtn.addEventListener('click', () => {
+                if (!STATE.currentSpecimen) return;
+                const originalHtml = DOM.pngBtn.innerHTML;
+                DOM.pngBtn.innerHTML = '<i class="fa-solid fa-circle-notch fa-spin"></i> [ RENDERING ]';
+
+                const dims = getDimensions(STATE.currentRatio);
+                const scaleFactor = 2400 / Math.max(dims.w, dims.h);
+                const canvasW = Math.round(dims.w * scaleFactor);
+                const canvasH = Math.round(dims.h * scaleFactor);
+
+                const blob = new Blob([STATE.currentSpecimen.svg], { type: 'image/svg+xml;charset=utf-8' });
+                const url = URL.createObjectURL(blob);
+                const img = new Image();
+
+                img.onload = () => {
                     const canvas = document.createElement('canvas');
-                    canvas.width = STATE.currentSpecimen.aspectRatio.w * 2;
-                    canvas.height = STATE.currentSpecimen.aspectRatio.h * 2;
+                    canvas.width = canvasW;
+                    canvas.height = canvasH;
                     const ctx = canvas.getContext('2d');
-                    ctx.drawImage(image, 0, 0, canvas.width, canvas.height);
-                    canvas.toBlob((pngBlob) => {
-                        if (pngBlob && navigator.clipboard && navigator.clipboard.write) {
-                            navigator.clipboard.write([new ClipboardItem({ 'image/png': pngBlob })]).then(() => {
-                                const orig = DOM.copyPngBtn.innerHTML;
-                                DOM.copyPngBtn.innerHTML = '<i class="fa-solid fa-check mr-1 text-[#8B1A1A]"></i> COPIED';
-                                setTimeout(() => { DOM.copyPngBtn.innerHTML = orig; }, 1800);
-                            });
-                        }
-                    });
+                    ctx.drawImage(img, 0, 0, canvasW, canvasH);
+                    URL.revokeObjectURL(url);
+
+                    const pngUrl = canvas.toDataURL('image/png');
+                    const a = document.createElement('a');
+                    a.href = pngUrl;
+                    a.download = `machina_${STATE.currentSpecimen.id}.png`;
+                    a.click();
+                    DOM.pngBtn.innerHTML = originalHtml;
                 };
-                image.src = blobURL;
+                img.src = url;
             });
 
-            // Embed Modal Controls
-            DOM.embedBtn.addEventListener('click', () => {
-                const host = window.location.origin;
-                const cleanSeed = encodeURIComponent(STATE.currentSeed);
-                const code = `<iframe src="${host}/?mode=embed&w=3&h=2&seed=${cleanSeed}&palette=${STATE.currentPalette}" width="600" height="400" frameborder="0" style="border:none; aspect-ratio: 3/2; width:100%;" loading="lazy"></iframe>`;
-                DOM.embedCodeArea.value = code;
-                DOM.embedModal.classList.remove('hidden');
+            // Export 3: Generate Embed Snippet
+            DOM.embedBtn.addEventListener('click', async () => {
+                const ratio = STATE.currentRatio;
+                const baseUrl = window.location.origin + window.location.pathname;
+                let query = '?mode=embed';
+                if (DOM.idLoadInput.value.trim()) query += `&id=${encodeURIComponent(DOM.idLoadInput.value.trim())}`;
+                else if (DOM.seedInput.value.trim()) query += `&seed=${encodeURIComponent(DOM.seedInput.value.trim())}`;
+                query += `&w=${ratio.w}&h=${ratio.h}&palette=${STATE.currentPalette}`;
+
+                const embedUrl = `${baseUrl}${query}`;
+                const iframeCode = `<iframe src="${embedUrl}" width="600" height="400" frameborder="0" style="border:1px solid #DDD5C5; border-radius:4px; aspect-ratio:3/2; width:100%;" title="Machina Vault // ${STATE.currentSpecimen ? STATE.currentSpecimen.id : 'Chronometry'}"></iframe>`;
+
+                if (DOM.embedModalTextarea) {
+                    DOM.embedModalTextarea.value = iframeCode;
+                    DOM.embedModal.classList.remove('hidden');
+                    DOM.embedModal.classList.add('flex');
+                } else {
+                    await copyToClipboard(iframeCode);
+                    buttonFeedback(DOM.embedBtn, DOM.embedBtn.innerHTML, '<i class="fa-solid fa-check"></i> [ EMBED_COPIED ]');
+                }
             });
 
-            DOM.embedModalClose.addEventListener('click', () => {
-                DOM.embedModal.classList.add('hidden');
-            });
-
-            DOM.embedModalCopy.addEventListener('click', () => {
-                navigator.clipboard.writeText(DOM.embedCodeArea.value).then(() => {
-                    const orig = DOM.embedModalCopy.innerHTML;
-                    DOM.embedModalCopy.innerHTML = '<i class="fa-solid fa-check mr-1"></i> COPIED!';
-                    setTimeout(() => { DOM.embedModalCopy.innerHTML = orig; }, 1800);
+            if (DOM.embedModalClose) {
+                DOM.embedModalClose.addEventListener('click', () => {
+                    DOM.embedModal.classList.add('hidden');
+                    DOM.embedModal.classList.remove('flex');
                 });
-            });
+            }
 
-            // Fullscreen Inspection
+            if (DOM.embedModalCopyBtn) {
+                DOM.embedModalCopyBtn.addEventListener('click', async () => {
+                    await copyToClipboard(DOM.embedModalTextarea.value);
+                    buttonFeedback(DOM.embedModalCopyBtn, DOM.embedModalCopyBtn.innerHTML, '<i class="fa-solid fa-check"></i> [ COPIED ]');
+                });
+            }
+
+            // Fullscreen Viewer Functions
             DOM.fullscreenBtn.addEventListener('click', () => {
                 if (!STATE.currentSpecimen) return;
-                DOM.fullscreenTarget.innerHTML = STATE.currentSpecimen.svg;
+                DOM.viewerTitle.textContent = `SPECIMEN PLATE // ${STATE.currentSpecimen.id}`;
+                DOM.viewerSeq.textContent = `CALIBRE: ${STATE.currentSpecimen.metrics.calibre} | PTR: ${STATE.currentSpecimen.metrics.hashHex}`;
+                DOM.viewerContent.innerHTML = STATE.currentSpecimen.svg;
+                DOM.fullscreenViewer.classList.add('active');
                 DOM.fullscreenViewer.classList.remove('hidden');
+                document.body.style.overflow = 'hidden';
             });
 
-            DOM.fullscreenClose.addEventListener('click', () => {
+            DOM.viewerClose.addEventListener('click', () => {
+                DOM.fullscreenViewer.classList.remove('active');
                 DOM.fullscreenViewer.classList.add('hidden');
-                DOM.fullscreenTarget.innerHTML = '';
+                document.body.style.overflow = '';
+            });
+
+            DOM.viewerDownloadSvg.addEventListener('click', async () => {
+                if (!STATE.currentSpecimen) return;
+                const blob = new Blob([STATE.currentSpecimen.svg], { type: 'image/svg+xml;charset=utf-8' });
+                const url = URL.createObjectURL(blob);
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = `machina_${STATE.currentSpecimen.id}.svg`;
+                a.click();
+                URL.revokeObjectURL(url);
+                buttonFeedback(DOM.viewerDownloadSvg, DOM.viewerDownloadSvg.innerHTML, '<i class="fa-solid fa-check"></i> [ SAVED ]');
+            });
+
+            DOM.viewerDownloadPng.addEventListener('click', () => {
+                DOM.pngBtn.click();
             });
 
             // URL Search Params & Embed Mode Initialization
@@ -805,7 +1099,7 @@
                 synthesizeSpecimen();
             });
 
-            // Synthesize initial specimen on boot
+            // Initial Synthesis
             synthesizeSpecimen();
 
             // PWA Service Worker Registration

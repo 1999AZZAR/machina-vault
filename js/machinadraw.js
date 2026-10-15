@@ -601,19 +601,28 @@
   function renderArchivalFrame(width, height, margin, p) {
     var borderW = width - margin * 2;
     var borderH = height - margin * 2;
-    var innerGap = 8;
+    var innerGap = 6;
     var innerW = borderW - innerGap * 2;
     var innerH = borderH - innerGap * 2;
+    var cx = width / 2;
+    var cy = height / 2;
+    var minDim = Math.min(width, height);
 
     var elements = [];
 
     // Outer Thick Neatline & Inner Precision Line
-    elements.push('<rect x="' + margin + '" y="' + margin + '" width="' + borderW + '" height="' + borderH + '" fill="none" stroke="' + p.ink + '" stroke-width="1.8" />');
-    elements.push('<rect x="' + (margin + innerGap) + '" y="' + (margin + innerGap) + '" width="' + innerW + '" height="' + innerH + '" fill="none" stroke="' + p.grid + '" stroke-width="0.75" />');
+    elements.push('<rect x="' + margin + '" y="' + margin + '" width="' + borderW + '" height="' + borderH + '" fill="none" stroke="' + p.ink + '" stroke-width="1.1" />');
+    elements.push('<rect x="' + (margin + innerGap) + '" y="' + (margin + innerGap) + '" width="' + innerW + '" height="' + innerH + '" fill="none" stroke="' + p.grid + '" stroke-width="0.5" />');
 
-    // Corner Alignment Registration Crosses
-    var cornerDist = margin + innerGap * 0.5;
-    var crossLen = 6;
+    // Central Drafting Projection Guidelines
+    elements.push('<g opacity="0.18">');
+    elements.push('  <circle cx="' + cx.toFixed(1) + '" cy="' + cy.toFixed(1) + '" r="' + ((minDim / 2) * 0.88).toFixed(1) + '" fill="none" stroke="' + p.meta + '" stroke-width="0.6" stroke-dasharray="2 3" />');
+    elements.push('  <line x1="' + cx.toFixed(1) + '" y1="' + (margin + innerGap + 4) + '" x2="' + cx.toFixed(1) + '" y2="' + (height - margin - innerGap - 4) + '" stroke="' + p.meta + '" stroke-width="0.5" stroke-dasharray="3 4" />');
+    elements.push('  <line x1="' + (margin + innerGap + 4) + '" y1="' + cy.toFixed(1) + '" x2="' + (width - margin - innerGap - 4) + '" y2="' + cy.toFixed(1) + '" stroke="' + p.meta + '" stroke-width="0.5" stroke-dasharray="3 4" />');
+    elements.push('</g>');
+
+    // Corner Alignment Crosses
+    var crossLen = 5;
     var corners = [
       [margin + 4, margin + 4],
       [margin + borderW - 4, margin + 4],
@@ -621,75 +630,61 @@
       [margin + borderW - 4, margin + borderH - 4]
     ];
     corners.forEach(function (pt) {
-      elements.push('<line x1="' + (pt[0] - crossLen) + '" y1="' + pt[1] + '" x2="' + (pt[0] + crossLen) + '" y2="' + pt[1] + '" stroke="' + p.meta + '" stroke-width="0.6" />');
-      elements.push('<line x1="' + pt[0] + '" y1="' + (pt[1] - crossLen) + '" x2="' + pt[0] + '" y2="' + (pt[1] + crossLen) + '" stroke="' + p.meta + '" stroke-width="0.6" />');
+      elements.push('<line x1="' + (pt[0] - crossLen) + '" y1="' + pt[1] + '" x2="' + (pt[0] + crossLen) + '" y2="' + pt[1] + '" stroke="' + p.meta + '" stroke-width="0.5" opacity="0.7" />');
+      elements.push('<line x1="' + pt[0] + '" y1="' + (pt[1] - crossLen) + '" x2="' + pt[0] + '" y2="' + (pt[1] + crossLen) + '" stroke="' + p.meta + '" stroke-width="0.5" opacity="0.7" />');
     });
-
-    // Millimeter Coordinate Ticks on Border
-    var tickSpacing = 20;
-    var numTicksX = Math.floor(borderW / tickSpacing);
-    for (var tx = 1; tx < numTicksX; tx++) {
-      var tickX = margin + tx * tickSpacing;
-      var isMajor = tx % 5 === 0;
-      var tLen = isMajor ? 5 : 2.5;
-      elements.push('<line x1="' + tickX + '" y1="' + margin + '" x2="' + tickX + '" y2="' + (margin + tLen) + '" stroke="' + p.ink + '" stroke-width="' + (isMajor ? 0.9 : 0.5) + '" />');
-      elements.push('<line x1="' + tickX + '" y1="' + (margin + borderH) + '" x2="' + tickX + '" y2="' + (margin + borderH - tLen) + '" stroke="' + p.ink + '" stroke-width="' + (isMajor ? 0.9 : 0.5) + '" />');
-    }
-
-    var numTicksY = Math.floor(borderH / tickSpacing);
-    for (var ty = 1; ty < numTicksY; ty++) {
-      var tickY = margin + ty * tickSpacing;
-      var isMajorY = ty % 5 === 0;
-      var tLenY = isMajorY ? 5 : 2.5;
-      elements.push('<line x1="' + margin + '" y1="' + tickY + '" x2="' + (margin + tLenY) + '" y2="' + tickY + '" stroke="' + p.ink + '" stroke-width="' + (isMajorY ? 0.9 : 0.5) + '" />');
-      elements.push('<line x1="' + (margin + borderW) + '" y1="' + tickY + '" x2="' + (margin + borderW - tLenY) + '" y2="' + tickY + '" stroke="' + p.ink + '" stroke-width="' + (isMajorY ? 0.9 : 0.5) + '" />');
-    }
 
     return elements.join('\n');
   }
 
-  // Vermilion Imperial Seal Chop: 璇玑典藏
+  // Archival Vermilion Seal Chop: 璇 玑 典 藏 (Xuán Jī Diǎn Cáng)
   function renderSealChop(x, y, size, p) {
-    var border = size * 0.08;
-    var innerSize = size - border * 2;
-    var half = innerSize / 2;
+    var sealInset = Math.max(1.5, size * 0.06);
+    var sealBorderWidth = Math.max(0.2, size * 0.05).toFixed(2);
+    var sealInnerWidth = Math.max(0.1, size * 0.02).toFixed(2);
+    var sealFontSize = Math.round(size * 0.36);
+    var chopColor = p.accent || "#B83227";
 
     var svg = [];
-    svg.push('<g class="seal-chop" transform="translate(' + x.toFixed(1) + ',' + y.toFixed(1) + ')">');
-    // Vermilion Square Backing
-    svg.push('  <rect width="' + size + '" height="' + size + '" fill="' + p.accent + '" rx="2" />');
-    svg.push('  <rect x="' + (border * 0.7).toFixed(1) + '" y="' + (border * 0.7).toFixed(1) + '" width="' + (size - border * 1.4).toFixed(1) + '" height="' + (size - border * 1.4).toFixed(1) + '" fill="none" stroke="' + p.paper + '" stroke-width="0.8" opacity="0.6" />');
-
-    // 4 Seal Characters in Ancient Hanzi Seal Script: 璇 玑 典 藏
-    // Top-Right: 璇 (Xuán), Bottom-Right: 玑 (Jī), Top-Left: 典 (Diǎn), Bottom-Left: 藏 (Cáng)
-    var textY1 = size * 0.42;
-    var textY2 = size * 0.88;
-    var textX1 = size * 0.28;
-    var textX2 = size * 0.74;
-
-    var fontSize = Math.round(size * 0.40);
-    svg.push('  <text x="' + textX2 + '" y="' + textY1 + '" font-family="\'Noto Serif SC\', serif" font-weight="900" font-size="' + fontSize + '" fill="' + p.paper + '" text-anchor="middle">璇</text>');
-    svg.push('  <text x="' + textX2 + '" y="' + textY2 + '" font-family="\'Noto Serif SC\', serif" font-weight="900" font-size="' + fontSize + '" fill="' + p.paper + '" text-anchor="middle">玑</text>');
-    svg.push('  <text x="' + textX1 + '" y="' + textY1 + '" font-family="\'Noto Serif SC\', serif" font-weight="900" font-size="' + fontSize + '" fill="' + p.paper + '" text-anchor="middle">典</text>');
-    svg.push('  <text x="' + textX1 + '" y="' + textY2 + '" font-family="\'Noto Serif SC\', serif" font-weight="900" font-size="' + fontSize + '" fill="' + p.paper + '" text-anchor="middle">藏</text>');
+    svg.push('<g class="archival-seal" transform="translate(' + x.toFixed(1) + ',' + y.toFixed(1) + ')">');
+    svg.push('  <rect width="' + size + '" height="' + size + '" fill="' + chopColor + '" fill-opacity="0.06" stroke="' + chopColor + '" stroke-width="' + sealBorderWidth + '" />');
+    svg.push('  <rect x="' + sealInset.toFixed(1) + '" y="' + sealInset.toFixed(1) + '" width="' + (size - sealInset * 2).toFixed(1) + '" height="' + (size - sealInset * 2).toFixed(1) + '" fill="none" stroke="' + chopColor + '" stroke-width="' + sealInnerWidth + '" />');
+    svg.push('  <line x1="' + (size / 2).toFixed(1) + '" y1="' + sealInset.toFixed(1) + '" x2="' + (size / 2).toFixed(1) + '" y2="' + (size - sealInset).toFixed(1) + '" stroke="' + chopColor + '" stroke-opacity="0.35" stroke-width="0.5" />');
+    svg.push('  <line x1="' + sealInset.toFixed(1) + '" y1="' + (size / 2).toFixed(1) + '" x2="' + (size - sealInset).toFixed(1) + '" y2="' + (size / 2).toFixed(1) + '" stroke="' + chopColor + '" stroke-opacity="0.35" stroke-width="0.5" />');
+    svg.push('  <text x="' + (size * 0.28).toFixed(1) + '" y="' + (size * 0.38).toFixed(1) + '" font-family="\'Noto Serif SC\', \'Source Han Serif\', \'Songti SC\', \'SimSun\', serif" font-weight="bold" font-size="' + sealFontSize + '" fill="' + chopColor + '" text-anchor="middle">璇</text>');
+    svg.push('  <text x="' + (size * 0.72).toFixed(1) + '" y="' + (size * 0.38).toFixed(1) + '" font-family="\'Noto Serif SC\', \'Source Han Serif\', \'Songti SC\', \'SimSun\', serif" font-weight="bold" font-size="' + sealFontSize + '" fill="' + chopColor + '" text-anchor="middle">典</text>');
+    svg.push('  <text x="' + (size * 0.28).toFixed(1) + '" y="' + (size * 0.80).toFixed(1) + '" font-family="\'Noto Serif SC\', \'Source Han Serif\', \'Songti SC\', \'SimSun\', serif" font-weight="bold" font-size="' + sealFontSize + '" fill="' + chopColor + '" text-anchor="middle">玑</text>');
+    svg.push('  <text x="' + (size * 0.72).toFixed(1) + '" y="' + (size * 0.80).toFixed(1) + '" font-family="\'Noto Serif SC\', \'Source Han Serif\', \'Songti SC\', \'SimSun\', serif" font-weight="bold" font-size="' + sealFontSize + '" fill="' + chopColor + '" text-anchor="middle">藏</text>');
     svg.push('</g>');
     return svg.join('\n');
   }
 
   // Metric Chronometer Pitch Module Gauge
   function renderScaleBar(x, y, scale, p) {
-    var barW = 80 * scale;
-    var barH = 5 * scale;
-    var svg = [];
-    svg.push('<g class="scale-bar" transform="translate(' + x.toFixed(1) + ',' + y.toFixed(1) + ')">');
-    svg.push('  <rect x="0" y="0" width="' + barW.toFixed(1) + '" height="' + barH.toFixed(1) + '" fill="none" stroke="' + p.ink + '" stroke-width="0.8" />');
-    svg.push('  <rect x="0" y="0" width="' + (barW * 0.25).toFixed(1) + '" height="' + barH.toFixed(1) + '" fill="' + p.ink + '" />');
-    svg.push('  <rect x="' + (barW * 0.5).toFixed(1) + '" y="0" width="' + (barW * 0.25).toFixed(1) + '" height="' + barH.toFixed(1) + '" fill="' + p.ink + '" />');
+    var scaleFactor = Math.max(0.65, scale);
+    var barW = Math.round(72 * scaleFactor);
+    var barH = Math.max(3, Math.round(3.5 * scaleFactor));
+    var segW = barW / 4;
+    var tickH = Math.max(2, Math.round(3 * scaleFactor));
+    var scaleFontSize = Math.max(7, Math.round(8 * scaleFactor));
+    var captionFontSize = Math.max(6, Math.round(6.5 * scaleFactor));
 
-    svg.push('  <text x="0" y="' + (-3 * scale).toFixed(1) + '" font-family="\'JetBrains Mono\', monospace" font-size="' + (7 * scale).toFixed(1) + '" fill="' + p.ink + '">0</text>');
-    svg.push('  <text x="' + (barW * 0.5).toFixed(1) + '" y="' + (-3 * scale).toFixed(1) + '" font-family="\'JetBrains Mono\', monospace" font-size="' + (7 * scale).toFixed(1) + '" text-anchor="middle" fill="' + p.ink + '">1.0</text>');
-    svg.push('  <text x="' + barW.toFixed(1) + '" y="' + (-3 * scale).toFixed(1) + '" font-family="\'JetBrains Mono\', monospace" font-size="' + (7 * scale).toFixed(1) + '" text-anchor="end" fill="' + p.ink + '">2.0mm</text>');
-    svg.push('  <text x="0" y="' + (barH + 10 * scale).toFixed(1) + '" font-family="\'JetBrains Mono\', monospace" font-size="' + (6.5 * scale).toFixed(1) + '" fill="' + p.meta + '" letter-spacing="1">MODULE 0.8 • ÉCHELLE 10:1</text>');
+    var svg = [];
+    svg.push('<g class="drafting-scale-bar" transform="translate(' + x.toFixed(1) + ',' + y.toFixed(1) + ')">');
+    svg.push('  <rect x="0" y="0" width="' + segW.toFixed(1) + '" height="' + barH.toFixed(1) + '" fill="' + p.ink + '" />');
+    svg.push('  <rect x="' + segW.toFixed(1) + '" y="0" width="' + segW.toFixed(1) + '" height="' + barH.toFixed(1) + '" fill="none" stroke="' + p.ink + '" stroke-width="0.8" />');
+    svg.push('  <rect x="' + (segW * 2).toFixed(1) + '" y="0" width="' + segW.toFixed(1) + '" height="' + barH.toFixed(1) + '" fill="' + p.ink + '" />');
+    svg.push('  <rect x="' + (segW * 3).toFixed(1) + '" y="0" width="' + segW.toFixed(1) + '" height="' + barH.toFixed(1) + '" fill="none" stroke="' + p.ink + '" stroke-width="0.8" />');
+    svg.push('  <rect x="0" y="0" width="' + barW.toFixed(1) + '" height="' + barH.toFixed(1) + '" fill="none" stroke="' + p.ink + '" stroke-width="0.8" />');
+
+    svg.push('  <line x1="0" y1="' + (-tickH) + '" x2="0" y2="0" stroke="' + p.ink + '" stroke-width="0.8" />');
+    svg.push('  <line x1="' + (segW * 2).toFixed(1) + '" y1="' + (-tickH) + '" x2="' + (segW * 2).toFixed(1) + '" y2="0" stroke="' + p.ink + '" stroke-width="0.8" />');
+    svg.push('  <line x1="' + barW.toFixed(1) + '" y1="' + (-tickH) + '" x2="' + barW.toFixed(1) + '" y2="0" stroke="' + p.ink + '" stroke-width="0.8" />');
+
+    svg.push('  <text x="0" y="' + (-tickH - 2) + '" font-family="\'JetBrains Mono\', monospace" font-size="' + scaleFontSize + '" font-weight="600" fill="' + p.ink + '" text-anchor="middle">0</text>');
+    svg.push('  <text x="' + (segW * 2).toFixed(1) + '" y="' + (-tickH - 2) + '" font-family="\'JetBrains Mono\', monospace" font-size="' + scaleFontSize + '" font-weight="600" fill="' + p.ink + '" text-anchor="middle">1.0</text>');
+    svg.push('  <text x="' + barW.toFixed(1) + '" y="' + (-tickH - 2) + '" font-family="\'JetBrains Mono\', monospace" font-size="' + scaleFontSize + '" font-weight="600" fill="' + p.ink + '" text-anchor="middle">2.0mm</text>');
+    svg.push('  <text x="0" y="' + (barH + captionFontSize + 2) + '" font-family="\'JetBrains Mono\', monospace" font-size="' + captionFontSize + '" font-weight="500" fill="' + p.meta + '" letter-spacing="1">CHRONOMETRIC SCALE 1:1</text>');
     svg.push('</g>');
     return svg.join('\n');
   }
@@ -720,12 +715,15 @@
 
     var seqId = generateSequenceIdentifier(hashVal, typeKey);
 
-    // Dynamic Geometry Scaling
+    // Dynamic Geometry Scaling adapting safely to any aspect ratio
     var cx = width / 2;
     var cy = height / 2;
     var minDim = Math.min(width, height);
-    var scale = (minDim / 400) * 0.78;
-    var margin = Math.round(18 * scale);
+    var margin = Math.round(minDim * 0.034);
+    var availW = width - margin * 2 - 24;
+    var availH = height - margin * 2 - 56;
+    var scale = Math.min(availW / 440, availH / 320, 1.15);
+    var mechCy = cy - 4 * scale;
 
     // Generate Mechanism SVG
     var mechanismSvg;
@@ -735,19 +733,19 @@
     var reductionRatio;
 
     if (typeKey === 'escapement') {
-      mechanismSvg = renderSwissLeverEscapement(prng, cx, cy - 8 * scale, scale, p);
+      mechanismSvg = renderSwissLeverEscapement(prng, cx, mechCy, scale, p);
       mechanismTitle = "Échappement à Ancre Suisse & Spiral Breguet";
       beatRate = "28,800 A/h (4.0 Hz)";
       jewelsCount = "21 Rubis Synthétiques";
       reductionRatio = "Échappement 15 Dents";
     } else if (typeKey === 'tourbillon') {
-      mechanismSvg = renderFlyingTourbillon(prng, cx, cy - 8 * scale, scale, p);
+      mechanismSvg = renderFlyingTourbillon(prng, cx, mechCy, scale, p);
       mechanismTitle = "Tourbillon Volant à Cage Tri-Axe 60s";
       beatRate = "21,600 A/h (3.0 Hz)";
       jewelsCount = "25 Rubis Synthétiques";
       reductionRatio = "1 Tour / Minute (0.0167 Hz)";
     } else {
-      mechanismSvg = renderEpicyclicGearTrain(prng, cx, cy - 8 * scale, scale, p);
+      mechanismSvg = renderEpicyclicGearTrain(prng, cx, mechCy, scale, p);
       mechanismTitle = "Train d'Engrenages Épicycloïdal Planétaire";
       beatRate = "Constante Chronométrique";
       jewelsCount = "19 Rubis Synthétiques";
@@ -761,19 +759,21 @@
 
     // Archival Frame, Scale Bar, Seal Chop
     var frameSvg = renderArchivalFrame(width, height, margin, p);
-    var sealSize = Math.max(26, Math.round(36 * scale));
-    var sealX = width - margin - 8 - sealSize;
-    var sealY = height - margin - 8 - sealSize;
+    var sealSize = Math.max(26, Math.min(42, Math.round(minDim * 0.08)));
+    var sealX = width - margin - sealSize - 12;
+    var sealY = height - margin - sealSize - 10;
     var sealSvg = renderSealChop(sealX, sealY, sealSize, p);
 
-    var scaleX = margin + 14;
+    var scaleX = margin + 12;
     var scaleY = height - margin - 22 * scale;
     var scaleBarSvg = renderScaleBar(scaleX, scaleY, scale, p);
 
-    // Header & Calibre Typography
-    var headerY = margin + 18 * scale;
-    var latinTaxon = '<text x="' + cx.toFixed(1) + '" y="' + (headerY + 6 * scale).toFixed(1) + '" font-family="\'Noto Serif SC\', serif" font-style="italic" font-weight="700" font-size="' + (12 * scale).toFixed(1) + '" text-anchor="middle" fill="' + p.ink + '">' + mechanismTitle + '</text>';
-    var serialText = '<text x="' + cx.toFixed(1) + '" y="' + (headerY + 19 * scale).toFixed(1) + '" font-family="\'JetBrains Mono\', monospace" font-size="' + (8 * scale).toFixed(1) + '" text-anchor="middle" fill="' + p.accent + '" letter-spacing="2">[' + calibreStr + ' • ' + seqId + ']</text>';
+    // Top Designation & Bottom Latin Taxon
+    var topSerialY = margin + 14 * scale;
+    var serialText = '<text x="' + cx.toFixed(1) + '" y="' + topSerialY.toFixed(1) + '" font-family="\'JetBrains Mono\', monospace" font-size="' + (8 * scale).toFixed(1) + '" font-weight="600" text-anchor="middle" fill="' + p.meta + '" letter-spacing="2">[ ' + calibreStr + ' • ' + seqId + ' ]</text>';
+
+    var bottomTitleY = height - margin - 12 * scale;
+    var latinTaxon = '<text x="' + cx.toFixed(1) + '" y="' + bottomTitleY.toFixed(1) + '" font-family="\'Noto Serif SC\', \'Noto Serif\', serif" font-style="italic" font-weight="700" font-size="' + (11 * scale).toFixed(1) + '" text-anchor="middle" fill="' + p.ink + '">' + mechanismTitle + '.</text>';
 
     // Assemble Full SVG
     var svg = [
@@ -785,14 +785,16 @@
       '  <!-- Drafting Frame & Neatlines -->',
       frameSvg,
       '',
-      '  <!-- Calibre Taxonomy & Nomenclature -->',
-      '  ' + latinTaxon,
+      '  <!-- Calibre Top Nomenclature -->',
       '  ' + serialText,
       '',
       '  <!-- Horological Vector Mechanism -->',
       '  <g class="horological-mechanism">',
       mechanismSvg,
       '  </g>',
+      '',
+      '  <!-- Calibre Bottom Title -->',
+      '  ' + latinTaxon,
       '',
       '  <!-- Imperial Vermilion Seal Chop -->',
       sealSvg,
